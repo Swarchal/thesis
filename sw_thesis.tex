@@ -1,0 +1,38 @@
+\documentclass[a4paper,11pt,twoside,openright]{scrbook}
+
+% Packages
+\usepackage{sw_thesis}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{standalone}
+\usepackage{acronym}
+\usepackage{epigraph}
+\usepackage{mhchem}
+\usepackage{pdfpages}
+\includepdfset{offset=1cm 0cm}
+
+\bibliography{bibliography}
+\graphicspath{{figs/}}
+
+\begin{document}
+
+\title{\sffamily \allcaps{Image Informatics Approaches to Advance Cancer Drug Discovery} \\~\\~\\
+\normalsize
+Scott J. Warchal \\~\\~\\
+Doctor of Philosophy \\
+The University of Edinburgh \\
+2018}
+\date{}
+\maketitle
+
+\frontmatter
+\input{00_front_matter/frontmatter}
+
+\mainmatter
+\input{01_introduction/introduction}
+% chapters here
+
+%\input{appendices/appendices}
+\printbibliography[heading=bibintoc]
+
+\end{document}

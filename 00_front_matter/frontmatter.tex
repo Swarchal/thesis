@@ -1,0 +1,67 @@
+\documentclass[a4paper,11pt,twoside,openright]{scrbook}
+
+\usepackage{../sw_thesis}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{standalone}
+\usepackage{epigraph}  % For dedication and quote
+\usepackage{bibentry}  % Allow full citations in text
+\standalonetrue
+
+\bibliography{../bibliography}
+
+\begin{document}
+
+\chapter*{Declaration}
+\addcontentsline{toc}{chapter}{Declaration}
+\setlength{\epigraphrule}{0pt}
+\setlength{\epigraphwidth}{\textwidth}
+\epigraph{\normalsize
+This thesis presents my own work, and has not been submitted for any other degree or professional qualification.
+Wherever results were obtained in collaboration with others, I have clearly stated it in the text.
+Any information derived from the published work of others has been cited in the text, and a complete list of references can be found in the bibliography.
+Published papers arising from the work described in this thesis can be found in the appendices.}%
+{\normalsize \vspace{0.8cm} -- Scott Warchal, 2018}
+
+% Dedication
+
+\chapter*{}
+\setlength{\epigraphwidth}{0.4\textwidth}
+\epigraph{\textit{epigraph here}}
+
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+Acknowledgements here.
+
+% 1 page max
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+Abstract here.
+
+
+\chapter*{Lay Summary}
+\addcontentsline{toc}{chapter}{Lay summary}
+Lay summary here.
+
+\clearpage
+\tableofcontents
+\addcontentsline{toc}{chapter}{Contents}
+
+\clearpage
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+\clearpage
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+\clearpage
+
+\chapter*{List of Acronyms}
+\addcontentsline{toc}{chapter}{List of Acronyms}
+
+\begin{acronym}[proteins]
+    \acro{2D}{Two-dimensional}
+    \acro{3D}{Three-dimensional}
+\end{acronym}
+
+\end{document}

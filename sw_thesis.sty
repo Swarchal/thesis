@@ -1,0 +1,174 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sw_thesis}
+
+% Page layout and typography
+\RequirePackage{geometry}
+\RequirePackage{setspace}
+\RequirePackage{amsmath}
+\RequirePackage{fontspec}
+\PassOptionsToPackage{automark}{scrlayer-scrpage}
+    \RequirePackage{scrlayer-scrpage}
+\RequirePackage{titlesec}
+\RequirePackage{sectsty}
+
+% Contents, figures, tables and acronyms
+\RequirePackage{tocloft}
+\RequirePackage{acronym}
+
+% Hyperlinks
+\RequirePackage[hyperfootnotes=false]{hyperref}
+\RequirePackage[dvipsnames,hyperref]{xcolor}
+
+% Figures
+\RequirePackage{graphicx}
+\RequirePackage{floatrow}
+\RequirePackage{caption}
+
+% Bibliography
+\RequirePackage[backend=biber,style=nature,maxcitenames=999]{biblatex}
+
+%************************************************************
+% Paper dimensions and generic formatting
+%************************************************************
+
+\geometry{
+    a4paper,
+    top=20mm,
+    bottom=40mm,
+    left=40mm,
+    right=25mm
+}
+\onehalfspacing
+\setlength{\parskip}{0em}
+
+\definecolor{halfgrey}{gray}{0.55}
+
+
+%************************************************************
+% Fonts
+%************************************************************
+
+\setmainfont{AGaramondPro-Regular}[
+    Ligatures=TeX,
+    BoldFont=AGaramondPro-Bold,
+    ItalicFont=AGaramondPro-Italic,
+    BoldItalicFont=AGaramondPro-BoldItalic
+]
+
+\setsansfont{GillSans-Light}[
+    Ligatures=TeX,
+    BoldFont=GillSans,
+    ItalicFont=GillSans-LightItalic,
+    BoldItalicFont=GillSans-Italic
+]
+
+\DeclareRobustCommand{\allcaps}[1]{\MakeUppercase{#1}}
+\DeclareRobustCommand{\headline}[1]{\textcolor{halfgrey}{#1}}
+\newfontfamily\chapterNumber[Ligatures=TeX,Scale=2.25]{Futura-Medium}
+
+\renewcommand\thefootnote{\roman{footnote}}
+
+
+%************************************************************
+% Chapter and section titles
+%************************************************************
+
+\titleformat{\chapter}[block]
+    {\chapterNumber\large\color{halfgrey}}
+    {\thechapter}{10pt}{\sffamily}
+    \newcommand\formatchapter[1]{%
+    \setbox0=\hbox{\chapterNumber\large\thechapter\hspace{10pt}\vline\ }%
+    \begin{minipage}[t]{\dimexpr\linewidth-\wd0\relax}%
+    \raggedright\allcaps{#1}%
+    \end{minipage}}
+    \titleformat{\chapter}[block]
+       {\normalfont\LARGE\sffamily}
+       {\textcolor{halfgrey}{\chapterNumber\thechapter}
+       \hspace{10pt}\vline\ }{10pt}
+    {\formatchapter}
+
+\titleformat{\section}
+    {\normalfont\sffamily\color{black}}
+    {\thesection}{1em}{\allcaps}
+
+\titleformat{\subsection}
+    {\normalfont\sffamily\color{black}}
+    {\thesubsection}{1em}{\normalsize}
+
+\titleformat{\subsubsection}
+    {\normalfont\sffamily\itshape\color{black}}
+    {\thesubsubsection}{1em}{\itshape}
+
+
+%************************************************************
+% Contents, figures, tables, abbreviations
+%************************************************************
+
+\renewcommand{\cfttoctitlefont}{\sffamily\LARGE\allcaps}
+\renewcommand{\cftloftitlefont}{\sffamily\LARGE\allcaps}
+\renewcommand{\cftlottitlefont}{\sffamily\LARGE\allcaps}
+\renewcommand{\cftchapfont}{\scshape}
+
+
+%************************************************************
+% Headlines
+%************************************************************
+
+% Perhaps would look better to take off the weird page numbers at the top and do them on the bottom instead?
+
+\clearscrheadfoot
+\renewcommand{\sectionmark}[1]{\markright{
+{\headline{\thesection}} \headline{#1}}}
+\renewcommand{\chaptermark}[1]{\markleft{
+{} \headline{#1}}}
+\lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgrey}%
+\vline}%
+\color{halfgrey}\hspace{0.5em}\headmark\hfil}}
+\rohead{\mbox{\hfil{\color{halfgrey}%
+\headmark\hspace{0.5em}}%
+\rlap{\small{\color{halfgrey}\vline}\kern1em\thepage}}}
+\renewcommand{\headfont}{\normalfont\sffamily}
+\renewcommand{\pnumfont}{\small\sffamily}
+
+
+%************************************************************
+% Hyperref
+%************************************************************
+\hypersetup{%
+    colorlinks=true, linktocpage=true, pdfstartpage=1,
+    pdfstartview=FitV, breaklinks=true, pdfpagemode=UseNone,
+    pageanchor=true, pdfpagemode=UseOutlines,
+    plainpages=false, bookmarksnumbered,
+    bookmarksopen=true,
+    bookmarksopenlevel=1,
+    hypertexnames=true, pdfhighlight=/O,
+    hyperfootnotes=false,pdfpagelabels,
+    urlcolor=BrickRed, linkcolor=RoyalBlue,
+    citecolor=RoyalBlue,
+    pdfcreator={XeLaTeX},
+    pdfproducer={LaTeX with jnwthesis}
+}
+
+
+%************************************************************
+% Figures and captions
+%************************************************************
+
+\captionsetup{format=plain,labelfont={sf,bf,small},font={small}}
+
+\newfloatcommand{fcapsideright}{figure}[{\capbeside
+    \captionsetup[capbesidefigure]{format=plain,labelsep=columnsep}
+        \thisfloatsetup{capbesideposition={top,right}}}]
+    [\FBwidth]
+
+\newfloatcommand{fcapsideleft}{figure}[{\capbeside
+    \captionsetup[capbesidefigure]{format=plain,labelsep=columnsep}
+        \thisfloatsetup{capbesideposition={top,left}}}]
+    [\FBwidth]
+
+
+%************************************************************
+% Miscellaneous
+%************************************************************
+
+\let\cite\supercite  % Use superscript citations
