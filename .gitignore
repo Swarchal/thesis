@@ -1,5 +1,7 @@
 *.aux
 *.bbl
+*.bcf
+*.run.xml
 *.blg
 *.idx
 *.ind
