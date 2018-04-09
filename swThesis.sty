@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{sw_thesis}
+\ProvidesPackage{swThesis}
 
 % Page layout and typography
 \RequirePackage{geometry}
@@ -25,7 +25,26 @@
 \RequirePackage{caption}
 
 % Bibliography
-\RequirePackage[backend=biber,style=nature,maxcitenames=999]{biblatex}
+% make hyperref text a different colour
+%\hypersetup{
+%    colorlinks,
+%    linkcolor={red!50!black},
+%    citecolor={blue!50!black},
+%    urlcolor={blue!80!black}
+%}
+
+% get references to look relatively normal
+\RequirePackage[backend=bibtex, style=numeric, natbib=true, sorting=none, isbn=false, doi=false, url=false, maxbibnames=99]{biblatex}
+\renewbibmacro{in:}{} %removes 'in' from the references
+
+% Removes months from reference section dates
+ \AtEveryBibitem{
+    \clearfield{day}
+    \clearfield{month}
+    \clearfield{endday}
+    \clearfield{endmonth}
+}
+
 
 %************************************************************
 % Paper dimensions and generic formatting
@@ -74,7 +93,7 @@
 %************************************************************
 
 \titleformat{\chapter}[block]
-    {\chapterNumber\large\color{halfgrey}}
+    {\chapterNumber\normalsize\color{halfgrey}}
     {\thechapter}{10pt}{\sffamily}
     \newcommand\formatchapter[1]{%
     \setbox0=\hbox{\chapterNumber\large\thechapter\hspace{10pt}\vline\ }%
@@ -115,7 +134,6 @@
 %************************************************************
 
 % Perhaps would look better to take off the weird page numbers at the top and do them on the bottom instead?
-
 \clearscrheadfoot
 \renewcommand{\sectionmark}[1]{\markright{
 {\headline{\thesection}} \headline{#1}}}
@@ -135,18 +153,18 @@
 % Hyperref
 %************************************************************
 \hypersetup{%
-    colorlinks=true, linktocpage=true, pdfstartpage=1,
-    pdfstartview=FitV, breaklinks=true, pdfpagemode=UseNone,
-    pageanchor=true, pdfpagemode=UseOutlines,
-    plainpages=false, bookmarksnumbered,
-    bookmarksopen=true,
-    bookmarksopenlevel=1,
-    hypertexnames=true, pdfhighlight=/O,
-    hyperfootnotes=false,pdfpagelabels,
-    urlcolor=BrickRed, linkcolor=RoyalBlue,
-    citecolor=RoyalBlue,
-    pdfcreator={XeLaTeX},
-    pdfproducer={LaTeX with jnwthesis}
+   colorlinks=true, linktocpage=true, pdfstartpage=1,
+   pdfstartview=FitV, breaklinks=true, pdfpagemode=UseNone,
+   pageanchor=true, pdfpagemode=UseOutlines,
+   plainpages=false, bookmarksnumbered,
+   bookmarksopen=true,
+   bookmarksopenlevel=1,
+   hypertexnames=true, pdfhighlight=/O,
+   hyperfootnotes=false,pdfpagelabels,
+   urlcolor=BrickRed, linkcolor=RoyalBlue,
+   citecolor=RoyalBlue,
+   pdfcreator={XeLaTeX},
+   pdfproducer={LaTeX with swThesis}
 }
 
 

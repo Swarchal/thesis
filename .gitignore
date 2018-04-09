@@ -11,6 +11,8 @@
 *.toc
 *.acn
 *.acr
+*.xml
+*blx.bib
 *.alg
 *.glg
 *.glo

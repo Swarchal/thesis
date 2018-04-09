@@ -1,6 +1,6 @@
 \documentclass[a4paper,11pt,twoside,openright]{scrbook}
 
-\usepackage{../sw_thesis}
+\usepackage{swThesis}
 \usepackage{amsmath}
 \usepackage{lipsum}
 \usepackage{standalone}
@@ -8,7 +8,7 @@
 \usepackage{bibentry}  % Allow full citations in text
 \standalonetrue
 
-\bibliography{../bibliography}
+\bibliography{bibliography}
 
 \begin{document}
 
@@ -59,9 +59,11 @@ Lay summary here.
 \chapter*{List of Acronyms}
 \addcontentsline{toc}{chapter}{List of Acronyms}
 
-\begin{acronym}[proteins]
+\begin{acronym}
     \acro{2D}{Two-dimensional}
     \acro{3D}{Three-dimensional}
+    \acro{PBS}{Phosphate buffered saline}
+    \acro{DMSO}{Dimethyl sulfoxide}
 \end{acronym}
 
 \end{document}

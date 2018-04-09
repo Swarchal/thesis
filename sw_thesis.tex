@@ -1,7 +1,7 @@
 \documentclass[a4paper,11pt,twoside,openright]{scrbook}
 
 % Packages
-\usepackage{sw_thesis}
+\usepackage{swThesis}
 \usepackage{amsmath}
 \usepackage{lipsum}
 \usepackage{standalone}
@@ -11,7 +11,7 @@
 \usepackage{pdfpages}
 \includepdfset{offset=1cm 0cm}
 
-\bibliography{bibliography}
+\bibliography{bibliography.bib}
 \graphicspath{{figs/}}
 
 \begin{document}
@@ -26,13 +26,14 @@ The University of Edinburgh \\
 \maketitle
 
 \frontmatter
-\input{00_front_matter/frontmatter}
+\input{00_frontmatter/frontmatter}
 
 \mainmatter
 \input{01_introduction/introduction}
+\input{02_moa/moa}
 % chapters here
 
 %\input{appendices/appendices}
-\printbibliography[heading=bibintoc]
+\printbibliography
 
 \end{document}
