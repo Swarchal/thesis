@@ -22,15 +22,18 @@ xelatex sw_thesis.tex
 
 echo "clearing out rubbish..."
 
-exts=(.latexmk .aux .bcf .bbl .blg .lof .lot .run.xml .out .toc .log "\-blx.bib")
+exts=(.latexmk .aux .bcf .bbl .blg .lof .lot .log .run.xml .out .toc .log blx.bib)
 
 for ext in ${exts[@]}; do
     if [ -f *"$ext" ]; then
         rm *"$ext"
     fi
+done
 
-    if [ -f */*"$ext" ]; then
-        rm -rf */*"$ext"
+for ext in ${exts[@]}; do
+    filepath="*/*$ext"
+    if [ -f "$filepath" ]; then
+        rm -rf "$filepath"
     fi
 done
 
