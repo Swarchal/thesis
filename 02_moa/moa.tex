@@ -3,6 +3,7 @@
 \usepackage{swThesis}
 \usepackage{amsmath}
 \usepackage{lipsum}
+\usepackage{microtype}
 \usepackage{standalone}
 \usepackage{epigraph}  % For dedication and quote
 \usepackage{bibentry}  % Allow full citations in text
@@ -15,17 +16,62 @@
 
 \begin{document}
 
-\chapter{Cell morphology can be used to predict compound mechanism of action} \label{chapter:moa}
+\chapter{Cell morphology can be used to predict compound mechanism-of-action} \label{chapter:moa}
+% Introduction, the general idea, why this might be useful
+\section{Introduction}
+Cellular morphology is influenced by multiple intrinsic and extrinsic factors acting on a cell, and striking changes in morphology are observed when cells are exposed to biologically active small molecules.
+This compound-induced alteration in morphology is a manifestation of various perturbed cellular processes, and we can hypothesise that compounds with similar MoA which act upon the same signalling pathways will produce comparable phenotypes, and that cell morphology can, in turn, be used to predict compound MoA.
 
-\section{Section name}
-Stuff here, text text text test citation \cite{Yang2018}.
+In 2010 Caie \textit{et al.} generated, as part of a larger study, an image dataset consisting of MCF7 breast cancer cells treated with 113 small molecules grouped into 12 mechanistic classes, these cells were then fixed, labelled and imaged in three fluorescent channels\cite{Caie2010}.
+This dataset (also known as \textsc{bbbc021}) has become widely used as a benchmark in the field for MoA classification tasks, with multiple publications using the images to compare machine learning and data pre-processing approaches \cite{Ljosa2013a,Singh2014a,Pawlowski2016,Ando2017}.
+Whilst this is important work, it has led to the situation whereby the vast majority of studies in this field have based their work on a single dataset of a single cell-line.
 
-% development of, and overcoming the issues in the cell-staining protocol
 
-% validation screen of 24 compounds
 
+\section{Creating an annotated dataset}
+%
+As part of a preliminary study, a dataset similar to that of Caie \textit{et al.}'s was generated consisting of 24 compounds grouped into 8 mechanistic classes screened across the panel of 8 breast cancer cell-lines. % see table
+
+
+\subsection{Cell culture}
+Cells seeding densities, min-max, plate effects etc...
+
+
+\subsection{Compounds}
+The 24 compounds were chosen based on their ability to produce
+% concentrations
+% pairs of compounds which were chemically distinct (or similar?)
+% table of compounds and their mechanistic classes
+
+
+\subsection{Cell painting: labelling cellular morphology}
+% development of, and overcoming the issues in the cell-staining protocol?
+Cell painting, why, issues, development of and some images...
+
+\section{Machine learning methods to classify compound mechanism-of-action}
 % comparison of machine learning and data pre-processing methods to predict MOA
 % from morphological data
+
+\subsection{Comparison between classical and deep-learning machine learning methods}
+% description / background of each method
+% pros / cons of each
+% results
+% conclusion of comparison
+
+\subsubsection{Ensemble of decision trees trained on extracted morphological features}
+% idea behind decision trees / ensemble learning methods
+
+\subsubsection{Convolutional neural networks trained on pixel data}
+% idea behind convolutional neural networks
+
+\section{The transferability of machine learning models between morphologically distinct cell lines}
+% How well machine learning models generalise across cell-lines.
+
+\subsection{Leave-one-out classification}
+
+\subsection{Additional cell-lines}
+
+\section{Conclusion}
 
 %\printbibliography
 
