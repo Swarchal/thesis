@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{lipsum}
 \usepackage{microtype}
+\usepackage{booktabs}
 \usepackage{standalone}
 \usepackage{epigraph}  % For dedication and quote
 \usepackage{bibentry}  % Allow full citations in text
@@ -17,36 +18,84 @@
 \begin{document}
 
 \chapter{Cell morphology can be used to predict compound mechanism-of-action} \label{chapter:moa}
-% Introduction, the general idea, why this might be useful
+
 \section{Introduction}
 Cellular morphology is influenced by multiple intrinsic and extrinsic factors acting on a cell, and striking changes in morphology are observed when cells are exposed to biologically active small molecules.
 This compound-induced alteration in morphology is a manifestation of various perturbed cellular processes, and we can hypothesise that compounds with similar MoA which act upon the same signalling pathways will produce comparable phenotypes, and that cell morphology can, in turn, be used to predict compound MoA.
 
 In 2010 Caie \textit{et al.} generated, as part of a larger study, an image dataset consisting of MCF7 breast cancer cells treated with 113 small molecules grouped into 12 mechanistic classes, these cells were then fixed, labelled and imaged in three fluorescent channels\cite{Caie2010}.
-This dataset (also known as \textsc{bbbc021}) has become widely used as a benchmark in the field for MoA classification tasks, with multiple publications using the images to compare machine learning and data pre-processing approaches \cite{Ljosa2013a,Singh2014a,Pawlowski2016,Ando2017}.
-Whilst this is important work, it has led to the situation whereby the vast majority of studies in this field have based their work on a single dataset of a single cell-line.
+This dataset (also known as BBBC021) has become widely used as a benchmark in the field for MoA classification tasks, with multiple publications using the images to compare machine learning and data pre-processing approaches \cite{Ljosa2013a,Singh2014a,Pawlowski2016,Ando2017}.
+Whilst this is important work, it has led to the situation whereby the vast majority of studies in this field have based their work on a single dataset generated with a single cell-line.
 
+One of the issues associated with phenotypic screening when used in a drug discovery setting is target deconvolution.
+Once a compound has been identified which results in a desirable phenotype in a disease-relevant assay it is common to want to know which molecular pathways the hit compound is acting upon.
+While target deconvolution is a complex and difficult task, image-based morphological profiling represents one option similar to transcriptional profiling that can match and unknown compound to the nearest similar annotated compound in a dataset, while at the same time being far cheaper than the transcriptional methods such as LINCS1000 \cite{?lincs100 paper?}.
 
 
 \section{Creating an annotated dataset}
 %
-As part of a preliminary study, a dataset similar to that of Caie \textit{et al.}'s was generated consisting of 24 compounds grouped into 8 mechanistic classes screened across the panel of 8 breast cancer cell-lines. % see table
+As part of a preliminary study, a dataset similar to that of Caie \textit{et al.}'s was generated consisting of 24 compounds grouped into 8 mechanistic classes screened across the panel of 8 breast cancer cell-lines (see table \ref{table:cell-lines})
+
+
+% Please add the following required packages to your document preamble:
+\begin{table}[]
+    \begin{footnotesize}
+    \centering
+    \caption[Annotated compounds of known MoA]{Annotated compounds of known MoA}
+    \label{table:compounds}
+    \begin{tabular}{@{}llll@{}}
+    \toprule
+    Compound        & MOA class              & Supplier    & Catalog no. \\ \midrule
+    Paclitaxel      & Microtubule disrupting & Sigma       & T7402       \\
+    Epothilone B    & Microtubule disrupting & Selleckchem & S1364       \\
+    Colchicine      & Microtubule disrupting & Sigma       & C9754       \\
+    Nocodazole      & Microtubule disrupting & Sigma       & M1404       \\
+    Monastrol       & Microtubule disrupting & Sigma       & M1404       \\
+    ARQ621          & Microtubule disrupting & Selleckchem & S7355       \\
+    Barasertib      & Aurora B inhibitor     & Selleckchem & S1147       \\
+    ZM447439        & Aurora B inhibitor     & Selleckchem & S1103       \\
+    Cytochalasin D  & Actin disrupting       & Sigma       & C8273       \\
+    Cytochalasin B  & Actin disrupting       & Sigma       & C6762       \\
+    Jaskplakinolide & Actin disrupting       & Tocris      & 2792        \\
+    Latrunculin B   & Actin disrupting       & Sigma       & L5288       \\
+    MG132           & Protein degradation    & Selleckchem & S2619       \\
+    Lactacystin     & Protein degradation    & Tocris      & 2267        \\
+    ALLN            & Protein degradation    & Sigma       & A6165       \\
+    ALLM            & Protein degradation    & Sigma       & A6060       \\
+    Emetine         & Protein synthesis      & Sigma       & E2375       \\
+    Cycloheximide   & Protein synthesis      & Sigma       & 1810        \\
+    Dasatinib       & Kinase inhibitor       & Selleckchem & S1021       \\
+    Saracatinib     & Kinase inhibitor       & Selleckchem & S1006       \\
+    Lovastatin      & Statin                 & Sigma       & PHR1285     \\
+    Simvastatin     & Statin                 & Sigma       & PHR1438     \\
+    Camptothecin    & DNA damaging agent     & Selleckchem & S1288       \\
+    SN38            & DNA damaging agent     & Selleckchem & S4908       \\ \bottomrule
+    \end{tabular}
+    \end{footnotesize}
+\end{table}
+
 
 
 \subsection{Cell culture}
-Cells seeding densities, min-max, plate effects etc...
+%Cells seeding densities, min-max, plate effects etc...
+The cell-lines were all grown in \textsc{dmem} (\#CATNO MANUFACTURER) supplemented with 10\% foetal bovine serum and 2 mM L-glutamine, incubated at 37$^\circ$C, 5\% CO$_2$. 2,500 cells were seeded into the inner 60 wells of 96-well plates (\#165305 ThermoFisher) in 100 $\mu$L of media, whilst outer wells were filled with 100 $\mu$L of \textsc{pbs}.
+After seeding with cells, assay plates were incubated for 24 hours before compound treatment.
 
 
 \subsection{Compounds}
-The 24 compounds were chosen based on their ability to produce
-% concentrations
-% pairs of compounds which were chemically distinct (or similar?)
-% table of compounds and their mechanistic classes
+The 24 compounds see table \ref{table:compounds} were chosen based on previous knowledge of their biological activity and wide range of morphological responses.
+The compounds were diluted in \textsc{dmso} at a stock concentration of 10 mM.
+Compounds plates were made in v-bottomed 96-well plates (\#CATNO MANUFACTURER), at 1000-fold concentration in 100\% \textsc{DMSO} by serial dilutions ranging from 10 mM to 0.3 $\mu$M in semi-log concentrations.
+Compounds were added to assay plates containing cells after 24 hours of incubation by first making a 1:50 dilution in media to create an intermediate plate, followed by a 1:20 dilution from intermediate plate to the assay plate, with an overall dilution of 1:1000 from the stock compound plate to the assay plate.
 
 
 \subsection{Cell painting: labelling cellular morphology}
 % development of, and overcoming the issues in the cell-staining protocol?
 Cell painting, why, issues, development of and some images...
+
+
+
+
 
 \section{Machine learning methods to classify compound mechanism-of-action}
 % comparison of machine learning and data pre-processing methods to predict MOA
@@ -63,13 +112,20 @@ Cell painting, why, issues, development of and some images...
 
 \subsubsection{Convolutional neural networks trained on pixel data}
 % idea behind convolutional neural networks
+% extending CNN's beyond RGB images (cannot used pre-trained models), already used in hyperspectral imaging (LANDSAT)
+% benefits - no hand-picked features, not reliant on segmentation
+% downsides - difficult to implement, computationally expensive to train, black-box
+
 
 \section{The transferability of machine learning models between morphologically distinct cell lines}
 % How well machine learning models generalise across cell-lines.
 
 \subsection{Leave-one-out classification}
+% train on 7 cell-lines
+% test on witheld 8th cell-line
 
 \subsection{Additional cell-lines}
+% for predicting MoA in a single cell-line, does adding additional data from other cell-lines during training improve classification accuracy?
 
 \section{Conclusion}
 

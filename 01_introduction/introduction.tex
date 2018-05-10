@@ -3,6 +3,7 @@
 \usepackage{swThesis}
 \usepackage{lipsum}
 \usepackage{standalone}
+\usepackage{caption}
 \standalonetrue
 
 % Bibliography
@@ -25,20 +26,44 @@ One explanation may be that the low-hanging fruit has been taken, effective long
 % lots of interest in diverse approaches to drug-discovery
 % incorporate more technology intro drug-discovery
 
-\section{The Drug Discovery Process}
-\texttt{TODO:} A brief section on the drug discovery process, hit -> lead -> validation -> clinical trials -> approval.
+\section{The drug discovery process}
+\texttt{TODO: flesh this out}
+Commercial drug discovery programmes usually follow a well established pattern:
+\begin{enumerate}
+    \item For a given disease or indication, an assay is developed which allows for high-throughput screening of large chemical libraries.
+    \item Hits are selected based on a univariate read-out. These are then confirmed with further repeats.
+    \item Lead compounds are then validated by testing in more complex assays, such as \textit{in vitro} or \textit{in vivo} disease models.
+    \item Validated compounds are taken through DMPK and toxicity testing.
+    \item A lead compound is selected and taken onto clinical trials.
+        \begin{enumerate}
+            \item phase I: Toxicity and DMPK testing.
+            \item phase II: Effectiveness at treating the condition.
+            \item phase III: Larger scale testing of efficacy.
+        \end{enumerate}
+\end{enumerate}
+\texttt{why is this being written about??}
 
-\subsection{Target-Based Screening}
-Over the past 30 years the majority of drug discovery programmes seized upon new advances in robotics and automation to screen ever-expanding compound libraries against hypothesised protein targets.
-It would be difficult to argue that this target-based high-throughput screening (HTS) approach has not been fruitful, and has yielded many succesful therapeutics.
-Despite HTS's clinical and commerical success stories, it is not a panacea, with a high attrition rate of candidate compounds once they enter clinical trials.
-A large proportion of clinical trial failures are due to a lack of efficacy (\texttt{TODO:} get value), which can usually be traced back to an incomplete understanding of disease aetiology.
+
+\subsection{Target-based screening}
+Over the past 30 years the majority of drug discovery programmes seized upon new advances in robotics and automation to screen ever expanding compound libraries against pre-defined protein targets.
+It would be difficult to argue that this target-based high-throughput screening (HTS) approach has not been fruitful, as it has yielded many succesful therapeutics.
+Despite numerous clinical and commerical success stories, HTS is not a panacea, with a high attrition rate of lead compounds once they enter clincial trials.
+A large majority of these clinical trial failures are not due to toxicity, but rather a lack of efficacy, which can often be traced back to a poorly hypothesised target in the face of complex disease aetiology.
 
 % issues with prior identification of a target
 % large gamble on the hypothesised target
-% examples where this has failed - Alzheimers
+% examples where this has failed - Alzheimers? neuroscience in general?
 
-\subsection{Phenotypic Screening}
+\subsection{Phenotypic screening}
+Phenotypic screening differs from target-based screening in that it does not rely on prior knowledge of a specific target, but instead relies on interrogating a biologically relevant assay to identify hit compounds.
+This target-agnostic approach can prove useful in diseases with poorly understood mechanisms, or those with no obvious druggable protein targets.
+
+One such example is the anti-hepatitis C drug daclatasvir, which was discovered through a phenotypic assay in which human cells were modified to express the hepatitis C virus (HCV) replicon.
+This cell-model was then screened to identify compounds which reduced HCV replication.
+The target for daclatasvir was later found to be the HCV NS5A protein, which would not have been suggested in a target-based screen, as at the time it was thought to have no involvement with HVC.
+This elegant assay has the very useful attribute of modelling the disease, whilst simulatenously weeding out many compounds that may prove to be toxic in human cells. % TODO: citation for daclatasivir
+
+
 % define what is is
 % how is this different to target-based
 % historic approach
@@ -47,6 +72,7 @@ A large proportion of clinical trial failures are due to a lack of efficacy (\te
 % pros, cons (complimentary to target-based, not a replacement)
 
 \section{High content imaging}
+High content imaging is often thought of as a sub set of phenotypic screening.
 % how this relates to phenotypic screening
 % how this can be used in drug-discovery
 % benefits over transcriptomics, proteomics etc
@@ -57,6 +83,29 @@ A large proportion of clinical trial failures are due to a lack of efficacy (\te
 % rationale behind picking the 8 cell lines
 % cancer drug discovery
 % applications of phenotypic/high-content imaging in cancer
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+    \captionsetup{width=0.70\textwidth}
+    \centering
+    \caption[Panel of breast cancer cell lines chosen for study]{Panel of breast cancer cell lines chosen for study. PI3K:Phosphoinsitide-3-kinase, PTEN:Phosphatase and tensin homolog, ER:Estrogen receptor, TN:triple-negative, HER2:human epidermal growth factor, WT:wild-type, *:lack of consensus regarding the mutational status}
+    \label{table:cell-lines}
+    \begin{tabular}{@{}llll@{}}
+    \toprule
+               &                    & \multicolumn{2}{l}{Mutational status} \\
+    Cell line  & Molecular subclass & PTEN             & PI3K               \\ \midrule
+    MCF7       & ER                 & WT               & E545K              \\
+    T47D       & ER                 & WT               & H1047R             \\
+    MDA-MB-231 & TN                 & WT               & WT                 \\
+    MDA-MB-157 & TN                 & WT               & WT                 \\
+    HCC1569    & HER2               & WT               & WT                 \\
+    SKBR3      & HER2               & WT               & WT                 \\
+    HCC1954    & HER2               & *                & H1047R             \\
+    KPL4       & HER2               & *                & H1047R             \\ \bottomrule
+    \end{tabular}
+    \end{table}
+
 
 %\printbibliography
 
