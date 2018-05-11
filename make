@@ -4,10 +4,10 @@ trap "exit" INT
 #set -e
 
 echo "compiling main document"
-xelatex sw_thesis.tex
+xelatex -shell-escape sw_thesis.tex
 bibtex sw_thesis
-xelatex sw_thesis.tex
-xelatex sw_thesis.tex
+xelatex -shell-escape sw_thesis.tex
+xelatex -shell-escape sw_thesis.tex
 
 
 #echo "compiling individual chapters"
@@ -40,5 +40,14 @@ done
 if [ -f missfont.log ]; then
     rm missfont.log
 fi
+
+echo "================================================================================"
+echo "                                word count                                      "
+echo "================================================================================"
+texcount sw_thesis.tex -inc -total
+
+DATE=`date '+%Y-%m-%d'`
+WORDCOUNT=$(texcount sw_thesis.tex -inc -total | grep "Words in text" | cut -d ' ' -f 4)
+echo -e "$DATE""\t""$WORDCOUNT" >> word_count.tsv
 
 exit 0
