@@ -16,80 +16,106 @@
 
 \chapter{Introduction} \label{chapter:intro}
 
+
 \section{Eroom's Law: The increasing cost of drug discovery}
 Throughout the last 70 years the cost of developing a new drug has steadily increased.
-Scannel \textit{et al.} observed that the cost to develop a new drug has approximately doubled every 9 years \cite{Scannell2012}.
-This observation has been dubbed ``Eroom's law'', a homage to Moore's law -- a well-known observation that the number of transistors in microprocessors approximately doubles every 2 years.
-The cost of bringing a new drug to market is now approaching £1 billion, taking 10 years from initial concept to approval, the reasons behind this every-increasing cost are multi-faceted.
-One explanation may be that the low-hanging fruit has been taken, effective long-standing remedies have been studied and commercialised, natural products screened, and we are now tackling the more complex diseases and pharmacological targets.
-% pharma's productivity cliff
+A study by Scannel \textit{et al.} noted the cost to develop a new drug has approximately doubled every 9 years \cite{Scannell2012}, this observation has been dubbed ``Eroom's law'', a homage to Moore's law -- the well-known observation that the number of transistors in microprocessors approximately doubles every 2 years.
+The cost of bringing a new drug to market is now approaching £1 billion, taking 10 years from initial concept to approval, the reasons behind this every-increasing cost are still very much in debate, though most agree the issue is multi-faceted.
+One explanation may be that the low-hanging fruit has been taken, effective traditional remedies have been studied and their active ingredients commercialised, natural products screened, leaving us to tackle the more complex diseases and pharmacological targets.  
+This pessimism has led to the ever present idea that drug discovery is undergoing a productivity crisis, and that the investments made in early stage research do not translate into actionable pharmacology which can be used to develop efficacious therapies and ultimately benefit patients.
+This belief has led to a renewed interest in alternative drug discovery paradigms.
+
+% perceived decrease in productivity, leading to increased interest in other
+% drug discovery paradiagms.
 % lots of interest in diverse approaches to drug-discovery
 % incorporate more technology intro drug-discovery
 
 \section{The drug discovery process}
-\texttt{TODO: flesh this out}
-Commercial drug discovery programmes usually follow a well established pattern:
-\begin{enumerate}
-    \item For a given disease or indication, an assay is developed which allows for high-throughput screening of large chemical libraries.
-    \item Hits are selected based on a univariate read-out. These are then confirmed with further repeats.
-    \item Lead compounds are then validated by testing in more complex assays, such as \textit{in vitro} or \textit{in vivo} disease models.
-    \item Validated compounds are taken through DMPK and toxicity testing.
-    \item A lead compound is selected and taken onto clinical trials.
-        \begin{enumerate}
-            \item phase I: Toxicity and DMPK testing.
-            \item phase II: Effectiveness at treating the condition.
-            \item phase III: Larger scale testing of efficacy.
-        \end{enumerate}
-\end{enumerate}
-\texttt{why is this being written about??}
+
+% Typically, commercial drug discovery programmes follow a well-established sequence of events, starting with selecting a disease or indication
+% \begin{enumerate}
+%     \item For a given disease or indication, an assay is developed which allows for high-throughput screening of large chemical libraries.
+%     \item Hits are selected based on a univariate read-out. These are then confirmed with further repeats.
+%     \item Lead compounds are then validated by testing in more complex assays, such as \textit{in vitro} or \textit{in vivo} disease models.
+%     \item Validated compounds are taken through DMPK and toxicity testing.
+%     \item A lead compound is selected and taken onto clinical trials.
+%         \begin{enumerate}
+%             \item phase I: Toxicity and DMPK testing.
+%             \item phase II: Effectiveness at treating the condition.
+%             \item phase III: Larger scale testing of efficacy.
+%         \end{enumerate}
+% \end{enumerate}
+% \texttt{why is this being written about??}
 
 
 \subsection{Target-based screening}
-Over the past 30 years the majority of drug discovery programmes seized upon new advances in robotics and automation to screen ever expanding compound libraries against pre-defined protein targets.
-It would be difficult to argue that this target-based high-throughput screening (HTS) approach has not been fruitful, as it has yielded many succesful therapeutics.
-Despite numerous clinical and commerical success stories, HTS is not a panacea, with a high attrition rate of lead compounds once they enter clincial trials.
-A large majority of these clinical trial failures are not due to toxicity, but rather a lack of efficacy, which can often be traced back to a poorly hypothesised target in the face of complex disease aetiology.
+Over the past 30 years the majority of drug discovery programmes have seized upon technological advances in robotics and automation to screen ever expansive compound libraries against pre-defined protein targets.
+It would be difficult to argue that this target-based high-throughput screening (HTS) approach has not been fruitful, yielding many succesful therapeutics across a range of disease areas, largely attributed to an increased understanding of the genomic basis of many diseases.
+However, despite numerous clinical and commerical success stories, HTS is not a panacea, with a high attrition rate of lead compounds once they enter clincial trials \cite{citation_needed}.
+A large majority of these clinical trial failures are not due to toxicity, but rather a lack of efficacy which can often be traced back to a poorly hypothesised target in the face of complex disease aetiology.
+
 
 % issues with prior identification of a target
 % large gamble on the hypothesised target
 % examples where this has failed - Alzheimers? neuroscience in general?
 
 \subsection{Phenotypic screening}
-Phenotypic screening differs from target-based screening in that it does not rely on prior knowledge of a specific target, but instead relies on interrogating a biologically relevant assay to identify hit compounds.
+Phenotypic screening differs from target-based screening in that it does not rely on prior knowledge of a specific target, but instead interrogates a biologically relevant assay to identify compounds which alter the phenotype in a biologically desirable way.
 This target-agnostic approach can prove useful in diseases with poorly understood mechanisms, or those with no obvious druggable protein targets.
+Phenotypic screening is not a new approach in small molecule drug discovery, it was the primary method for many decades before the genomics revolution made target hypothesis tractable
+\cite{Zheng2013}.
 
-One such example is the anti-hepatitis C drug daclatasvir, which was discovered through a phenotypic assay in which human cells were modified to express the hepatitis C virus (HCV) replicon.
-This cell-model was then screened to identify compounds which reduced HCV replication.
-The target for daclatasvir was later found to be the HCV NS5A protein, which would not have been suggested in a target-based screen, as at the time it was thought to have no involvement with HVC.
-This elegant assay has the very useful attribute of modelling the disease, whilst simulatenously weeding out many compounds that may prove to be toxic in human cells. % TODO: citation for daclatasivir
+An example of a modern day target-agnostic phenotypic screen is the development of the anti-hepatitis C drug daclatasvir.
+A model was developed in which human cells were modified to express the hepatitis C virus (HCV) replicon, this was then screened to identify compounds which reduced HCV replication.
+The target for daclatasvir was later found to be the HCV NS5A protein, which is a novel target and likely not have been suggested in a hypothesis-driven screen as at the time it was thought to have no involvement with HVC. \cite{Belema2014,Nettles2014}.
+This elegant assay has the very useful attribute of modelling the disease whilst simulatenously identifying compounds which may prove to be toxic in human cells.
+
+Many concerns related to phenotypic screening are centered on the lack of mechanistic information for a given lead compound.
+Whilst the lack of a known target may cause concerns within a commercial drug discovery programme, regulatory bodies such as the Food and Drug Administration (FDA) and European Medicines Agency (EMA) do not require a known target for drug approval -- only that it is safe and efficacious.
+Metformin, a first-line therapy for type 2 diabetes, and is on the World Health Organisation's list of essential medicine, decreases liver glucose production and has a insulin senstitising effect on many tissues.
+Despite approval in Europe since 1957 and widespread clinical use, the  molecular mechanism of metformin remained unknown for 43 years \cite{Hundal2000}.
+Although knowledge of the molecular target is not necessary to get a drug into the clinic, target deconvolution is still an important part of phenotypic drug discovery programmes.
+Without knowing which protein or proteins a compound is binding to, lead optimisation via structure activity relationship (SAR) studies becomes extremely difficult.
+In addition, knowledge of the molecular target of a lead compound generated by a phenotypic screen can be used as a basis for starting a more high-throughput hypothesis-driven screen on a novel target.
+It is for this reason that many view phenotypic screening as a complimentary method to target based screening, rather than a competing approach or a proposed replacement.
 
 
-% define what is is
-% how is this different to target-based
-% historic approach
-% examples of approved drugs through phenotypic screening (monastrol?)
+
 % resurgence in recent years -> swinney and anthony, first in class
-% pros, cons (complimentary to target-based, not a replacement)
 
 \section{High content imaging}
-High content imaging is often thought of as a sub set of phenotypic screening.
+High content imaging is a technique utilising high-throughput microscopes and automated image analysis, commonly used in phenotypic screening as a method for gathering multivariate datasets from images of biological specimens and has proven useful in a wide variety of phenotypic assays, ranging from 2D mammalian cells \cite{cite_HCA_cell_papers}, \textit{in vivo} studies in zebrafish \cite{GeoffreyBurns2005} and even plants and crops \cite{Chen2014}.
+
+High content screens -- screening studies carried out with high content imaging -- are particularly useful in phenotypic drug discovery for a few reasons.
+The first is that they allow the use of more complicated assays, which might better represent the biological complexity than simple reductionist models.
+However, these complex assays often have readouts which are more difficult to quantify, which a single univariate readout may fail to accurately recapitulate,
+therefore the multivariate datasets produced by high content screening enables a more detailed representation of a complex assay endpoint.
+A second benefit is that the multivariate nature of the data generated by high content screening facilitates a more unbiased method for selecting hits.
+% TODO: expand on this point?
+
 % how this relates to phenotypic screening
 % how this can be used in drug-discovery
 % benefits over transcriptomics, proteomics etc
 % downsides compared to alternatives
+% high-dimensional profiling of compound response
 
-\section{Cancer}
-% general background on breast cancer
+
+\section{Cancer drug discovery}
+Cancer drug discovery programmes of past decades seized upon uncontrolled proliferation as a clinically relevant phenotype to screen against, giving rise a number of cytotoxic anti-proliferative and cytotoxic compounds, often renowned for their severe side-effects.
+Many modern day oncology drug discovery programmes still retain anti-proliferation as a key marker for pre-clinical success, although our ever increasing knowledge of cancer's molecular underpinnings has driven many oncology programmes towards a more target-based approach.
+The prototypical success story of target-driven drug discovery in oncology is imatinib, a tyrosine kinase inhibitor targetting the bcr-abl fusion protein in chronic myeloid leukemia.
+However, despite imatinib's success, in most cases targeting a single driver in a complex signalling network results in compensatory signalling, activation of redundant pathways, and unpredicted feedback mechanisms which often diminish or completely amilerorate efficacy \textit{in vivo}.
+
 % rationale behind picking the 8 cell lines
-% cancer drug discovery
 % applications of phenotypic/high-content imaging in cancer
+% use and cite the moffat paper here
 
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
+
 \begin{table}[]
-    \captionsetup{width=0.70\textwidth}
+    \begin{footnotesize}
+    \captionsetup{width=0.60\textwidth}
     \centering
-    \caption[Panel of breast cancer cell lines chosen for study]{Panel of breast cancer cell lines chosen for study. PI3K:Phosphoinsitide-3-kinase, PTEN:Phosphatase and tensin homolog, ER:Estrogen receptor, TN:triple-negative, HER2:human epidermal growth factor, WT:wild-type, *:lack of consensus regarding the mutational status}
+    \caption[Panel of breast cancer cell lines chosen for study]{Panel of breast cancer cell lines chosen for study. PI3K:Phosphoinsitide-3-kinase, PTEN:Phosphatase and tensin homolog, ER:Estrogen receptor, TN:triple-negative, HER2:human epidermal growth factor, WT:wild-type, $\star$:lack of consensus regarding the mutational status.}
     \label{table:cell-lines}
     \begin{tabular}{@{}llll@{}}
     \toprule
@@ -101,10 +127,11 @@ High content imaging is often thought of as a sub set of phenotypic screening.
     MDA-MB-157 & TN                 & WT               & WT                 \\
     HCC1569    & HER2               & WT               & WT                 \\
     SKBR3      & HER2               & WT               & WT                 \\
-    HCC1954    & HER2               & *                & H1047R             \\
-    KPL4       & HER2               & *                & H1047R             \\ \bottomrule
+    HCC1954    & HER2               & $\star$          & H1047R             \\
+    KPL4       & HER2               & $\star$          & H1047R             \\ \bottomrule
     \end{tabular}
-    \end{table}
+    \end{footnotesize}
+\end{table}
 
 
 %\printbibliography

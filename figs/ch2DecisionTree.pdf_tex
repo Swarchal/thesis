@@ -1,0 +1,75 @@
+%% Creator: Inkscape inkscape 0.48.4, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ch2DecisionTree.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{330.83654785bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.55663603)%
+    \put(0,0){\includegraphics[width=\unitlength]{ch2DecisionTree.pdf}}%
+    \put(0.26074659,0.37141125){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{yes}}}}}%
+    \put(0.10559893,0.2411554){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{yes}}}}}%
+    \put(0.2221376,0.42262951){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{nuclear area > 300 px}}}}}%
+    \put(0.09382244,0.29777128){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{cell roundness > 0.8}}}}}%
+    \put(0,0.08190633){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\textbf{\tiny{\textsf{Statin}}}}}}%
+    \put(0.04535909,0.24182361){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{no}}}}}%
+    \put(0.12962243,0.3719349){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{no}}}}}%
+    \put(0.28674551,0.19287554){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\textbf{\textsf{\tiny{\shortstack{Aurora B \\  kinase inhibitor}}}}}}}%
+    \put(0.10483117,0.05923047){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\textbf{\textsf{\tiny{\shortstack{Microtubule \\ disruptor}}}}}}}%
+    \put(0.70604495,0.00100597){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{nuclear area}}}}}%
+    \put(0.47851139,0.03070829){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{0}}}}}%
+    \put(0.95283972,0.03070829){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{500}}}}}%
+    \put(0.74111348,0.03070829){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{300}}}}}%
+    \put(0.45699072,0.21970978){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{\tiny{\textsf{cell roundness}}}}}}%
+    \put(0.47620191,0.49300228){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{1.0}}}}}%
+    \put(0.47620191,0.37401142){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\tiny{\textsf{0.8}}}}}%
+    \put(0.79293199,0.24626943){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\textbf{\textsf{\small{\shortstack{Aurora B \\  kinase \\ inhibitor}}}}}}}%
+    \put(0.56040636,0.41624872){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\textbf{\textsf{\small{\shortstack{Microtubule \\ disruptor}}}}}}}%
+    \put(0.60060866,0.206374){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\textbf{\small{\textsf{Statin}}}}}}%
+    \put(0.00206722,0.53826404){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\Large{\textsf{\textbf{A}}}}}}%
+    \put(0.47523578,0.53826404){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\Large{\textsf{\textbf{B}}}}}}%
+  \end{picture}%
+\endgroup%

@@ -2,8 +2,8 @@
 
 \usepackage{swThesis}
 \usepackage{amsmath}
-\usepackage{lipsum}
 \usepackage{standalone}
+\usepackage{xcolor}
 \standalonetrue
 
 \bibliography{bibliography}
@@ -17,6 +17,51 @@
 
 \section{Section name}
 
+% basically the TCCS book chapter, but with more of an introduction
+
+% compare other methods, PCA, cosine distance etc.
+
 %\printbibliography
+
+Random text before.
+
+text text text here:
+
+\begin{minted}[mathescape,
+linenos,
+numbersep=5pt,
+fontseries=Roboto Mono Medium,
+fontsize=\footnotesize,
+gobble=4,
+frame=leftline,
+framesep=2mm]{r}
+    # example code highlighting
+    dist <- function(x) {
+        return(sqrt(x %*% x))
+    }
+\end{minted}
+
+Example text inbetween.
+
+\begin{footnotesize}
+\begin{minted}[mathescape,
+linenos,
+numbersep=5pt,
+fontseries=Roboto Mono Medium,
+fontsize=\footnotesize,
+gobble=4,
+frame=leftline,
+framesep=2mm]{python}
+
+    # some comment
+    def new_function(x):
+        """docstring"""
+        total = 0
+        for i in x:
+            total += 1
+        return total
+
+\end{minted}
+\end{footnotesize}
 
 \end{document}

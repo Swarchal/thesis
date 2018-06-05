@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{c+c1}{\PYGZsh{} some comment}
+\PYG{k}{def} \PYG{n+nf}{new\PYGZus{}function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{):}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}docstring\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{total} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n}{x}\PYG{p}{:}
+        \PYG{n}{total} \PYG{o}{+=} \PYG{l+m+mi}{1}
+    \PYG{k}{return} \PYG{n}{total}
+\end{Verbatim}

@@ -1,0 +1,179 @@
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ch2ConfusionMatricesCNN.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{457.55442225bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.5835565)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.86411555,0.57649895){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{HCC1569}}}%
+    \put(0.8395008,0.56584081){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Accuracy = 52.43\%}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.55624464,0.0469273){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{actin}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.58455547,0.0403774){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{aurora}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.6128663,0.00929941){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{dna damaging}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.64117713,0.04078599){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{kinase}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.66948796,0.01880853){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{microtubule}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.69779879,0.02066578){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{protein deg}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.72610962,0.01360823){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{protein synth}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.75442045,0.04404237){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{statin}}}}%
+    \put(0.62457029,0.00011222){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Predicted MoA}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.63082303,0.31392429){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{HCC1954}}}%
+    \put(0.60620827,0.30326615){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Accuracy = 48.70\%}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.32295212,0.0469273){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{actin}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.35126295,0.0403774){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{aurora}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.37957378,0.00929941){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{dna damaging}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.40788461,0.04078599){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{kinase}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.43619544,0.01880853){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{microtubule}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.46450627,0.02066578){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{protein deg}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.4928171,0.01360823){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{protein synth}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.52112793,0.04404237){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{statin}}}}%
+    \put(0.39127777,0.00011222){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Predicted MoA}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.40819113,0.31392429){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{KPL4}}}%
+    \put(0.37291575,0.30326615){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Accuracy = 53.99\%}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.78953714,0.04692729){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{actin}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.81784797,0.04037739){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{aurora}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.8461588,0.00929941){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{dna damaging}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.87446963,0.04078599){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{kinase}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=24]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.90278046,0.01880853){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{microtubule}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=25]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.93109129,0.02066578){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{protein deg}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=26]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.95940212,0.01360823){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{protein synth}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=27]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.98771295,0.04404236){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{statin}}}}%
+    \put(0.85786279,0.00011221){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Predicted MoA}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=28]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.8732532,0.31392428){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{MCF7}}}%
+    \put(0.83950077,0.30326614){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Accuracy = 57.29\%}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=29]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.39804435,0.57649894){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{MDA-157}}}%
+    \put(0.37291575,0.5658408){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Accuracy = 42.73\%}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=30]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.0896596,0.0469273){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{actin}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=31]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.11797043,0.0403774){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{aurora}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=32]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.14628126,0.00929941){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{dna damaging}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=33]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.17459209,0.04078599){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{kinase}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=34]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.20290292,0.01880853){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{microtubule}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=35]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.23121375,0.02066578){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{protein deg}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=36]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.25952458,0.01360823){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{protein synth}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=37]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.28783541,0.04404237){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{statin}}}}%
+    \put(0.15798525,0.00011222){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Predicted MoA}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=38]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.04822117,0.28134743){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{actin}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=39]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.04167128,0.2530366){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{aurora}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=40]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.01059329,0.22472576){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{dna damaging}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=41]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.04207987,0.19641493){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{kinase}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=42]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.02010241,0.1681041){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{microtubule}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=43]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.02195966,0.13979327){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{protein deg}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=44]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.01490211,0.11148244){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{protein synth}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=45]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.04533625,0.08317161){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{statin}}}%
+    \put(0.00577682,0.16645432){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{True MoA}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=46]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.16475183,0.31392429){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{MDA-231}}}%
+    \put(0.13962324,0.30326615){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Accuracy = 63.65\%}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=47]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.04822117,0.54392208){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{actin}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=48]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.04167128,0.51561124){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{aurora}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=49]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.01059329,0.48730041){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{dna damaging}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=50]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.04207987,0.45898958){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{kinase}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=51]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.02010241,0.43067875){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{microtubule}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=52]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.02195966,0.40236792){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{protein deg}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=53]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.01490211,0.37405709){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{protein synth}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=54]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.04533625,0.34574626){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{statin}}}%
+    \put(0.00577682,0.42902897){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lb]{\smash{True MoA}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=55]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.17082504,0.57649894){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{SKBR3}}}%
+    \put(0.13962324,0.5658408){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Accuracy = 50.35\%}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=56]{ch2ConfusionMatricesCNN.pdf}}%
+    \put(0.64053026,0.57649894){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{T47D}}}%
+    \put(0.60620828,0.5658408){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Accuracy = 43.48\%}}}%
+  \end{picture}%
+\endgroup%

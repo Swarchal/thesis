@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{c+c1}{\PYGZsh{} example code highlighting}
+dist \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{k+kr}{function}\PYG{p}{(}x\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k+kr}{return}\PYG{p}{(}\PYG{k+kp}{sqrt}\PYG{p}{(}x \PYG{o}{\PYGZpc{}*\PYGZpc{}} x\PYG{p}{))}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

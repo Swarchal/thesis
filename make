@@ -3,11 +3,13 @@
 trap "exit" INT
 #set -e
 
+MASTER_DOC=sw_thesis.tex
+
 echo "compiling main document"
-xelatex -shell-escape sw_thesis.tex
+xelatex -shell-escape "$MASTER_DOC"
 bibtex sw_thesis
-xelatex -shell-escape sw_thesis.tex
-xelatex -shell-escape sw_thesis.tex
+xelatex -shell-escape "$MASTER_DOC"
+xelatex -shell-escape "$MASTER_DOC"
 
 
 #echo "compiling individual chapters"
@@ -44,10 +46,10 @@ fi
 echo "================================================================================"
 echo "                                word count                                      "
 echo "================================================================================"
-texcount sw_thesis.tex -inc -total
+texcount "$MASTER_DOC" -inc -total
 
-DATE=`date '+%Y-%m-%d'`
-WORDCOUNT=$(texcount sw_thesis.tex -inc -total | grep "Words in text" | cut -d ' ' -f 4)
-echo -e "$DATE""\t""$WORDCOUNT" >> word_count.tsv
+#DATE=`date '+%Y-%m-%d'`
+#WORDCOUNT=$(texcount $MASTER_DOC -inc -total | grep "Words in text" | cut -d ' ' -f 4)
+#echo -e "$DATE""\t""$WORDCOUNT" >> word_count.tsv
 
 exit 0
