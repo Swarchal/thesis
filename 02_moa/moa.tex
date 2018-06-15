@@ -43,7 +43,7 @@ As part of a preliminary study, a dataset similar to that of Caie \textit{et al.
 \begin{table}[]
     \begin{footnotesize}
     \centering
-    \captionsetup{width=0.635\textwidth}
+    \captionsetup{width=0.8\textwidth}
     \caption[Annotated compounds of known MoA]{Annotated compounds and their associated mechanism-of-action label used in the classification tasks.}
     \label{table:compounds}
     \begin{tabular}{@{}llll@{}}
@@ -88,7 +88,7 @@ The 24 compounds see table \ref{table:compounds} were chosen based on previous k
 \subsection{Cell painting: labelling cellular morphology}
 In order to capture a broad view of morphological changes within a cell using fluorescent microscopy, a choice has to be made which cellular structures to label.
 This choice is limited by the availablity of the fluorescent filter sets fitted to the microscope, reagent costs, and the scalability of the protocol when used in a large screen.
-Fortunately, this problem was already addressed by another group who published a protocol -- named ``cell painting" -- for labelling 7 cellular structures, using 6 non-antibody stains imaged in the same 5 fluorescent channels available with our miscoscopy setup \cite{Gustafsdottir2013, Bray2016}.
+Fortunately, this problem was already addressed by another group who published a protocol -- named ``cell painting" -- for labelling 7 cellular structures, using 6 non-antibody stains imaged in the same 5 fluorescent channels available with our miscoscopy setup. \cite{Gustafsdottir2013, Bray2016}
 
 % development of, and overcoming the issues in the cell-staining protocol?
 The cell-painting protocol was initially optimised by Gustafsdottir \textit{et al.} for use in the U2OS oesteosarcoma cell line, and briefly tested in a few other commonly used cell-lines.
@@ -145,7 +145,7 @@ Most classifiction models will overfit to some degree, typically performing bett
 A decision tree is a very simple method that can be used for both regression and classification.
 The method works by repeatedly dividing the decision space using binary rules on the feature values until a terminal node containing a classification label is reached (figure \ref{figure:decision_tree}).
 Simple decision trees like those shown in figure \ref{figure:decision_tree} perform relatively poorly on all but the simplest of classification problems.
-However, by aggregating many decision trees and their predictions we can create more accurate and robust models in a practice known as ensemble learning \cite{Opitz1999}.
+However, by aggregating many decision trees and their predictions we can create more accurate and robust models in a practice known as ensemble learning. \cite{Opitz1999}
 Bagging \cite{Breiman1996} and Boosting \cite{Freund1996} are two popular methods for constructing ensembles of decision trees.
 As combining the output of several decision trees is useful only if there is a disagreement among them, these two methods both attempt to solve the same problem of generating a set of correct decision tress, that still disagree with one another as much as possible on incorrect predictions.
 
@@ -161,8 +161,8 @@ As combining the output of several decision trees is useful only if there is a d
 Decision tree methods work best with multivariate tabular data, with well defined features describing each observation, this is in contrast to image data which consists of 2D arrays of pixel intensities.
 Therefore, in order to train such a model, cellular morphology needs to be quantified by measuring cellular features.
 This is a common task with multiple software packages available, which follow two main steps: (1) Segment objects from the background. Objects may be sub-cellular structures or whole-cell masks (2) Measure various attributes from the object, this is typically based on size, shape and intensity.
-Cellprofiler \cite{cellprofiler_paper} was chosen primarily due to the high configurability and the permissive license enabling large-scale distributed processing on compute clusters in order to reduce the image analysis time.
-The images captured on the ImageXpress were analysed using CellProfiler, quantifying approximately 400 morphological features.
+Cellprofiler \cite{Carpenter2006} was chosen primarily due to the high configurability and the permissive license enabling large-scale distributed processing on compute clusters in order to reduce the image analysis time.
+The images captured on the ImageXpress were analysed using Cellprofiler, quantifying approximately 400 morphological features.
 The datasets produced by the Cellprofiler analysis contained morphological measurements on an individual cell level.
 Although we can train a model on single cell data we are not interesting in classifying morphologies of single cells, but rather classifying an image or a collection of images that represent a compound treatment, this therefore allows several approaches to structuring the training data:
 
@@ -174,23 +174,20 @@ Although we can train a model on single cell data we are not interesting in clas
 \end{enumerate}
 
 
-
 % image averages, vs single cell data and consensus classification.
     % comparison of both.
 
 
-
-
 \subsubsection{Convolutional neural networks trained on pixel data}
 Artificial neural networks (ANNs) are becoming increasingly common in a wide range of machine learning tasks.
-Although many of the theories underpinning ANNs are decades old \cite{perceptron_paper}, they have only recently achieved widespread practical use due to improved methods for training \cite{Rumelhart1986} and the availability of more computing power allowing the use of more complex models.
+Although many of the theories underpinning ANNs are decades old, \cite{Rosenblatt1958} they have only recently achieved widespread practical use due to improved methods for training \cite{Rumelhart1986} and the availability of more computing power allowing the use of more complex models.
 ANNs are (very) loosely inspired by the structure of biological brains, with interconnected neurons passing signals through layers onto subsequent neurons forming a chain with the output of one neuron becoming the input for the next neuron.
 In between neurons, the signals can be altered by multiplying the value by a weight ($W$), it is through adjusting these individual weights that ANNs optimise their performance for a particular task, similar to how long-term potentiation is used to strengthen synaptic connections in biological brains.
 When a signal reaches a neuron, it is combined via a weighted sum with all the other inputs from other connected neurons and passed through an activation function.
 This activation function -- similar to an action potential in neurons -- determines the output of the neuron for the given aggregated input, which is then passed as new inputs onto subsequent neurons and so on, however, in contrast to an all-or-nothing output of an action potential there are several types of activation functions used in ANNs, most of which have a graded output (figure \ref{figure:neuron_relu}B).
 
 \begin{figure}
-    \captionsetup{width=0.8\textwidth}
+    \captionsetup{width=0.9\textwidth}
     \caption[Diagram neural network neuron and activation function.]{\textbf{(A)} A representation of a single connected neuron in an ANN, the input value to the neuron is multiplied by the weight ($W_1$), before being passed through the activation function $R$, the output of which is then multiplied by $W_2$, and passed as the input to the next neuron. \textbf{(B)} A neuron with multiple inputs and outputs, typical of those in a hidden layer. The activation function acts on the weighted sum of all inputs, and returns a single output value which is when directed to all connected neurons in the next layer. Where $W_i$ is the weight of \textsf{input}$_i$. \textbf{(C)} A common activation function also known as a rectifier, in this example a rectified linear unit (ReLU), in the inputs ($x$) is transformed and passed as output. So $f(x)$ can be viewed as the output for a given value of $x$.}
     \label{figure:neuron_relu}
 \input{figs/ch2NeuralNetworkNode2.pdf_tex}
@@ -199,7 +196,7 @@ This activation function -- similar to an action potential in neurons -- determi
 The neurons in an ANN are typically arranged in several layers: an input layer; one or more hidden layers; and a final output layer (figure \ref{figure:nn_layers}).
 With each layer, the network transforms the data into a new representation, through training the network these representations make the data easier to classify.
 In the final layer, the data is ultimately represented in a way which makes a single output neuron activate more strongly than the other neurons in that layer, and so the data is ultimately transformed into a single value -- the index of the active neuron which corresponds to a particular class.
-A new ANN is initialised with random weights, to train a neural network these weights are adjusted by feeding in labelled data and adjusting weights in order to minimise classification errors through a process known as backpropagation \cite{Rumelhart1986}.
+A new ANN is initialised with random weights, to train a neural network these weights are adjusted by feeding in labelled data and adjusting weights in order to minimise classification errors through a process known as backpropagation.\cite{Rumelhart1986}
 
 
 
@@ -222,7 +219,7 @@ This lends itself well to ANNs, as a pixel value in isolation is less informativ
 Depending on the size and the values within the kernel, the transformations highlight different features within an image.
 Two dimensional convolutions are used in ANNs by starting with many randomly initialised kernels, and updating the kernel values through training in order to best highlight features which prove useful for accurately predicting classes.
 Using a single convolutional layer highlights simple features in an image such as edges and speckles, by combining several convolutional layers more complex features are highlighted through combinations of these simple features.
-These convolved images are then flattened into a one-dimensional vector which is used as an input in an ANN such as that depicted in figure \ref{figure:nn_layers}.
+These convolved images are then flattened into a one-dimensional vector which is used as an input in a fully connected ANN such as that depicted in figure \ref{figure:nn_layers}.
 
 % TODO more of a segway here, more details on using more than RGB channels.
 
@@ -236,7 +233,7 @@ However, as most images are digitially represented in three colour channels (red
 % TODO: diagram of architecture
 % easy for alexnet
 
-The images generated by the ImageXpress microscope are 2160 by 2160 pixel tiff files, with a bit-depth of 16, whilst these image properties are common in microscopy, they are extreme for current CNN implementations.
+The images generated by the ImageXpress microscope with zero binning are 2160 by 2160 pixel tiff files, with a bit-depth of 16, whilst these image properties are common in microscopy, they are extreme for current CNN implementations.
 Most image classification tasks involving CNN's use 8-bit images in the region of 300 by 300 pixels, relatively small images are used as the convolutional layers of deep CNN's generate many thousands of matrices, and using smaller input images drastically reduces the computing resources and time required to train such classifiers.
 
 This presents the issue of how to reduce the 2160$\times$2160 images into small images, one option is to downscale the entire image using bi-linear or bi-cubic interpolation, while a second option is to chop the original image up into smaller sub-images (figure \ref{figure:image_chopping}).
@@ -259,8 +256,8 @@ This method returns an image per cell, negating the issue of empty images; it do
 The first step is to determine a baseline of how well the predictive models perform when trained and tested on the same cell line, this also acts as a platform with which to test and optimise model architecture and hyperparameters.
 
 
-The two different CNN architectures were tested based on the hypothesis that a deeper, more complex architecture (ResNet18 \cite{resnet_paper}) will be capable of learning more subtle features, although more complex models with greater numbers of interal parameters are more prone to overfitting when training data is limited.
-On the other hand, a more simple model such as AlexNet \cite{alexnet_paper} which contains fewer convolutional layers will be less able to perform complex tranformations of the data, and therefore theoretically limit the subtle features which can be extracted and learned from an image.
+The two different CNN architectures were tested based on the hypothesis that a deeper, more complex architecture (ResNet18 \cite{He2015}) will be capable of learning more subtle features, although more complex models with greater numbers of interal parameters are more prone to overfitting when training data is limited.
+On the other hand, a more simple model such as AlexNet \cite{Krizhevsky2012} which contains fewer convolutional layers will be less able to perform complex tranformations of the data, and therefore theoretically limit the subtle features which can be extracted and learned from an image.
 While this might theoretically reduce accuracy, in the absence of large amount of training data it may reduce overfitting due to the fewer number of parameters.
 % TODO alexnet, resnet (with and without dropout) training graphs for a few cell-lines
 % pick an architecture
