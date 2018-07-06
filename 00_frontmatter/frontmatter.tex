@@ -36,7 +36,19 @@ Acknowledgements here.
 % 1 page max
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
-Abstract here.
+High content image-based screening assays utilise cell based models to extract an quantify morphological phenotypes induced by small molecules.
+The rich datasets produced can be used to identify lead compounds in drug discovery efforts, infer compound mechanism of action, or aid biological understanding with the use of tool compounds.
+Here I present my work developing and applying high-content image based screens of small molecules across a panel of eight genetically and morphologically distinct breast cancer cell lines.
+
+I implemented machine learning models to predict compound mechanism of action from morphological data and assesed how well these models transfer to unseen cell lines, comparing the use of numeric morphological features extracted using computer vision techniques against more modern convolutional neural networks acting on raw image data.
+
+The use of cell lines panels have been widely used in pharmacogenomics in order to compare the sensitivity between genetically distinct cell lines to drug treatments.
+I applied dimensional reduction techniques and distance metrics to develop a measure of differential morphological response between cell lines to small molecule treatment, which controls for the inherent morphological differences between untreated cell lines.
+
+These methods were then applied to a screen of 13,000 drug-like molecules across the eight cell lines to identify compounds which produced distinct phenotypic responses between cell lines.
+Putatative hits were then validated in a three-dimensional tumour spheroid assay to determine the functional effect of these compounds in more complex models, as well as proteomics to determine the responsible pathways.
+
+Using data generated from the compound screen, I carried out work towards integrating knowledge of chemical structures with morphological data to infer mechanistic information of the unannotated compounds, and assess structure activity relationships from imaging data.
 
 
 \chapter*{Lay Summary}

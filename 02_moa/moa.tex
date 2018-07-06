@@ -36,7 +36,7 @@ While target deconvolution is a complex and difficult task, image-based morpholo
 
 \section{Creating an annotated dataset}
 %
-As part of a preliminary study, a dataset similar to that of Caie \textit{et al.}'s was generated consisting of 24 compounds grouped into 8 mechanistic classes screened across the panel of 8 breast cancer cell-lines (see table \ref{table:cell-lines})
+As part of a preliminary study, a dataset similar to that of Caie \textit{et al.}'s was generated consisting of 24 compounds grouped into 8 mechanistic classes screened across the panel of 8 breast cancer cell-lines (see table \ref{table:cell-lines}).
 
 
 % Please add the following required packages to your document preamble:
@@ -369,7 +369,7 @@ TODO
 \subsection{Convolutional neural networks}
 
 
-All code related to neural networks was written in pytorch (version 0.3) for python 3.5, and all ANN models were trained on Nvidia K80 GPUs.
+All code related to neural networks was written in pytorch v0.3 for python 3.5, and all ANN models were trained on Nvidia K80 GPUs.
 As training CNNs is computationally expensive and time consuming, data parallelism was leveraged to share batches of images across multiple GPUs.
 This technique replicates the CNN model on each device, which processes a portion of the input data, the updated weights for all devices are then averaged and model replicates are updated synchronously after each batch (figure \ref{figure:multi_GPU}).
 This speeds up model training approximately linearly with the number of GPUs and allows use of larger batch sizes.
