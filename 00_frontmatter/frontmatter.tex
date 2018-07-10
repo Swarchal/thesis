@@ -36,24 +36,35 @@ Acknowledgements here.
 % 1 page max
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
-High content image-based screening assays utilise cell based models to extract an quantify morphological phenotypes induced by small molecules.
+High content image-based screening assays utilise cell based models to extract and quantify morphological phenotypes induced by small molecules.
 The rich datasets produced can be used to identify lead compounds in drug discovery efforts, infer compound mechanism of action, or aid biological understanding with the use of tool compounds.
 Here I present my work developing and applying high-content image based screens of small molecules across a panel of eight genetically and morphologically distinct breast cancer cell lines.
 
-I implemented machine learning models to predict compound mechanism of action from morphological data and assesed how well these models transfer to unseen cell lines, comparing the use of numeric morphological features extracted using computer vision techniques against more modern convolutional neural networks acting on raw image data.
+I implemented machine learning models to predict compound mechanism of action from morphological data and assessed how well these models transfer to unseen cell lines, comparing the use of numeric morphological features extracted using computer vision techniques against more modern convolutional neural networks acting on raw image data.
 
-The use of cell lines panels have been widely used in pharmacogenomics in order to compare the sensitivity between genetically distinct cell lines to drug treatments.
+The application of cell line panels have been widely used in pharmacogenomics in order to compare the sensitivity between genetically distinct cell lines to drug treatments and identify molecular biomarkers that predict response.
 I applied dimensional reduction techniques and distance metrics to develop a measure of differential morphological response between cell lines to small molecule treatment, which controls for the inherent morphological differences between untreated cell lines.
 
-These methods were then applied to a screen of 13,000 drug-like molecules across the eight cell lines to identify compounds which produced distinct phenotypic responses between cell lines.
+These methods were then applied to a screen of 13,000 lead-like small molecules across the eight cell lines to identify compounds which produced distinct phenotypic responses between cell lines.
 Putatative hits were then validated in a three-dimensional tumour spheroid assay to determine the functional effect of these compounds in more complex models, as well as proteomics to determine the responsible pathways.
 
-Using data generated from the compound screen, I carried out work towards integrating knowledge of chemical structures with morphological data to infer mechanistic information of the unannotated compounds, and assess structure activity relationships from imaging data.
+Using data generated from the compound screen, I carried out work towards integrating knowledge of chemical structures with morphological data to infer mechanistic information of the unannotated compounds, and assess structure activity relationships from cell-based imaging data.
 
 
 \chapter*{Lay Summary}
 \addcontentsline{toc}{chapter}{Lay summary}
-Lay summary here.
+Drugs act by altering the behaviour of cells, usually by disrupting the internal cellular machinery necessary for normal function, or in the case of diseases, by trying to reverse disfunctional cellular processes responsible for disease initiation and progression back towards a normal state.
+Subtle changes in cellular functions can be detected visually through microscopy and fluorescent labels which bind to subcellular components such as DNA.
+Using automated image analysis methods it is possible to analyse these microscope images of cells and create a detailed description of each individual cell, represented as a series of measurements describing various attributes such as the cell's size, location and concentration of various biomolecules, this can be though of as the cell's ``fingerprint''.
+Using these cellular fingerprints it is possible to test drugs in an effort to find those that convert a disease-like fingerprint into a healthy looking one, or to compare the fingerprints produced by unknown drugs to ones produced by molecules whose function is already known.
+
+My work focuses on how to generate and exploit compound fingerprints across a number of different cells which represent different types of breast cancer.
+A significant challenge in studying distinct cancer cell types is that each cell has its own unique fingerprint regardless of drug treatment, which makes comparisons between cells more difficult.
+In addition, I investigate how more advanced computational tools alongside this varied dataset can aid predicting how novel compounds work.
+
+
+
+
 
 \clearpage
 \tableofcontents
