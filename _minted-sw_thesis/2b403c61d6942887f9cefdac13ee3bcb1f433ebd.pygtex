@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+threshold \PYG{o}{=} \PYG{l+m}{0.8}
+pca\PYGZus{}output \PYG{o}{=} prcomp\PYG{p}{(}data\PYG{p}{)}
+pc\PYGZus{}variance \PYG{o}{=} pca\PYGZus{}output\PYG{o}{\PYGZdl{}}stdev\PYG{o}{\PYGZca{}}\PYG{l+m}{2}
+cumulative\PYGZus{}prop\PYGZus{}variance \PYG{o}{=} \PYG{k+kp}{cumsum}\PYG{p}{(}pc\PYGZus{}variance\PYG{p}{)} \PYG{o}{/} \PYG{k+kp}{sum}\PYG{p}{(}pc\PYGZus{}variance\PYG{p}{)}
+n\PYGZus{}components \PYG{o}{=} \PYG{k+kp}{min}\PYG{p}{(}\PYG{k+kp}{which}\PYG{p}{(}cumulative\PYGZus{}prop\PYGZus{}variance \PYG{o}{\PYGZgt{}=} threshold\PYG{p}{))}
+\end{Verbatim}

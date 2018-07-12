@@ -1,0 +1,322 @@
+\documentclass[a4paper,11pt,twoside,openright]{scrbook}
+
+\usepackage{swThesis}
+\usepackage{amsmath}
+\usepackage{standalone}
+\usepackage{xcolor}
+\standalonetrue
+
+\bibliography{bibliography}
+
+% Figures
+\graphicspath{./figs}
+
+\begin{document}
+
+% basically the TCCS book chapter, but with more of an introduction
+
+% compare other methods, PCA, cosine distance etc.
+
+%\printbibliography
+
+\chapter{Measuring distinct phenotypic response} \label{chapter:tccs}
+
+\scriptsize{Note: this chapter is based on previously published work: \textit{"Development of the Theta Comparative Cell Scoring Method to Quantify Diverse Phenotypic Responses Between Distinct Cell Types", S Warchal, J Dawson, N.O Carragher. ASSAY and Drug Development Technologies, pages 395-406, 7:14, 2016.} and \textit{"High-Dimensional Profiling: The Theta Comparative Cell Scoring Method", Phenotypic Screening. Methods in Molecular Biology 1787, 171-181}.} 
+
+
+
+\section{Introduction}
+\normalsize
+\subsection{Comparing response to small molecules across a panel of cell lines}
+% First introduce why you would want to compare phenotypic response between cell
+% lines
+Comparative analysis of panels of cell lines treated with compounds are routinely used in pharmacogenomic studies and drug sensitivity profiling.
+These studies often use large numbers of cell lines and simple measures of compound response such as growth inhibition or cell death, allowing researchers to interrogate sensitivity of various small molecule therapies in a number of genomic backgrounds representing different diseases, disease-subtypes or patient populations.
+
+Using high-content screening methods with cell line panels enables more complex cellular readouts than cell death resulting in a more detailed characterisation of compound effect.
+However, in order to apply multiparametric high-content data to pharmacogenomic studies, there needs to be a robust -- and ideally univariate -- measure of compound response to correlate drug sensitivity with genomic or proteomic datasets.
+
+
+\subsection{Quantifying compound response in high content screens}
+A simple but effective method to quantify the magnitude of compound response from multiparametric data is to calculate the distance from the negative control to the compound induced phenotype in feature space.
+This idea was demonstrated by Tanaka \textit{et al.} who used PCA to reduce the dimensionality of the dataset to 3 principal components, and took the distance from the centroid of the negative control replicates to the compound co-ordinates in 3D principal component space. \cite{Tanaka2005}
+Distance from the negative control in PCA space is an effective method for detecting phenotypically active compounds.
+In addition, distance measurements can repeated for multiple concentrations of a compound to produce a concentration -- phenotypic-distance response curve (see figure \ref{figure:pca_dist}), and derived EC$_{50}$ values.
+However, one issue of the distance-from-negative-control metric of compound activity is that it disregards much of the information relating to the position in feature space, as depicted in figure \ref{figure:pca_dist}, two compounds might have nearly identical distances, yet those distances may be produced by very different morphological changes.
+In order to discern between two compounds such as these there needs to be a measure of directionality.
+
+\begin{figure}
+    \captionsetup{width=0.8\textwidth}
+    \caption[Compound distance in principal component space]{
+    Diagram illustrating measuring magnitude of compound response by distance from the negative control centroid in principal component space.
+    \textbf{(A)} Phenotypic distance to three different compounds.
+    Compound A and B show phenotypic activity as they are distanced from the negative control cluster, whereas compound B shows little activity.
+    Note that compound A and compound C have similar distances from the negative control centroid, yet have very different values in principal component space.
+    \textbf{(B)} A titration series for each of the three compounds, depicting increasing concentration of compound increasing distance from the negative control as morphological changes become more apparent.
+}
+    \input{figs/ch3PcaDist.pdf_tex}
+    \label{figure:pca_dist}
+\end{figure}
+
+% TODO: maybe more info on principal components, eigen vectors?
+
+
+
+
+\section{Results}
+
+\subsection{Compound titrations produce a phenotypic `direction'}
+ 
+Visualising high-content imaging data from compound screens in principal component space reveals a number of patterns and interesting effects.
+Plotting the first two principal components of the morphological features calculated form 24 compounds into 8 mechanistic classes reveals that compounds with the same MoA tend to cluster with one another in PCA space (figure \ref{figure:pca_clustering}).
+
+\begin{figure}
+    \captionsetup{width=0.8\textwidth}
+    \caption[PCA compound clustering based on MoA]{
+MoA clustering of compounds based on PCA of their morphological features. 
+Principal components calculated from morphological features of 24 compounds grouped into 8 mechanistic classes.
+\textbf{(A)} Principal components calculated from an image average of individual cell measurements.
+\textbf{(B)} Each point reprensents a well average from individual cell measurements as each well contains 9 image sites.
+STS: staurosporine.
+}
+    \input{figs/ch3pcaClustering.pdf_tex}
+    \label{figure:pca_clustering}
+\end{figure}
+
+When taking concentrations of compounds into account, is it possible to visualise the effect of increasing concentrations of a compound and its distance from the negative control and inactive compounds.
+Figure \ref{figure:pca_direction} shows two highlighted compounds from the same data as in figure \ref{figure:pca_clustering}, we can see as compound concentration increases morphologies become increasingly distant from the untreated negative control cluster positioned centrally, with the two different compounds producing opposite directions.
+Mirroring the differences in direction, the morphologies produced by barasertib and cycloheximide are also very different from one another, with barasertib -- an Aurora B kinase -- inhibitor producing large irregular nuclei, and cycloheximide creating small bright nuclei.
+This direction in PCA space can be thought of as a phenotypic direction, which can be measured and quantified independent from potency\footnote{as measured by distance from the negative control cluster centroid}.
+
+
+\begin{figure}
+    \captionsetup{width=0.8\textwidth}
+    \caption[Two compound titrations highlighted in phenotypic space]{
+Principal components of Cellprofiler features calculated from a 24 compound high content screen in MDA-MB-231 cells.
+Barasertib (left) and cycloheximide (right) titrations are highlighted to show two active compounds with distinct phenotypes heading in different directions in phenotypic space with increasing concentration.
+Images shown next to points are from the Hoechst stain labelling nuclei morphology produced by 1 $\mu$M of each compound.
+}
+    \includegraphics[scale=1.4]{figs/ch3TCCS_direction}
+    \label{figure:pca_direction}
+\end{figure}
+
+
+\subsection{Difference in phenotypic direction can be used to quantify distinct phenotypes}
+
+Using direction in addition to distance it is now possible to distinquish between equally phenotypically potent compounds with distinct morphological effects.
+By calculating an angle ($\theta$) between phenotypic directions as a function of cosine dissimilarity a univariate value can be used to quantify phenotypic distance between either different compounds, or cell-lines treated with the same compound to detect distinct phenotypic response.
+By calculating $\theta$ against a fixed reference vector, the difference in $\theta$  ($\Delta\theta$) between two treatments can be quantified and visualised in polar co-ordinates as histograms or rose plots (figure \ref{figure:theta_histogram}).
+Whereby compounds with the same phenotypic direction will have a small $\Delta\theta$ and compounds with dissimilar phenotypes having a large $\Delta\theta$, when expressed in degrees the values are constrained between 0$^\circ$ and 180$^\circ$.
+
+
+\begin{figure}
+    \captionsetup{width=0.8\textwidth}
+    \caption[Visualisation of $\Delta\theta$ to quantify the difference in phenotypic direction between two compounds.]{
+Visualisation of $\Delta\theta$ to quantify the difference in phenotypic direction between two compounds.
+Histograms in polar co-ordinates show the $\theta$ values of treatments against a fixed reference vector, with $\Delta\theta$ calculated as the difference between the average $\theta$ (black lines) of each compound.
+}
+    \input{figs/ch3thetaHistogram.pdf_tex}
+    \label{figure:theta_histogram}
+\end{figure}
+
+Although the data in figures \ref{figure:pca_direction} \& \ref{figure:pca_clustering} show the negative control points clustered near the origin (0, 0) in principal component co-ordinates this is not guaranteed and should not be relied upon, so it is necessary to translate the principal components co-ordinates so that the negative control centroid is position over the median.
+In addition, inactive compounds will be positioned in proximity to the negative control points and calculated $\theta$ values will be misleading, therefore removing inactive compounds based on distance from the negative control is an important pre-processing step.
+
+
+\subsection{SN38 elicits a disinct phenotypic response between cell lines}
+
+
+
+\begin{figure}
+    \captionsetup{width=0.8\textwidth}
+    \caption[Visualisation of $\Delta\theta$ to quantify the difference in phenotypic direction between cell lines]{
+Visualisation $\Delta\theta$ to quantify the difference in phenotypic response between cell lines when treated with barasertib.
+\textbf{(A)} Ciricular histogram of $\theta$ values of barasertib calculated for eight cell lines.
+\textbf{(B)} Phenotypic direction of cell lines treated with barasertib stratified by cell line.
+\textbf{(C)} Representation of $\Delta\theta$ for the difference between HCC1569 and MDA-MB-231 cell lines. Note that in this case $\Delta\theta$ is relatively small.
+}
+    \includegraphics[scale=1.15]{figs/ch3tccsCellLines}
+    \label{figure:theta_cell_lines}
+\end{figure}
+
+Instead of calculating $\Delta\theta$ between compounds it is also possible to compare the phenotypic responses between cell lines for a given compound.
+To identify and quanitfy differential phenotypic responses, $\Delta\theta$ was calculated between pairs of 8 breast cancer cell lines treated with 24 small molecules at 8 semi-log concentrations.
+21 out of the 24 compounds were found to be sufficiently active across the 8 cell lines to proceed, and the difference in phenotypic direction was calculated for all pairs of cell lines for each compound.
+Figure \ref{figure:theta_24} shows a heatmap of the calculated $\Delta\theta$ values.
+Some compounds such as the Aurora B inhibitors ZM447439 and barasertib showed very little difference in phenotypic response between the breast cancer cell lines, whereas compounds such as the topoisomerase I inhibitor SN38 demonstrated a single cell-line (KPL4) having a distinct response compared to the 7 others.
+Particularly striking is the difference between the MCF7 and KPL4 cell lines with a $\Delta\theta$ of 179$\circ$, indicated near opposite phenotypic responses between the pair of cell lines.
+
+
+\begin{figure}
+    \captionsetup{width=0.8\textwidth}
+    \caption[Heatmap of $\Delta\theta$ between pairs of cell lines for separate compounds]{
+Heatmap of $\Delta\theta$ values between pairs of cell lines for separate compounds.
+\textbf{(A)} $\Delta\theta$ calculated between pairs of cell lines treated with 21 compounds as 1 $\mu$M concentration.
+Images show differential response between KPL4 and MCF7 cell lines treated with 1 $\mu$M SN38.
+    MCF7 cells are observed to decrease in cell area with bright staining for the endoplasmic reticulum, whereas KPL4 cells produce a `fried egg' morphology with large spread cells and weak endoplasmic reticulum staining. Channels used are as follows: \textit{Red} - MitoTracker DeepRed (mitochondria); \textit{Green} - Concanavalin A (endoplasmic reticulum); \textit{Blue} - Hoechst33342 (nuclei). Scale bar: 100 $\mu$m.
+\textbf{(B)} Histogram of $\theta$ values calculated for MCF7 and KPL4 cells treated with 1 $\mu$M SN38. $\Delta\theta = 179^\circ$
+}
+    \includegraphics[scale=1.0]{figs/ch3theta24}
+    \label{figure:theta_24}
+\end{figure}
+
+
+
+\section{Discussion}
+
+% the use of this method, define TCCS
+A number of methods exist to classify drug MoA and profile drug response in the context of high-content imaging studies, most of these methods have only been applied to a single cell type.
+The method described in this chapter, named as theta comparative cell scoring (TCCS), was developed to provide a pragmatic way to perform comparative high-content imaging studies across genetically and morphologically distinct cell lines.
+This should be viewed as an extension to the common distance-in-PCA approach by also considering directionality as an important parameter.
+The benefits of TCCS over previous methods are as follows: (1) the use of distance from the negative control to remove inactive compounds as one of the first steps prevents spurious differences that would be present in measures such as correlation or simple cosine similarity; (2) The comparison of each data point to a common reference vector enables visulisation of a phenotypic direction.
+
+
+\begin{figure}
+    \captionsetup{width=0.8\textwidth}
+    \caption[TCCS workflow]{
+Theta comparative cell scoring (TCCS) workflow.
+\textbf{(A)} Normalised and standardised numerical data.
+    \textbf{(B)} Principal component analysis, negative control values coloured in blue.
+    \textbf{(C)} Centering of principal component values to the negative control centroid.
+    \textbf{(D)} Calculation of distance from the origin to each data point, an activity cutoff is derived fro the standard deviation of the distance to the negative control values.
+    \textbf{(D.2)} In two-dimensional space, a directional histogram can be created by the angle of each vector against a reference vector.
+    \textbf{(E)} Inactive compounds excluded based on distance from the origin.
+    \textbf{(F)} Determining the angle between compounds/cell-lines.
+    \textbf{(F.2)} Visualisation or clustering of compounds based on $\theta$ values.
+}
+    \includegraphics[scale=1.0]{figs/ch3thetaWorkflow}
+    \label{figure:theta_workflow}
+\end{figure}
+
+% importance of normalisation to remove cell-line specific morphologies before
+% PCA
+When comparing compound response between cell lines the most critical step, regardless of subsequent methods, is to account for inherent morphological differences between untreated cell lines.
+Without this normalisation step morphologically distinct cell lines are not directly comparable as their large scale morphological differences will mask any difference in morphological response to a compound.
+
+% issue of potency, inactive compound in one cell-line might mean the compound
+% is removed from the analysis when this is an interesting results -- need to
+% pre-analyse with phenotypic distance to find these hits.
+The TCCS method removes compounds which are deemed to be inactive if they are not sufficiently different from the negative control (see figure \ref{theta_workflow}).
+While this increases the robustness of the calculation it also introduces a problem when compounds elicit large differences in potency between cell lines.
+This would result in such a compound being removed from the analysis despite producing a genuine, and potentially biologically interesting, differential response between cell lines.
+This problem can be addressed by identifying such compounds in the early stages of the method when computing compound distances from the negative control in principal component space, any compounds that show large differences in this distance between cell lines can be flagged for further analysis before the TCCS calculation.
+
+
+% 2 principal components might not capture all the variation in the data, method
+% works in higher dimensions
+When using high-content imaging data with a lot of morphological feature measurements, using the first two principal components as depicted in this chapter may only account for a small proportion of variation in the data.
+This would mean that potentially interesting phenotypes will be missed as they are more evident in later principal components, and would not be detected by the TCCS algorithm.
+Fortunately the cosine dissimilarity calculation (equation \ref{equation:theta}) as part of calculating $\theta$ uses the dot product between the two vectors and reducing any 2 equal length vectors to a single number, therefore any number of principal components can be used.
+This allows the use of a minimum number of principal components that accounts for a user-specified proportion of variance in the data, meaning that the method can be adapted to suit the properties of different screening datasets.
+
+% relating phenotypic direction back to principal component feature weightings
+% to make result more interpretable -- using other dimensional reduction
+% techniques might make this easier
+An interesting prospect of using the concept of `phenotypic direction` is relating directions back to combinations of morphological features to provide more interpretability to the results.
+This is possible with PCA by using the feature loadings which the weights of combinations of original features used to construct the principal components.
+However, as PCA uses arbitrary positive and negative weights for these feature loadings, other dimensional reductions techniques might be better suited for generating more interpretable results.
+One example is non-negative matrix factorisation which would return only positive weights for the morphological features.
+
+
+% using multiple concentrations
+
+
+% summary of summary
+
+
+\section{Methods}
+
+\subsection{Data pre-processing}
+Tabular data from Cellprofiler measuring 309 morphological features for each cell was aggregated to an image median.
+To remove batch effects and to remove inherent cell-line specific morphologies data was normalised by dividing each morphological feature by the plate median negative control value for that feature.
+Each feature was then standardised to a mean of zero and unit variance on the pooled data.
+
+\subsection{Principal component analysis}
+
+Principal components were calculated using the \texttt{prcomp} function in R v2.3, with no centering or scaling as this was performed manually beforehand.
+
+\subsection{Selecting the number of principal components}
+The number of principal components to used in the analysis can be determined by specifying beforehand the proportion of variance in the data that should be kept, and then finding the minimum number of principal components that account for that much variance in the data.
+
+E.g in R:
+
+\begin{minted}[mathescape,
+linenos,
+numbersep=5pt,
+fontseries=Roboto Mono Medium,
+fontsize=\footnotesize,
+gobble=4,
+frame=leftline,
+framesep=2mm]{r}
+    threshold = 0.8
+    pca_output = prcomp(data)
+    pc_variance = pca_output$stdev^2
+    cumulative_prop_variance = cumsum(pc_variance) / sum(pc_variance)
+    n_components = min(which(cumulative_prop_variance >= threshold)) 
+\end{minted}
+where \texttt{data} is numeric dataframe of morphological features.
+
+
+\subsection{Centering the data on the negative control}
+
+In order to centre the principal component data so that the mediod of the negative control was positioned on the origin the median value for each feature columns for the negative control data was calculated.
+Then finding how much this differs from the origin for each feature, all feature values were adjusted by this difference.
+
+\begin{enumerate}
+    \item Calculate the median value $m$ for each principal component for the negative control data (medioids).
+    \item Subtract each medioid from 0 in order to find the difference from the origin to $\delta m_i$, where $i$ is the $i^{th}$ principal component.
+    \item Add $\delta m_i$ to each value in the $i^{th}$ principal component.
+\end{enumerate}
+
+For example in R, given a dataframe \texttt{data} containing a metadata column \texttt{"compound\_name"} of compound names, with \texttt{"DMSO"} as a negative control, and \texttt{feature\_cols} as a list of non-metadata column names:
+
+
+\begin{minted}[mathescape,
+linenos,
+numbersep=5pt,
+fontseries=Roboto Mono Medium,
+fontsize=\footnotesize,
+gobble=4,
+frame=leftline,
+framesep=2mm]{r}
+    mediods = apply(data[data[, "compound_name"] == "DMSO"], 2, median)
+    delta_m = 0 - mediods # $\delta m$
+    for (i in seq_along(feature_cols)) {
+        feature = feature_cols[i]
+        # feature_column$_i$ $:=$ feature_column$_i$ + $\delta m_i$
+        data[, feature] = data[, feature] + delta_m[i]
+    }
+\end{minted}
+
+
+\subsection{Identifying inactive compounds}
+
+Inactive compounds were identified by a minimum cut-off distance to the negative control centroid in principal component space.
+This was determined by first calculating the $l_1$ norm\footnote{A.K.A Manhattan or city-block distance} from each compound at all concentrations to the negative control centroid.
+The standard deviation of all these distances was calculated and any compound which was within 2 standard deviations at 1 $\mu$M was deemed inactive, if a compound was found to be inactive in any one of the eight cell lines it was removed from the analysis.
+
+
+\subsection{Calculating $\theta$ and $\Delta\theta$}
+
+$\theta$ was calculated by taking cosine dissimilarity between two vectors ($u$ and $v$) in principal component space and coverting into degrees.
+
+\begin{equation} \label{equation:theta}
+        \theta = \cos^{-1} \left( \frac{u \cdot v}{||u||v||} \right) \cdot \frac{180}{\pi}
+\end{equation}
+
+When $v$ is a common fixed reference vector, $\Delta\theta = |\theta_i - \theta_j|$ where $\theta_i$ and $\theta_j$ are theta values for 2 vectors.
+As opposite phenotypic directions are at 180$^\circ$, $\Delta\theta$ values greater than 180$^\circ$ should be thought as converging towards similar phenotypes.
+Therefore $\Delta\theta$ values were constrained to a maximum value of 180$^\circ$ by substracting any value greater than 180$^\circ$ from 360.
+
+\begin{equation}
+\theta = 
+    \begin{cases}
+        360 - \theta & \text{if } \theta > 180\\
+        \theta       & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+\end{document}
+
+
+

@@ -1,0 +1,157 @@
+\documentclass[a4paper,11pt,twoside,openright]{scrbook}
+
+\usepackage{swThesis}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{standalone}
+\standalonetrue
+
+\bibliography{bibliography}
+
+% Figures
+\graphicspath{./figs}
+
+\begin{document}
+
+\chapter{General Methods} \label{chapter:generalMethods}
+
+These methods are used throughout the work in this thesis and are listed here to reduce repetition.
+Each subsequent chapter will have a separate methods section which refers to methods unique to that particular chapter, or how they differ from the general methods described here.
+
+
+\section{Cell culture}
+The cell-lines were all grown in DMEM (\# CATNO MANUFACTURER) and supplemented with 10\% foetal bovine serum and 2 mM L-glutamine, incubated at 37$^\circ$C, humidified and 5\% CO$_2$.
+
+\subsection{Culturing cells in 96-well plates}
+
+\subsection{Culturing cells in 384-well plates}
+
+
+\section{Compound handling}
+
+\subsection{24 compound validation set}
+
+Compounds (table \ref{table:compounds}) were diluted in DMSO at a stock concentration of 10 mM.
+Compounds plates were made in v-bottomed 96-well plates (\#CATNO MANUFACTURER), at 1000-fold concentration in 100\% DMSO by serial dilutions ranging from 10 mM to 0.3 $\mu$M in semi-log concentrations.
+Compounds were added to assay plates containing cells after 24 hours of incubation by first making a 1:50 dilution in media to create an intermediate plate, followed by a 1:20 dilution from intermediate plate to the assay plate, with an overall dilution of 1:1000 from the stock compound plate to the assay plate.
+
+\begin{table}[]
+    \begin{footnotesize}
+    \centering
+    \captionsetup{width=0.8\textwidth}
+    \caption[Annotated compounds of known MoA]{Annotated compounds and their associated mechanism-of-action label used in the classification tasks.}
+    \label{table:compounds}
+    \begin{tabular}{@{}llll@{}}
+    \toprule
+    Compound        & MoA class              & Supplier    & Catalog no. \\ \midrule
+    Paclitaxel      & Microtubule disrupting & Sigma       & T7402       \\
+    Epothilone B    & Microtubule disrupting & Selleckchem & S1364       \\
+    Colchicine      & Microtubule disrupting & Sigma       & C9754       \\
+    Nocodazole      & Microtubule disrupting & Sigma       & M1404       \\
+    Monastrol       & Microtubule disrupting & Sigma       & M1404       \\
+    ARQ621          & Microtubule disrupting & Selleckchem & S7355       \\
+    Barasertib      & Aurora B inhibitor     & Selleckchem & S1147       \\
+    ZM447439        & Aurora B inhibitor     & Selleckchem & S1103       \\
+    Cytochalasin D  & Actin disrupting       & Sigma       & C8273       \\
+    Cytochalasin B  & Actin disrupting       & Sigma       & C6762       \\
+    Jaskplakinolide & Actin disrupting       & Tocris      & 2792        \\
+    Latrunculin B   & Actin disrupting       & Sigma       & L5288       \\
+    MG132           & Protein degradation    & Selleckchem & S2619       \\
+    Lactacystin     & Protein degradation    & Tocris      & 2267        \\
+    ALLN            & Protein degradation    & Sigma       & A6165       \\
+    ALLM            & Protein degradation    & Sigma       & A6060       \\
+    Emetine         & Protein synthesis      & Sigma       & E2375       \\
+    Cycloheximide   & Protein synthesis      & Sigma       & 1810        \\
+    Dasatinib       & Kinase inhibitor       & Selleckchem & S1021       \\
+    Saracatinib     & Kinase inhibitor       & Selleckchem & S1006       \\
+    Lovastatin      & Statin                 & Sigma       & PHR1285     \\
+    Simvastatin     & Statin                 & Sigma       & PHR1438     \\
+    Camptothecin    & DNA damaging agent     & Selleckchem & S1288       \\
+    SN38            & DNA damaging agent     & Selleckchem & S4908       \\ \bottomrule
+    \end{tabular}
+    \end{footnotesize}
+\end{table}
+
+
+
+
+\section{Cell painting staining protocol}
+
+In order to capture a broad view of morphological changes within a cell using fluorescent microscopy, a choice has to be made which cellular structures to label.
+This choice is limited by the availablity of the fluorescent filter sets fitted to the microscope, reagent costs, and the scalability of the protocol when used in a large screen.
+Fortunately, this problem was already addressed by another group who published a protocol -- named ``cell painting" -- for labelling 7 cellular structures, using 6 non-antibody stains imaged in the same 5 fluorescent channels available with our miscoscopy setup. \cite{Gustafsdottir2013, Bray2016}
+
+% development of, and overcoming the issues in the cell-staining protocol?
+The cell-painting protocol was initially optimised by Gustafsdottir \textit{et al.} for use in the U2OS oesteosarcoma cell line, and briefly tested in a few other commonly used cell-lines.
+However, when tested on the panel of 8 breast cancer cell lines, the staining protocol was observed to induce morphological changes on certain cell lines, in the absence of compounds.
+It was found that changing the media, and adding the MitoTracker DeepRed stain to live MDA-MB-231 cells produced a rounded morphology, which was not observed in the other cell lines.  %TODO: figure of cell painting cell-rounding in MDA-MB-231 cells.
+As any morpholgical changes introduced by the staining protocol would mask those caused by small-molecules, the protocol was adapted by removing the media change step, and moving the addition of wheat germ agglutinin and MitoTracker DeepRed until after fixation.
+As the cells were now fixed immediately in their existing media this prevented any alterations to the morphology and improved the wheat germ agglutinin staining, although as the MitoTracker stain relies on membrane potential of the mitochondria, the selectivity of the MitoTracker stain was reduced when used on fixed cells, though it still produced selective enough labelling to capture large changes in mitochondrial morphology.
+
+To stain cells in a 96 or 384 well plates, the cells are first fixed by adding an equal volume of 8\% paraformaldehyde (\#CATNO MANUFACTURER) to the existing media resulting in a final paraformaldehyde concentration of 4\%, and left to incubate for 30 minutes at room temperature.
+The plates are then washed with PBS (100 $\mu$L for a 96 well plate, 50 $\mu$L for a 384 well plate) and permeabilised with (50 $\mu$L 96-well, 30 $\mu$L 384-well) 0.1\% Triton-X100 solution for 20 minutes at room temperature.
+A solution of cell painting reagents was made up in 1\% bovine serum albumin (BSA) solution (see table \ref{table:staining}).
+Cell painting solution was added to plates (30 $\mu$L 96-well, 20 $\mu$L 384-well) and left to incubate for 30 minutes at room temperature in a dark place.
+Plates were then wased with PBS (100 $\mu$L 96-well, 50 $\mu$L 384) three times, before the final aspiration plates were sealed with a transparent plate seal (\#CATNO MANUFACTURER).
+
+
+\begin{table}[]
+    \begin{footnotesize}
+    \centering
+    \captionsetup{width=0.8\textwidth}
+    \caption[Cell painting reagents and filter wavelengths for imaging.]{Reagents used in the cell painting protocol and the excitation/emission wavelengths of the filters used in imaging. ex: excitation, em: emission}
+    \label{table:staining}
+    \begin{tabular}{@{}lllll@{}}
+    \toprule
+    Stain                                                               & Labeled Structure                                                   & \begin{tabular}[c]{@{}l@{}}Wavelength\\ (ex/em {[}nm{]})\end{tabular} & Concentration & \begin{tabular}[c]{@{}l@{}}Catalog no.;\\ Supplier\end{tabular} \\ \midrule
+    Hoechst 33342                                                       & Nuclei                                                              & 387/447 $\pm 20$                                                      & 2 $\mu$g/mL   & \begin{tabular}[c]{@{}l@{}}\#H1399;\\ Mol. Probes\end{tabular}  \\
+    SYTO14                                                              & Nucleoli                                                            & 531/593 $\pm 20$                                                      & 3 $\mu$M      & \begin{tabular}[c]{@{}l@{}}\#S7576;\\ Invitrogen\end{tabular}   \\
+    Phalloidin 594                                                      & F-actin                                                             & 562/624 $\pm 20$                                                      & 0.85 U/mL     & \begin{tabular}[c]{@{}l@{}}\#A12381;\\ Invitrogen\end{tabular}  \\
+    \begin{tabular}[c]{@{}l@{}}Wheat germ\\ agglutinin 594\end{tabular} & \begin{tabular}[c]{@{}l@{}}Golgi and \\plasma membrane\end{tabular} & 562/624 $\pm 20$                                                      & 8 $\mu$g/mL   & \begin{tabular}[c]{@{}l@{}}\#W11262;\\ Invitrogen\end{tabular}  \\
+    Concanavalin A 488                                                  & \begin{tabular}[c]{@{}l@{}}Endoplasmic\\ reticulum\end{tabular}     & 462/520 $\pm 20$                                                      & 11 $\mu$/mL   & \begin{tabular}[c]{@{}l@{}}\#C11252;\\ Invitrogen\end{tabular}  \\
+    \begin{tabular}[c]{@{}l@{}}MitoTracker\\ DeepRed\end{tabular}       & Mitochondria                                                        & 628/692 $\pm 20$                                                      & 0.6 $\mu$M        & \begin{tabular}[c]{@{}l@{}}\#M22426;\\ Invitrogen\end{tabular}  \\ \bottomrule
+    \end{tabular}
+    \end{footnotesize}
+\end{table}
+
+
+
+\section{Imaging}
+
+\section{ImageXpress}
+Imaging was carried out on an ImageXpress micro XL (MolecularDevices, USA) a multi-wavelength wide-field fluorescent microscope equiped with a robotic plate loader (Scara4, PAA, UK).
+
+\subsection{Cell painting image capture}
+Images were captured in 5 fluorescent channels at 20x magnification, exposure times were kept constant between plates and batches as to not influence intensity values.
+
+
+\section{Image analysis}
+
+\subsection{Cellprofiler}
+Images were analysed using Cellprofiler v2.1.1 to extract morphological features.
+Briefly, cell nuclei were segmented in the Hoechst stained image based on intensity, clumped nuclei were separated based on shape.
+Nuclei objects were used as seeds to detect and segment cell-bodies in the cytoplasmic stains of tha dditional channels.
+Subcellular structures such as nucleoli and Golgi apparatus were segmented and assigned to parent objects (cells).
+Using these masks marking the boundary of cellular objects, morphological features are measured for multiple image channels returning per object measurements.
+
+\section{Data analysis}
+
+\section{Preprocessing}
+Out of focus and low-quality images were detected through saturation and focus measurements and removed from the dataset.
+Image averages of single object (cell) measurements were aggregated by taking the median of each measured feature per image.
+Features were standardised on a plate-by-plate basis by dividing each feature by the median DMSO response for that feature and scaled by a z-score ($z$) to a zero mean and unit variance by
+
+\begin{equation} \label{eq:zscore}
+    z = \frac{x - \mu}{\sigma}
+\end{equation}
+
+where $\mu$ is the mean and $\sigma$ is the standard deviation.
+
+Feature selection was performed by calculating pair-wise correlations of features and removing one of a pair of features that have correlation greater than 0.9, and removing features with very low or zero variance.
+
+
+
+
+%\printbibliography
+
+\end{document}
