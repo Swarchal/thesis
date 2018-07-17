@@ -161,6 +161,7 @@ This method returns an image per cell, negating the issue of empty images; it do
 
 To compare the performance of using either downsized whole images or cropped sub-images, a pair of ResNet18 models were trained using either one of the datasets.
 It was evident during training that using sub-images resulted in a higher final validation accuracy (0.847) compared to whole-images (0.778), as well as converging much faster than the whole-image-trained model (figure \ref{figure:nn_chopped_vs_whole_curves}).
+Although it should be noted that whole images performed suprisingly well given their low resolution of cellular features.
 
 \begin{figure}
     \includegraphics[width=0.8\textwidth]{ch2choppedVsWhole}
@@ -302,12 +303,13 @@ Validation accuracy during training was measured using the Jaccard similarity sc
 
 The F$_1$ score was used post training to determine classification accuracy.
 The F$_1$ score is the harmonic mean of both the precision and recall.
-So given true positives ($\text{tp}$), false positives ($\text{fp}$) and false negatives ($\text{fn}$)
+So given true positives ($\text{tp}$), false positives ($\text{fp}$) and false negatives ($\text{fn}$):
 
 \begin{align}
         \text{precision} &= \frac{ \text{tp} }{ \text{tp} + \text{fp} } \\
         \text{recall} &= \frac{\text{tp}}{\text{tp} + \text{fn}} \\
-        F_1 &= 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
+        \intertext{the F$_1$ score can be calculated as:}
+        F_1 &= 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}.
 \end{align}
 
 \subsection{Ensemble of decision trees}
@@ -346,12 +348,21 @@ During backpropagation the updated weights for all replicas are averaged and mod
 % image intensity standardisation
 Image intensities were standardised on an individual image and channel basis by taking each image in the form of a [width $\times$ height $\times$ channel] array and subtracting the mean of each channel from each pixel value in that channel, and dividing the pixel value by the standard deviation of the original channel.
 
-% size of datasets
-% batch size
-% epochs
-% learning rate + decay
-% optimiser
+Batch sizes during training were kept at 64 images.
+In the case of using GPU arrays then this was multiplied by the number of GPUs.
+Learning rate was set to $1e^{-3}$ decreasing 10-fold every 10 epochs (figure \ref{figure:learningRate}).
+Decay was used to aid gradient descent and model convergence.
+Models were trained for 100 epochs or 48 hours, whichever was reached first, with model checkpoints every epoch there was an increase maximum validation accuracy.
+The optimiser used was ADAM \cite{Kingma2014} with the categorical cross entropy loss function.
 
+\begin{figure}
+    \captionsetup{width=0.8\textwidth}
+    \caption[CNN learning rate and decay]{
+Learning rate and decay for training CNN models, intialised at $1e^{-3}$ and reduced 10-fold every 10 epochs.
+}
+    \includegraphics[width=0.7\textwidth]{ch2learningRate}
+    \label{figure:learningRate}
+\end{figure}
 
 
 \subsubsection{Image preparation}
