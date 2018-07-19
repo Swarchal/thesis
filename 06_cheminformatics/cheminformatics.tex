@@ -2,6 +2,7 @@
 
 \usepackage{swThesis}
 \usepackage{amsmath}
+\usepackage[htt]{hyphenat}
 \usepackage{lipsum}
 \usepackage{standalone}
 \standalonetrue
@@ -13,9 +14,31 @@
 
 \begin{document}
 
-\chapter{Cheminformatics} \label{chapter:cheminformatics}
+\chapter{Cheminformatics and high-content imaging} \label{chapter:cheminformatics}
 
 \section{Introduction}
+
+% aim of the chapter
+
+\subsection{Cheminformatics}
+% Introduction to cheminformatics
+
+\subsection{Structure activity relationships}
+% structure activity relationship
+% how chemical structures can be represented
+    % SMILES, SDF
+
+\subsection{Chemical similarity}
+% chemical similarity
+    % required properties of a chemical fingerprint
+    % daylight fingerprints + tanimoto distances
+    % ECPF? fingerprints
+
+\subsection{Previous work in this field}
+% previous attempts to map chemical structure to gene-expression?
+% paper by Bender, Young et al chemical structure phenotype..
+
+\section{Results}
 
 % prediction un-annotated compound MOA from the annotated datasets
 
@@ -25,23 +48,121 @@
 % evaluation of how chemical similarity matches phenotypic similarity within the
 % BioAscent dataset
 
-\section{Results}
-
 \subsection{The BioAscent library contains clusters of phenotypically similar compounds}
 
+In order to compare the phenotypic profiles produced by compounds in the BioAscent library, active compounds were selected based on on the L$_1$ norm distance from the negative control centroid (figure (\ref{figure:compound_activity})).
+As many of the compounds were cytotoxic and produced images containing only a few dying cells which do not produce robust morphological measurements, an activity window was used to exclude cytoxic compounds.
+
+%TODO: insert figure of compound activity and selection window
+
+Hierarchical clustering of morphological profiles produced by these phenotypically active compounds showed that despite the chemical diversity of the BioAscent library, the active compounds formed distinct clusters of compounds which produced similar cellular morphologies (figure \ref{figure:morph_cluster}).
+
+%TODO: insert figure of morpholgoical clustering
+% maybe add some images of example morphologies produced by each cluster
+
+To confirm the validity of the clustering, the hierarchical labels were compared with clusters found in an unsupervised algorithm.
+The morphological profiles were embedded into lower dimensional space using the t-SNE algorithm \cite{tnse_paper} which aims to preserve local structure within the data and reveals clusters of similar points in an unsupervised approach.
+When these points were coloured by the cluster labels idenfified by hierarchical clustering they appeared to match up with the tSNE embedding.
+
+%TODO: insert figure of t-SNE clustering
+
+
+
 \subsection{The BioAscent library is chemically diverse}
+The BioAscent library is marketed as chemically diverse, yet I still wanted see to what degree this is true, and if there are clusters of chemically similar compounds such as those based around a common scaffold.
+All 13,000 BioAscent compounds were converted into molecular fingerprints to produce a distance matrix between all pairs of compound fingerprints, this was then clustered using agglomative hierarchical clustering.
+As could be predicted, the heatmaps and dendrograms did not reveal any large clusters of structurally similar compounds in the 13,000 compound library.
+This chemical diversity continued when the compounds were filtered to only contain the phenotypically active molecules.
+The use of more novel compound fingerprinting techniques such as USRCAT \cite{usercat} and autoencoded features \cite{autoencoder} did not increase the degree of clustering.
 
-\subsection{There is no evidence of correlation between chemical structure and induced morphology}
+%TODO insert figure of (lack of) compound similarity clustering for both 13K and
+%active
 
-\subsection{GO terms are rubbish}
+Rather than looking at large-scale clustering of many thousands of compounds with hierarchical clustering, I tried the Butina clustering method to identify small collections of structurally similar compounds.
+This method does not return similarity measures, but rather groups compounds into bins of similar compounds \cite{Butina1999}.
+After removing clusters which contained fewer than 3 compounds, this left 96 clusters, with the largest cluster containing 20 compounds and 58\% of the clusters containing only 3 compounds (figure \ref{figure:butina_clusters}).
+
+% TODO figure of histogram of cluster sizes
+% and structures from one of the clusters.
+
+
+
+\subsection{There is little evidence of correlation between chemical structure and induced morphology}
+
+Using the clusters of structurally similar compounds obtained from the Butina algorithm I investigated if these compounds produced similar cellular morphologies compared to compounds which were not found to be structurally similar.
+Two distributions were created of the distance between pairs of morphological profiles, with one distribution created from pairs of compounds picked from within structurally similar clusters, and another null distribution of pairs of compounds picked at random.
+The hypothesis being that structurally similar compounds should produce similar morphological profiles, and therefore the distance between these morphological profiles should be smaller than between compounds picked at random.
+However, I found that there was no significant difference between the distance distribution of structurally similar compounds versus the null distribution (one-tailed independent t-test $p=0.13$, figure \ref{figure:chem_pheno_dist}).
+
+
+% pairwise chemical distance between phenotypic clusters
+In a different approach I took the 10 clusters obtained by compounds which produced similar phenotypic profiles (see figure \ref{figure:morph_cluster}) and compared compound similarity within these phenotypically similar clusters to compounds picked at random.
+% TODO: pairs of compounds from within phenotypic clusters vs pairs of compounds
+% picked at random
+Delving into the individual clusters revealed that no particular phenotypic cluster showed any noticeable structural similarity between compounds.
+% TODO: make this figure.
+
+
+Another approach is two see how well the distance matrix of phenotypic profiles correlates with the distance matrix of chemical structures.
+Using Mantel's test\cite{Mantel1967} I found no significant correlation between the two distances matrices for the active compound subset ($r = 0.02$, $p = 0.116$).
+
+
+
+\subsection{Identifying the putative MoA of phenotypic hits with ChEMBL structure queries}
+TODO
+
+\subsection{Phenotypic hits reveal ``dark chemical space''}
+TODO
+
+\section{Discussion and Conclusions}
+TODO
+% chemical similarity is difficult
+% rapidly evolving field
+% activity cliffs - binding properties change despite very similar structures
+% bind to different targets within the same pathway - similar phenotype but can
+% be very different structures
+
 
 \section{Methods}
 
 \subsection{Chemical similarity}
+Compound structural information was in the form of .sdf files provided by BioAscent.
+To create daylight-like compound fingerprints the RDKit library was used to convert .sdf entries into an RDKit's implementation of the daylight fingerprint using the `rdkit.Chem.Fingerprints.FingerprintMols' function with default parameters.
+
+USRCAT features were generously calculated and supplied by Dr. Steven Shave (Edinburgh).
+
+Latent representations of chemical structure features were calculated using a molecular autoencoder pre-trained on the ChEMBL22 dataset \footnote{www.github.com/cxhernandez/molencoder}, based on the work published by Gomez-Bombarelli \textit{et al.} \cite{Gomez-Bombarelli2016} using one-hot encoded SMILE strings of the molecules.
+
+To compute the distance between RDKit daylight fingerprints the Tanimoto/Jaccard distance was used, in the case of USRCAT and autoencoded features I used the Euclidean distance.
+Hierarchical clustering was performed on the distance matrix using the complete linkage method and euclidean distance.
+To define clusters from the calculated dendrogram, a threshold was defined as 70\% of the maximum linkage distance which produced 10 clusters.
+Butina clustering was implemented using RDKit with Tanimoto distances calculated from daylight fingerprints, with a cutoff value of 0.2.
+
+Mantel's test for comparing two distance matrices was implemented using scikit-bio's implementation using Pearson's correlation coefficient and 999 permutations for testing significance.
+The distance matrices used were standardised Euclidean distance for the morphological profiles and standardised Tanimoto distances of the daylight fingerprints for compound structure profiles.
+
+
+\subsection{BioAscent library screen}
+
+\subsubsection{Compound activity window}
+Data was normalised to plate-based controls and features standardised, then transformed with PCA to the minimum number of principal components which accounted for 80\% of the variance in the data.
+L$_1$ norm distances were calculated from the DMSO negative control centroid in PCA space.
+The lower bound of the activity window was defined visually using a plot of ranked L$_1$ distances.
+The upper bound was chosen based on images containing at least 10 cells and visual assessment of images produced by higher L$_1$ distances ensuring images did not consist entirely of dying cell (small, rounded and bright cytoplasmic staining).
+
 
 \subsection{Phenotypic similarity}
+Clustering of morphological profiles was carried out by first calculating a correlation matrix between between all pairs of active compound morphologies.
+Hierarchical clustering was performed on the correlation matrix using the complete linkage method and euclidean distance.
+To define clusters from the calculated dendrogram, a threshold was defined as 70\% of the maximum linkage distance which produced 10 clusters.
 
-\subsection{ChEMBL mining}
+%TODO: insert figure of dendrogram cutting
+
+t-SNE clustering was performed using sklearn's `manifold.TSNE` implementation using the Barnes-Hut approximation with the default parameters.
+
+\subsection{ChEMBL structure searches}
+
+
 %\printbibliography
 
 \end{document}
