@@ -18,29 +18,127 @@
 
 \section{Introduction}
 
-% aim of the chapter
-
 \subsection{Cheminformatics}
 % Introduction to cheminformatics
+The term ``cheminformatics'' was first coined in 1998\cite{Brown1998} although the use of computers to interact with chemical data predates this by many years, with early systems used to index, search and catalogue databases of chemical compounds. \cite{Ray1957}
+Most of the early work in this field was concerned with efficient means to search large chemical databases for similar molecules or molecules containing certain sub-structures.
+This early work developed a number of important methods to generate, represent and compare chemical structures in a time of limited computational power, as a by-product these methods are very efficient and are still used today as the size of chemical databases has grown alongside computational power.
+
+It was later on that researchers attempted to correlate biological activity with physiochemical parameters and give rise to structure activity relationships (SAR), this was partly due to the advancement of statistical techniques which gave rise to new tools such as multiple linear regression.
+One of the first quantitative SAR (QSAR) studies was carried out by Hansch and Fujita, in which they found the lipophilicity of a molecule correlated strongly with biological activity \cite{HanschCitation}.
+Since then the QSAR field has advanced to include many more parameters and in now a key part in most empirical drug discovery efforts.
+
+% cheminformatics for drug library design
+% chemical space and all that
+Another use of cheminformatics in drug discovery is the analysis and design of compound screening libraries.
+% mention lipinski's RO5 as an established method to filer compound collections?
+In industrial high-throughput screening a full-deck compound library typically contains several million small molecules.
+Screening this entire library is a costly endevour, even for pharmaceutical companies, and therefore a lot of research has been carried out in how to maximise the value and information gained from screening these large compound collections.
+One of the ways compound libraries can be optimised is by covering a large a range of chemical space as possible.
+A compound library that contains many extremely similar molecules may be useful in certain specific circumstances, but in most cases this is viewed as a redundancy and a library which covering the same chemical space with fewer compounds would reduce costs.
+Alternatively, a compound collection of equal size which contains more diverse chemistry may lead to a more varied selection of lead candidates. \cite{Clemons2011}
+The concept of chemical space in compound collections can also be used to identify potential blind-spots or bias in drug discovery libraries, which are areas of chemical space with potential biological potential that are not covered by an existing library, in contrast to areas of chemical space which are well covered by a compound collection but have historically failed to show biological activity, termed ``dark chemical matter''. \cite{Wassermann2015}
+
 
 \subsection{Structure activity relationships}
 % structure activity relationship
-% how chemical structures can be represented
-    % SMILES, SDF
+% how this is used in target-based drug discovery
+ % lead optimisation for affinity and specificity
+% but how is this used in a target-agnostic setting?
+    % any examples?
+A structure activity relationship is the link between a chemical's structure and its effect in a biological system, which underpins much of the medicinal chemistry field.
+The underlying premise of SAR is that compounds with similar structures and physiochemical properties have similar biological effects by virtue of binding to the same or similar targets.
+This idea is commonly applied during lead optimisation whereby a candidate molecule is iteratively modified in order to optimise parameters such as specificity and affinity, all the while ensuring that these modifications do not disrupt binding to the desired target, leading to the identification and determination of functional groups which are required for target engagement and biological activity.
+
+% multiparametric
+Relating changes to a compound's structure to biological activity is relatively straightforward if compound activity can be represented as a single variable such as binding affinity or EC$_{50}$, applying quantitative SAR (QSAR) to multiparametric data such as that found with high-content imaging is not as well defined.
+
+
+
 
 \subsection{Chemical similarity}
-% chemical similarity
-    % required properties of a chemical fingerprint
-    % daylight fingerprints + tanimoto distances
-    % ECPF? fingerprints
+Despite the premise of QSAR as ``\textsl{similar molecules} have similar biological effects'' there is the challenge of how to measure similarity between chemical structures.
+Chemical structures can be represented in a number of different formats and we typically think of the skeletal 2D graphical representation (figure \ref{figure:mol_encodings} A) when considering complex organic molecules which have to be interpreted by chemists.
+Computers however require a different format to efficiently store and parse chemical structure data.
+SMILEs (simplified molecular input line entry system) and InChIs (international chemical identifier) are two formats which encode chemical structures as short character strings representing atoms as human readable characters (such as \texttt{CH} for carbon and hydrogen) with other symbols to represent branches and sterochemistry etc (figure \ref{figure:mol_encodings} B\&C).
+These relatively simple formats sometimes suffer from ambiguity, in which a single encoding could represent several molecules, or a single molecule could be
+represented by multiple valid encodings.
+A less ambiguous but also less human-readable file format is SDF (structure data file) or Molfile, which encode chemical structures as a table of x, y, z co-ordinates and bonds for each atom (figure \ref{figure:mol_encodings} D).
 
-\subsection{Previous work in this field}
-% previous attempts to map chemical structure to gene-expression?
-% paper by Bender, Young et al chemical structure phenotype..
+\begin{figure}
+    \fcapsideright{
+    \caption[Different methods to encode chemical structure]{
+Different methods to encode the chemical structure of a molecule (aspirin).
+\textbf{(A)} A 2D skeletal graphical representation commonly used by chemists.
+\textbf{(B)} SMILE format, a concise relatively human readable format encoding atoms as characters.
+\textbf{(C)} InChI format, another commonly used string format which is less human readable but contains more details to reduce ambiguity.
+\textbf{(D)} SDF / Mol format. A tabular format which lists the co-ordinates of atoms in 3 dimensions along with bonds and distances.
+}
+} {
+    \includegraphics[scale=1.5]{ch5molEncodings}
+    \label{figure:mol_encodings}
+}
+\end{figure}
+
+% chemical similarity
+    % required properties of a chemical fingerprints
+    % daylight fingerprints + tanimoto distances
+    % ECPF? USRCAT
+Given these encodings of chemical structure and the task to calculate similarity (or distance) between molecules, the most direct and simple method is to calculate distance based on the string encodings (usually SMILE format), such as hamming distance or longest-common-substring divided by total length between two SMILE strings.\cite{Ozturk2016}
+However, these naive methods  suffer from a number of drawbacks, mainly stemming from the ambiquity and variability of SMILE encodings which limit their widespread use. \cite{citation_needed}
+A more nuanced approach to measuring chemical similarity is to first calculate  compound fingerprints such as daylight or extended connectivity fingerprints (ECFP) \cite{citation} which are abstract representations of molecules in the form of fixed-length binary arrays -- generated from local patterns in the molecule such as the identity of neighbouring atoms (where neighbouring is extended to several bonds away).
+The distance between compound fingerprints can then be found using one of a variety of distance metrics.
+To compare the binary compound fingerprints the most commonly used metric is Tanimoto similarity ($T_s$) and distance\footnote{Whilst not a distance in the  strict mathematical sense it is commonly referred to as a distance metric.} ($T_d$), where $T_s$ is defined as the ratio of common elements between two equal length fingerprints divided by the length of either fingerprint, and $T_d = -\log_2(T_s)$.
+Another approach to molecular fingerprinting is to summarise the 3D shape of a molecule.
+Ultrafast shape recognition (USR) was developed and used for \textit{in silico} drug screening to efficiently describe molecular shape in 12 measurements.
+USR however was optimised for computational efficiency at the expense of detailed information and is agnostic to the atom types contained in the molecule.
+This drawback led to an extension of USR (USRCAT - USR with CREDO atom types) which was later developed for users to search the protein data bank and describes a molecule's 3D shape and constituent atoms. \cite{Schreyer2012}
+Recently a number of studies have leveraged advances in the machine learning field to generate alternative chemical fingerprints using neural networks. \cite{Kearnes2016a,Feinberg2018,Ma2018,Liu2018}
+The idea behind these methods is that deep neural networks are able to learn appropriate representations of the input data in order to maximise performance in a certain task.
+They typically represent chemical structures as un-directional graphs of atoms, and apply convolutional techniques -- which have proven themselves in image-related tasks -- to the graph structures to generate molecular fingerprints which can be used in downstream machine learning and cheminformatics work.
+
+
+\subsection{Application of cheminformatics to high-content screening}
+Much of the work in cheminformatics is carried out in industrial rather than academic laboratories, coupled with the relatively immature field of high-content imaging means has resulted in a sparsity of published research in the application of cheminformatics to high-content imaging and screening.
+
+% Young et al paper summary
+One of the earliest papers which combined cheminformatics with image-based screening was by Young \textit{et al.}\cite{Young2008} who screened a library of 6,547 compounds in HeLa cells and extracted 30 morphological features regarding nuclei morphology.
+They used factor analysis and hierarchical clustering to group their compound library into 7 clusters describing similar nuclear morphologies, and created matrices of phenotypic similarity with consine similarity of phenotypic features and compound similarities with Tanimoto coefficients of ECFP features.
+They then found a correlation between the rank ordering of phenotypic similarities and compound similarities, as well as identified instances of ``activity-cliffs'' when two structurally similar compounds demonstrated very different phenotypic activities which matched up to known SAR studies on the two compounds.
+
+% Wawer compound library design summary
+A second study by Wawer \textit{et al.}\cite{Wawer2014b} incorportated high-content morphological profiling to construct compound libraries based on the diversity of biological response as opposed to diversity of chemical space.
+Using a library of 31,000 compounds, they performed a image-based morphological screen and selected a subset of compounds which produced a diverse range of bioactivities.
+They then compared this subset to a second subset generated by maximising diversity of chemical space, and investigated the performance of each subset of compounds in a wide range of previously performed cell-based screens.
+They found that subsetting compounds based on morphological diversity resulted in an increased performance compared to compounds chosen on chemical diversity or compounds chosen at random.
+
+Another paper published by the same group\cite{Wawer2014c} developed a method for SAR with high-dimensional profiling data, assessing both high-content imaging and gene expression profiling datasets.
+They used pattern mining techniques originally developed in advertising and marketing to find frequently linked sub-structures with certain biological activities.
+
+% find which papers have been published and v. briefly summarise them
+% Young Bender, Clemons Wagner
+% activity cliffs
+    % representing a continuous landscape of chemical similarity and biological
+        % activity
+    % real biology or artefacts of molecular representation?
+
+
+\subsection{Aim of this chapter}
+This chapter is based on work using the BioAscent compound library which is supplied with detailed structural information of each of the 12,000 compounds.
+My aim was to incorporate this chemical information with existing public datasets and my own high-content imaging data in a way to aid target convolution as well as investigate the link between chemical structure structure activity relationship (SAR) applied to cellular morphology as an indicator of compound activity.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 \section{Results}
 
-% prediction un-annotated compound MOA from the annotated datasets
 
 % compare MOA prediction from phenotypic data with the predicted target obtained
 % from chemical similarity matches to public databases (ChEMBL)
@@ -64,9 +162,8 @@ Lower and upper bounds of the selected compounds are indicated by dashed lines. 
 \end{figure}
 
 Hierarchical clustering of morphological profiles produced by these phenotypically active compounds showed that despite the chemical diversity of the BioAscent library, the active compounds formed distinct clusters of compounds which produced similar cellular morphologies (figure \ref{figure:morph_cluster} A).
-
 To confirm the validity of the clustering, the hierarchical labels were compared with clusters found in an unsupervised algorithm.
-The morphological profiles were embedded into lower dimensional space using the t-SNE algorithm \cite{tnse_paper} which aims to preserve local structure within the data and reveals clusters of similar points in an unsupervised approach.
+The morphological profiles were embedded into lower dimensional space using the t-SNE algorithm \cite{Maaten2008} which aims to preserve local structure within the data and reveals clusters of similar points in an unsupervised approach.
 When these points were coloured by the cluster labels idenfified by hierarchical clustering they appeared to match up with the tSNE embedding (figure \ref{figure:morph_cluster} B).
 
 \begin{figure}
@@ -90,7 +187,7 @@ The BioAscent library is marketed as chemically diverse, yet I still wanted see 
 All 13,000 BioAscent compounds were converted into molecular fingerprints to produce a distance matrix between all pairs of compound fingerprints, this was then clustered using agglomative hierarchical clustering.
 As could be predicted, the heatmaps and dendrograms did not reveal any large clusters of structurally similar compounds in the 13,000 compound library.
 This chemical diversity continued when the compounds were filtered to only contain the phenotypically active molecules.
-The use of more novel compound fingerprinting techniques such as USRCAT \cite{usercat} and autoencoded features \cite{autoencoder} did not increase the degree of clustering.
+The use of more novel compound fingerprinting techniques such as USRCAT \cite{Schreyer2012} and autoencoded features \cite{Gomez-Bombarelli2016} did not increase the degree of clustering.
 
 %TODO insert figure of (lack of) compound similarity clustering for both 13K and
 %active
@@ -106,7 +203,7 @@ After removing clusters which contained fewer than 3 compounds, this left 96 clu
         \textbf{(B)} An example of one of the structurally similar clusters as found with the Butina clustering algorithm. 
 }
     \includegraphics[width=0.5\textwidth]{ch5butinaClusterBoth}
-    \label{figure:butina_clusers}
+    \label{figure:butina_clusters}
 \end{figure}
 
 
@@ -164,7 +261,7 @@ The most significantly enriched target in 6/8 of the clusters was related to pro
 
 
 
-\subsection{Finding phenotypic hits to target ``dark chemical space''}
+\subsection{Finding phenotypic hits in ``dark chemical space''}
 
 An area of interest in drug discovery is finding new pharmacologically active compounds which occupy new areas of chemical space. \cite{Wassermann2015}
 One way to incoporate the phenotypically active hits from the BioAscent library is to query historical screening databases by structural similarity.
@@ -189,13 +286,33 @@ BioAscent hits from dark chemical space.
 %cluster somewhere or are mixed in with all the rest
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 \section{Discussion and Conclusions}
 TODO
+% describe what I've achieved
+% what I failed to achieve ..?
 % chemical similarity is difficult
+% would have been a lot easier if I didn't use a chemical diversity library
 % rapidly evolving field
 % activity cliffs - binding properties change despite very similar structures
 % bind to different targets within the same pathway - similar phenotype but can
 % be very different structures
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 \section{Methods}
@@ -244,12 +361,14 @@ Dashed line indicates cutoff of 70\% of the maximum linkage distance, resulting 
 t-SNE clustering was performed using sklearn's `manifold.TSNE` implementation using the Barnes-Hut approximation with the default parameters.
 
 \subsection{ChEMBL structure searches}
-To query the ChEMBL database I used the ChEMBL webresource client \footnote{https://github.com/chembl/chembl\_webresource\_client}.
+To query the ChEMBL database I used the ChEMBL webresource client \footnote{www.github.com/chembl/chembl\_webresource\_client}.
 In order to identify records for similar compounds I first queried structures based on SMILE strings of the BioAscent compounds with a filter to return only compounds with a Tanimoto distance less than 0.1, recording the similar compounds as ChEMBL identifiers.
 Then in a second query using the ChEMBL identifiers, I searched for historical screening results against human protein targets and returned a list in the form of Uniprot accession codes.
 As this returned a list of all protein targets which had been screened against, I filtered this list to protein targets with an assay EC/IC$_{50}$ value less than 1 $\mu$M.
 This was repeated for each cluster of BioAscent compounds returning a list of Uniprot accession codes for each cluster.
 
+
+\subsection{Dark chemical matter}
 To search for active compounds in the BioAscent library which are structurally distinct from any compounds in the ChEMBL database I queried the ChEMBL webresource with the 1244 active BioAscent compounds, returning ChEMBL compounds wit a similarity of 70\% relating to a Tanimoto distance of the daylight fingerprints of within 0.3 (the minimum similarity value allowable with the ChEMBL API).
 Any BioAscent compound that failed to return any structurally similar ChEMBL record was listed as a `dark SMILE'
 \footnote{A thanks to Michał Nowotka from EMBL-EBI for making changes to the ChEMBL servers and API to allow for such time-intensive queries.}.
