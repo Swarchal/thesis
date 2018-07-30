@@ -27,22 +27,22 @@ This compound-induced alteration in morphology is a manifestation of various per
 
 In 2010 Caie \textit{et al.} generated, as part of a larger study, an image dataset consisting of MCF7 breast cancer cells treated with 113 small molecules grouped into 12 mechanistic classes, these cells were then fixed, labelled and imaged in three fluorescent channels\cite{Caie2010}.
 This dataset (also known as BBBC021) has become widely used as a benchmark in the field for MoA classification tasks, with multiple publications using the images to compare machine learning and data pre-processing approaches. \cite{Ljosa2013a,Singh2014a,Pawlowski2016,Ando2017}
-Whilst this is important work, it has led to the situation whereby the vast majority of studies in this field have based their work on a single dataset generated with a one cell-line.
+Whilst this is important work, it has led to the situation whereby the vast majority of studies in this field have based their work on a single dataset generated with one cell-line.
 
 One of the issues associated with phenotypic screening when used in a drug discovery setting is target deconvolution.
 Once a compound has been identified which results in a desirable phenotype in a disease-relevant assay it is common to want to know which molecular pathways the hit compound is acting upon.
-While target deconvolution is a complex and difficult task, image-based morphological profiling represents one option similar to transcriptional profiling that can match and unknown compound to the nearest similar annotated compound in a dataset, while at the same time being far cheaper than the transcriptional methods such as LINCS1000 \cite{Duan2014}.
+While target deconvolution is a complex and difficult task, image-based morphological profiling represents one option similar to transcriptional profiling that can match and unknown compound to the nearest similar annotated compound in a dataset to inform compound MoA, while at the same time being far cheaper than the transcriptional methods such as LINCS1000 \cite{Duan2014}.
 
 
 \subsection{Machine learning methods to classify compound MoA}
 Predicting compound MoA from phenotypic data is a classification task.
 This type of machine learning problem is well researched, and there are several models appropriate for our labelled data.
-As the raw data is in the form of images, it can approached as an image classification task, a problem in the field receiving lots of attention due to recent theoretical and technological breakthroughs. %citations?
+As the raw data is in the form of images, it can be approached as an image classification task, a problem in the field receiving lots of attention due to recent theoretical and technological breakthroughs. %citations?
 Whereas a more classical approach would be to extract morphological information from the images, generating a multivariate dataset from the images, and training a classifier on these morphological features.
 
 To develop and validate a machine learning model the dataset has to be split into training, validation and test sets.
 This is because overfitting is a common problem in machine learning, whereby the model is trained and accurately predicts labels on one dataset, but performs poorly when applied to new data on which is was not trained.
-Most classifiction models will overfit to some degree, typically performing better on the training dataset than any other subsequent examples, but the challenge is to limit this overfitting, and also to ensure that the data used to report accuracy measures has not been used in any way to train or validate the model.
+Most classification models will overfit to some degree, typically performing better on the training dataset than any other subsequent examples, but the challenge is to limit this overfitting, and also to ensure that the data used to report accuracy measures has not been used in any way to train or validate the model.
 
 
 % comparison of machine learning and data pre-processing methods to predict MOA
@@ -147,28 +147,29 @@ Most image classification tasks involving CNN's use 8-bit images in the region o
 This presents the issue of how to reduce the 2160$\times$2160 images into small images, one option is to downscale the entire image using bi-linear or bi-cubic interpolation, while a second option is to chop the original image up into smaller sub-images (figure \ref{figure:image_chopping}).
 Downsizing the original image by simple scaling has a few potential problems which make it unsuitable for this particular task:
     many of the finer-grained cell morphologies such as mitochondria and endoplasmic reticulum distribution will be lost due to the reduction in image resolution;
-    in addition, it was found that whole well images are susceptible to over-fitting as the classfier learned biologically irrelevant features such as the locations of cells within an image, which although should be random might have some spurious association with particular class labels.
+    in addition, it was found that whole well images are susceptible to over-fitting as the classifier learned biologically irrelevant features such as the locations of cells within an image, which although should be random might have some spurious association with particular class labels.
 When chopping images into sub-images the most simple and commonly used method is to chop each image into an evenly spaced grid, whilst this is unbiased and easy to implement, it has the downside of potentially returning many images that do not contain any cells.
-A more nuanced approach is to first detect the $x$,$y$ co-ordinates of each  in the image, and creating a 300$\times$300 bounding-box around the centre of each cell.
+A more nuanced approach is to first detect the $x$,$y$ co-ordinates of each cell in the image, and creating a 300$\times$300 bounding-box around the centre of each cell.
 This method returns an image per cell, negating the issue of empty images; it does however require detecting cell locations and handling cells located next to the image border.
 
 \begin{figure}
     \includegraphics[width=0.6\textwidth]{ch2ImageChopping}
     \captionsetup{width=0.8\textwidth}
-    \caption[Down-sizing and chopping images for CNN training]{Two options for adapting large microscope images to work with the smaller input size of typical CNNs. \textbf{(A)} Full-sized images are downsized to the desired dimensions via bilinear or bicubic interpolation. \textbf{(B)} Images are chopped into smaller sub-images, cell detection can be carried out beforehand to ensure images contain at least one cell.}
+    \caption[Down-sizing and chopping images for CNN training]{Two options for adapting large microscope images to work with the smaller input size of typical CNNs. \textbf{(A)} Full-sized images are downsized to the desired dimensions via bi-linear or bi-cubic interpolation. \textbf{(B)} Images are chopped into smaller sub-images, cell detection can be carried out beforehand to ensure images contain at least one cell.}
     \label{figure:image_chopping}
 \end{figure}
 
 To compare the performance of using either downsized whole images or cropped sub-images, a pair of ResNet18 models were trained using either one of the datasets.
+% TODO: define was ResNet18 is, should probably go in the introduction
 It was evident during training that using sub-images resulted in a higher final validation accuracy (0.847) compared to whole-images (0.778), as well as converging much faster than the whole-image-trained model (figure \ref{figure:nn_chopped_vs_whole_curves}).
-Although it should be noted that whole images performed suprisingly well given their low resolution of cellular features.
+Although it should be noted that whole images performed surprisingly well given their low resolution of cellular features.
 
 \begin{figure}
     \includegraphics[width=0.8\textwidth]{ch2choppedVsWhole}
     \captionsetup{width=0.8\textwidth}
     \caption[Comparison of whole images vs sub-images]{
 Comparison of training ResNet18 model on chopped sub-images vs downsized images from the MDA-MB-231 cell line.
-Chopped images were 300$\times$300 crops centered on nuclei.
+Chopped images were 300$\times$300 crops centred on nuclei.
 Whole images were 2160$\times$2160 images downsized to 300$\times$300 pixels.
 }
     \label{figure:nn_chopped_vs_whole_curves}
@@ -191,22 +192,22 @@ Confusion matrices comparing sub-image and whole image classification accuracy o
 \end{figure}
 
 Following these results the rest of the work involving CNNs used sub-images during training and prediction.
-Whilst sub-images improved model training and classification accuracy, it also introduces more complexity as images have to pre-processed to indentify cells and crop to a bounding box.
+Whilst sub-images improved model training and classification accuracy, it also introduces more complexity as images have to pre-processed to identify cells and crop to a bounding box.
 It also introduces another parameter in terms of image size which has to be considered and optimised.
 While here I chose 300$\times$300 pixel images corresponding to 97.5 $\mu$m$^2$, this was chosen pragmatically to fully capture a single cell and a portion of any adjacent cells.
 This value could be optimised by running several models with differently sized cropped images, although this value is largely dependent on cell line characteristics, magnification and image binning.
 
 
 \subsection{More complex CNN architectures outperform simpler AlexNet}
-As CNNs can be constructed with a wide variety of architectures, and the field is still rapidly developing, I remained closed to well established architectures in the literature.
-However, as most images are digitially represented in three colour channels (red, green, blue (RGB)), the vast majority of CNN models are constructed in a way that input is restricted to three colour channels, therefore it is necessary to adapt these architectures to work with the differently shaped inputs and additional parameters generated by the 5 channel images generated with the ImageXpress.
+As CNNs can be constructed with a wide variety of architectures, and the field is still rapidly developing, I remained close to well established architectures in the literature.
+However, as most images are digitally represented in three colour channels (red, green, blue (RGB)), the vast majority of CNN models are constructed in a way that input is restricted to three colour channels, therefore it is necessary to adapt these architectures to work with the differently shaped inputs and additional parameters generated by the 5 channel images generated with the ImageXpress.
 
-The two different CNN architectures were tested based on the hypothesis that a deeper, more complex architecture (ResNet18 \cite{He2015}) will be capable of learning more subtle features, although more complex models with greater numbers of interal parameters are more prone to overfitting when training data is limited.
-On the other hand, a more simple model such as AlexNet \cite{Krizhevsky2012} which contains fewer convolutional layers will be less able to perform complex tranformations of the data, and therefore theoretically limit the subtle features which can be extracted and learned from an image.
+The two different CNN architectures were tested based on the hypothesis that a deeper, more complex architecture (ResNet18 \cite{He2015}) will be capable of learning more subtle features, although more complex models with greater numbers of internal parameters are more prone to overfitting when training data is limited.
+On the other hand, a more simple model such as AlexNet \cite{Krizhevsky2012} which contains fewer convolutional layers will be less able to perform complex transformations of the data, and therefore theoretically limit the subtle features which can be extracted and learned from an image.
 While this might theoretically reduce accuracy, in the absence of large amount of training data it may reduce overfitting due to the fewer number of parameters.
 
 In an effort to reduce over-fitting, both models were evaluated with and without dropout in their dense layers during training.
-Dropout is a form of regularisation and works by randomly ignoring a fixed proportion of neurons during the training phase, with the theory that this prevents the model becoming too dependent on the output of particular neuron and leads to more robust features used for classification.
+Dropout is a form of regularisation and works by randomly ignoring a fixed proportion of neurons during the training phase, with the theory that this prevents the model becoming too dependent on the output of a particular neuron and leads to more robust features used for classification.
 
 \begin{figure}
     \includegraphics[width=0.8\textwidth]{ch2arch}
@@ -223,7 +224,7 @@ The models were ResNet18, ResNet18 with dropout, AlexNet and AlexNet with dropou
 During training the two ResNet18 models outperformed the AlexNets in both training and validation accuracy (figure (\ref{figure:nn_arch})).
 AlexNet with dropout layers did outperform the other three approaches when it came to validation loss, as loss did not increase even after many epochs this model demonstrated it is less liable to overfit data.
 However, the ResNet18 models showed a substantial increase in classification accuracy, and if training is limited to fewer than 10 epochs they do not show worse over-fitting compared to the AlexNet models.
-Additional dropout layers does not seem to reduce ResNet18's liability to overfit beyond 10 epochs, this is not too suprising as principal behind ResNet18's residual architecture is to limit overfitting, and adding additional dropout to the final fully-connected layers is a crude approach.
+Additional dropout layers does not seem to reduce ResNet18's liability to overfit beyond 10 epochs, this is not too surprising as the principal behind ResNet18's residual architecture is to limit overfitting, and adding additional dropout to the final fully-connected layers is a crude approach.
 
 
 
@@ -232,7 +233,7 @@ Additional dropout layers does not seem to reduce ResNet18's liability to overfi
 When training CNN models it is common practice to standardise image intensities.
 This pre-processing step consists of subtracting the mean of the image (or image batch) from each pixel and dividing the result by the standard deviation.
 The theory is this reduces training time and helps CNN models converge faster by ensuring the weights calculated during training are all on a similar scale which in turn restrains the gradients used in backpropagation.
-This pre-processing makes sense in the classicial and traditional academic use of CNNs which are often trained on images or photographs from many different sources with inconsistent lighting and colours.
+This pre-processing makes sense in the classical and traditional academic use of CNNs which are often trained on images or photographs from many different sources with inconsistent lighting and colours.
 However, the images used in this high-content screening dataset are all from a single microscope with a carefully controlled light source, in addition the intensities of the different channels carry a biological information relating to the abundance of different proteins or cellular structures.
 Therefore I wanted to assess if standardising image intensities per image channel improved model convergence and classification accuracy compared to un-normalised intensity values
 \footnote{Although un-normalised, intensity values were converted from 16 bit unsigned integers (65536 grayscale values) to 8 bit unsigned integers (256 grayscale values).
@@ -346,7 +347,7 @@ During backpropagation the updated weights for all replicas are averaged and mod
 % data loaders, image rotation,  how image normalisation was implemented
 
 % image intensity standardisation
-Image intensities were standardised on an individual image and channel basis by taking each image in the form of a [width $\times$ height $\times$ channel] array and subtracting the mean of each channel from each pixel value in that channel, and dividing the pixel value by the standard deviation of the original channel.
+Image intensities were standardised on an individual image and channel basis by taking each image in the form of an array [width $\times$ height $\times$ channel] and subtracting the mean of each channel from each pixel value in that channel, and dividing the pixel value by the standard deviation of the original channel.
 
 Batch sizes during training were kept at 64 images.
 In the case of using GPU arrays then this was multiplied by the number of GPUs.
@@ -354,11 +355,12 @@ Learning rate was set to $1e^{-3}$ decreasing 10-fold every 10 epochs (figure \r
 Decay was used to aid gradient descent and model convergence.
 Models were trained for 100 epochs or 48 hours, whichever was reached first, with model checkpoints every epoch there was an increase maximum validation accuracy.
 The optimiser used was ADAM \cite{Kingma2014} with the categorical cross entropy loss function.
+%TODO better define what ADAM is
 
 \begin{figure}
     \captionsetup{width=0.8\textwidth}
     \caption[CNN learning rate and decay]{
-Learning rate and decay for training CNN models, intialised at $1e^{-3}$ and reduced 10-fold every 10 epochs.
+Learning rate and decay for training CNN models, initialised at $1e^{-3}$ and reduced 10-fold every 10 epochs.
 }
     \includegraphics[width=0.7\textwidth]{ch2learningRate}
     \label{figure:learningRate}
