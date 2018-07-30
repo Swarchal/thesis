@@ -26,7 +26,7 @@ The cell-lines were all grown in DMEM (\# CATNO MANUFACTURER) and supplemented w
 \section{Generation of GFP labelled cell lines}
 Stable GFP expressing cell lines were created from the eight breast cancer cell lines in order to aid with spheroid image segmentation.
 Cells were seeded at approximately 35,000 cells per well of a 6-well plate in 3 mL of DMEM and incubated for 24 hours (37$^\circ$C) to achieve 20\% confluence.
-After 24 hours of incubation, 35 $\mu$L of IncyCyte NucLight Green Lentivirus (\#4624 Essen) was added to each well at an  MOI of 1 with 1.5 $\mu$L of polybrene (1:2000).
+After 24 hours of incubation, 35 $\mu$L of IncuCyte NucLight Green Lentivirus (\#4624 Essen) was added to each well at an  MOI of 1 with 1.5 $\mu$L of polybrene (1:2000).
 Plates were then incubated for an additional 24 hours followed by a media change, and another 24 hour incubation.
 Media was then changed for selection media consisting of 1 $\mu$g/mL puromycin and complete DMEM, followed by another 24 hour incubation.
 Following selection of puromycin resistant cells, cells were trypsinised and placed in a T75 tissue culture flask for further growth.
@@ -105,7 +105,7 @@ To stain cells in a 96 or 384 well plates, the cells are first fixed by adding a
 The plates are then washed with PBS (100 $\mu$L for a 96 well plate, 50 $\mu$L for a 384 well plate) and permeabilised with (50 $\mu$L 96-well, 30 $\mu$L 384-well) 0.1\% Triton-X100 solution for 20 minutes at room temperature.
 A solution of cell painting reagents was made up in 1\% bovine serum albumin (BSA) solution (see table \ref{table:staining}).
 Cell painting solution was added to plates (30 $\mu$L 96-well, 20 $\mu$L 384-well) and left to incubate for 30 minutes at room temperature in a dark place.
-Plates were then wased with PBS (100 $\mu$L 96-well, 50 $\mu$L 384) three times, before the final aspiration plates were sealed with a transparent plate seal (\#CATNO MANUFACTURER).
+Plates were then washed with PBS (100 $\mu$L 96-well, 50 $\mu$L 384) three times, before the final aspiration plates were sealed with a transparent plate seal (\#CATNO MANUFACTURER).
 
 
 \begin{table}[]
@@ -142,6 +142,7 @@ Images were captured in 5 fluorescent channels at 20x magnification, exposure ti
 
 \subsection{Cellprofiler}
 Images were analysed using Cellprofiler v2.1.1 to extract morphological features.
+%TODO: brief description of cellprofiler and reference to original paper(s)
 Briefly, cell nuclei were segmented in the Hoechst stained image based on intensity, clumped nuclei were separated based on shape.
 Nuclei objects were used as seeds to detect and segment cell-bodies in the cytoplasmic stains of tha dditional channels.
 Subcellular structures such as nucleoli and Golgi apparatus were segmented and assigned to parent objects (cells).
