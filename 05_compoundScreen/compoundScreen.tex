@@ -50,7 +50,126 @@
 
 \subsection{Spheroids}
 
+\subsubsection{Creating spheroids}
+Spheroids were created  by seeding approxmiately 10,000 GFP-expressing cells per well in 50 $\mu$L of media into each well of a 96-well low attachment U-bottomed plate (\#7007 Corning).
+A solution containing 4\% growth-factor reduced Matrigel (\#35623 Corning) and 2\% DRAQ7 apoptotic stain (\#DR710HC biostatus) was made in cold media, and 50 $\mu$L per well was added to the existing cell suspension, for a final Matrigel concentraion of 2\% and 1\% DRAQ7.
+Plates were then centrifuged for 10 minutes at 1000X G and 4$^\circ$ with break speed reduced to pellet down the cells in the centre of each well.
+After centrifugation plates were placed in a tissue culture incubator for 24 hours before addition of compounds.
+Compounds from a 1000x source plate were diluted 1:50 by transferring 3 $\mu$L from the source plate to an intermediate plate containing 150 $\mu$L of media.
+From the intermediate plate 5 $\mu$L were transferred to the spheroid assay plate containing 100 $\mu$L for a final dilution of 1:1000 and a DMSO concentration of 0.1\%.
+Following compound addition spheroid plates were incubated for an additional 72 hours.
+
+\subsubsection{Imaging spheroids}
+Spheroids were imaged on the ImageXpress using the 4X objective lens in 3 channels (transmitted light, GFP and CY5).
+Images were captured by first detecting the well-bottom in the centre of the U-bottomed well with a laser-based autofocus and offsetting by the well thickness, then capturing images in a z-stack at 8 focal planes spaced at 50 $\mu$m intervals for a total range of 350 $\mu$m.
+Z-stacks of the GFP and CY5 fluorescent channels were collapsed into a single image per channel using a maximum intensity projection, while the z-stack of transmitted light images were transformed using a minimum intensity projection.
+
+
+
+
+\subsection{Western blotting for SERT and TPH1}
+
+\subsubsection{Protein extraction}
+
+\paragraph{Protein extraction from cells.}
+Cells were grown for protein extraction in 6-well plates and lysed when roughly 80\% confluent.
+RIPA buffer was made from 25 mM Tris (pH 7.5), 150 mM NaCl, 0.1\% SDS, 1\% Triton-X100, 0.5\% deoxycholate and phosphatase inhibitors (cOmplete ULTRA \#05892970001 Roche), and placed on ice.
+Media was removed from the 6-well plates with a pipette, and wells were washed with cold PBS before addition of 300 $\mu$L of cold RIPA lysis solution.
+Cells were incubated in lysis buffer for 2-3 minutes on ice and scraped with a cell-scraper. The lysis buffer/cell-lysate was then transferred to a 1.5 mL eppendorf tube and incubated on ice for 10 minutes.
+Cell lysate solutions were centrifuged at 13,000x G for 10 minutes at 4 $^\circ$C and the supernatent transferred to new 1.5 mL eppendorf tubes.
+
+
+\paragraph{Protein extraction from mouse brain.}
+Two grain of rice sized pieces were cut from different regions of a frozen FVB adult mouse brain and separately homogenised (MP lysing matrix type D 1.4mm sphere) for 20 seconds at 4 M/s (MP FastPrep-24).
+Once homogenised, 500 $\mu$L of RIPA lysis buffer was added to each tube and placed on a rotator for 15 minutes at 4$^\circ$C.
+The homogenising tubes and lysis solution were then briefly centrifuged to settle the beads and the lysates extracted with a pipette into pre-chilled 1.5 mL eppendorf tubes which were centrifuged at 13,000x G for 10 minutes at 4$^\circ$C and the supernatents were transferred to new 1.5 mL tubes.
+
+
+\paragraph{Standardising protein concentrations.}
+Protein concentrations were measured using Precision-Red protein assay reagent (\#ADV02-A Cytoskeleton, Inc.).
+For each sample, 10 $\mu$L of lysate was added to a plastic cuvette followed by 1 mL of Precision-Red.
+The absorbance was measured after 1 minute incubation at room temperature with a spectrometer at 500 nm and compared to a blank of 1 mL Precision-Red and no lysate.
+Protein concentration in mg/mL was determined as 100 times the corrected absorbance value at 600 nm, as per the suppliers instructions.
+Sample protein concentrations were all made to 2.5 mg/mL by diluting in RIPA lysis buffer.
+Samples were then prepared for Western blot by mixing 75 $\mu$L of sample with 25 $\mu$L of 4x loading buffer (200 mM Tris, 400 mM DTT, 8\% SDS, 0.4\% bromophenol blue, 40\% glycerol) denaturing at 90$^\circ$C for 10 minutes.
+
+
+
+\subsubsection{Western blotting}
+
+\paragraph{Gel eletrophoresis and transfer.}
+Using pre-cast 4-15\% gradient gels (\#4568085 Bio-Rad) and SDS-page running buffer (20 mM Tris, 195 mM Glycine, 0.1\% SDS, pH 8.5), 7.5 $\mu$L of seeBlue Plus2 ladder (\#LC5925 Invitrogen) and 20 $\mu$L of sample (50 $\mu$g) were added to separate lanes, and the gel was run at 200V constant voltage for 30 minutes.
+Proteins were transferred to PVDF (polyvinylidene difluoride) membranes (P0.45 Aversham hybond) pre-wetted in in MeOH sandwiched with blotting paper at 400 mA constant ampage for 60 minutes in transfer buffer (SDS-page running buffer with 20\% MeOH) with ice packs.
+
+
+
+\paragraph{Antibody staining and visualising.}
+Following transfer, membranes were blocked in 20 mL of 1\% casein blocking solution (\#11921681001 Roche) for 10 minutes on a rocking plate.
+Antibody solutions were made up in the same blocking buffer, TPH1 (\#LS-C117936 LSBio) was diluted 1:500, SERT (\#AMT-004 Amalone) was diluted 1:500.
+Membranes were placed in separate 50 mL Falcon tubes with the protein side facing inwards in 7 mL of antibody solution and placed on rollers overnight at 4$^\circ$C.
+The membranes were then removed from the antibody solution was washed 3 times with 10 mL of TBS-T (50 mM Tris, 150 mM NaCl, 0.1\% Tween 20, pH 7.5) for 5 minutes.
+The secondary antibody (HRP-linked anti-rabbit IGg \#70742 CST) was diluted 1:5000 in blocking buffer and used to wash the membranes for 1 hour at room temperature.
+Membranes were then washed 3 times with 10 mL TBS-T for 5 minutes followed by 3 washes with 10 mL TBS (50 mM Tris, 150 mM NaCl, pH 7.5) for 5 minutes.
+Imaging of the membrane was carried out using BM chemiluminescence blotting substrate (\#11500619001 Roche) following the manufacturers instructions.
+
+TODO:housekeeper control, imaging
+
+
 \subsection{RPPA}
+
+\subsubsection{Protein extraction}
+
+\paragraph{2D cells.}
+Protein extraction from 2D cells was performed by first seeding approximately 50,000 cells per well of a 6-well plates in 3 mL of media followed by incubation in a tissue culture incubator for 24 hours.
+Compound addition was performed by diluting compound stocks in DMSO 1:50 in media to an intermediate plate, followed by 1:20 from the intermediate plate to the assay plate for a 1000-fold dilution and 0.1\% DMSO.
+Assay plates were then incubated for an additional 72 hours, after which wells were washed with 1 mL of room temperature PBS followed by addition of 100 $\mu$L of room temperature CLB1 (Zeptosens, Bayer) lysis buffer.
+Cells and lysis buffer were then scraped into 1.5 mL eppendorf tube and incubated at room temperature for 30 minutes with frequent vortexing.
+After 30 minutes of incubation lysis solution was centrifuged for 10 minutes at 13,000X G at room temperature and supernatant was transferred into new 1.5 mL eppendorf tubes.
+
+\paragraph{Spheroids.}
+Protein extraction from spheroids was performed by first growing spheroids in 96-well plates following the same protocol as for imaging.
+20 spheroids per treatment group were extracted with a pipette into a 1.5 mL eppendorf tube.
+Pipette tips were widened by cutting with scissors.
+The spheroids were then centrifuged for 30 seconds at 13,000X G at room temperature to pellet at the bottom of the tube, media was removed with a pipette and replaced with room temperature PBS.
+Spheroids were pelleted again, PBS removed and replaced with 75 $\mu$L of room temperature CLB1 lysis buffer.
+The spheroid lysis buffer mixture was incubated at room temperature for 30 minutes with frequent vortexing to break up cell aggregates.
+Following incubation the lysis solution was centrifuged for 10 minutes at 13,000X G at room temperature, and supernatant extracted into a new 1.5 mL eppendorf tube.
+
+\paragraph{Determining protein concentration.}
+Protein concentration was determined with a Bradford assay, using a standard curve of known BSA concentrations and the addition of CLB1 lysis buffer to control for the lysis buffer concentration of the samples.
+A curve of known BSA concentrations was created using 2 mg/mL BSA protein standard (\#23209 Thermo Scientific) diluted in PBS, with a 1:20 concentration of lysis buffer (see table \ref{table:bradford}).
+Samples were diluted 1:20 in PBS by adding 2.5 $\mu$L of sample to 47.5 $\mu$L of PBS and mixed with a vortex.
+10 $\mu$L of diluted samples and standard were added to each well of a flat-bottomed 96-well plate, followed by 240 $\mu$L of room temperature Coomassie Plus Protein Assay (\#1856210 Thermo Scientific) and incubated at room temperature for 10 minutes.
+Plates were then read with a microplate reader (BIORAD iMark) at a wavelength of 595 nm.
+The protein concentrations of samples were calculated from a linear model of the BSA standard curve.
+All protein samples were normalised to 1 mg/mL by dilution in CLB1 lysis buffer.
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[h]
+    \begin{footnotesize}
+    \captionsetup{width=0.8\linewidth}
+    \centering
+        \caption[Bradford standard BSA curve]{
+            Volumes for the BSA standard curve. Lysis buffer was CLB1, the same as used for the sample preparation.
+        }
+    \label{table:bradford}
+    \begin{tabular}{@{}llll@{}}
+        \toprule
+        \begin{tabular}[c]{@{}l@{}}BSA final\\ concentration (mg/mL)\end{tabular} & \begin{tabular}[c]{@{}l@{}}BSA 2 mg/mL\\ ($\mu$L)\end{tabular} & PBS ($\mu$L) & Lysis Buffer ($\mu$L) \\ \midrule
+            0                                                                         & 0                                                              & 95           & 5                     \\
+            0.05                                                                      & 2.5                                                            & 92.5         & 5                     \\
+            0.1                                                                       & 5                                                              & 90           & 5                     \\
+            0.15                                                                      & 7.5                                                            & 87.5         & 5                     \\
+            0.2                                                                       & 10                                                             & 85           & 5                     \\
+            0.3                                                                       & 15                                                             & 80           & 5                     \\
+            0.4                                                                       & 20                                                             & 75           & 5                     \\
+            0.6                                                                       & 30                                                             & 65           & 5                     \\ \bottomrule
+    \end{tabular}
+    \end{footnotesize}
+\end{table}
+
+
 
 %\printbibliography
 

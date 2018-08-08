@@ -20,20 +20,18 @@
 
 \subsection{Cheminformatics}
 % Introduction to cheminformatics
-The term ``cheminformatics'' was first coined in 1998\cite{Brown1998} although the use of computers to interact with chemical data predates this by many years, with early systems used to index, search and catalogue databases of chemical compounds. \cite{Ray1957}
-Most of the early work in this field was concerned with efficient means to search large chemical databases for similar molecules or molecules containing certain sub-structures.
+The term ``cheminformatics'' was first coined in 1998\cite{Brown1998} although the use of computers to interact with chemical data predates this by many years with early systems used to index, search and catalogue databases of chemical compounds. \cite{Ray1957}
+Most of the early work in this field was concerned with efficient means to search chemical databases for similar molecules or molecules containing certain sub-structures.
 This early work developed a number of important methods to generate, represent and compare chemical structures in a time of limited computational power, as a by-product these methods are very efficient and are still used today as the size of chemical databases has grown alongside computational power.
 
-It was later on that researchers attempted to correlate biological activity with physiochemical parameters and give rise to structure activity relationships (SAR), this was partly due to the advancement of statistical techniques which gave rise to new tools such as multiple linear regression.
-One of the first quantitative SAR (QSAR) studies was carried out by Hansch and Fujita, in which they found the lipophilicity of a molecule correlated strongly with biological activity \cite{HanschCitation}.
+It was later on that researchers attempted to correlate biological activity and physiochemical parameters with structure activity relationships (SAR), this was partly due to the advancement of statistical techniques which gave rise to new tools such as multiple linear regression.
+One of the first quantitative SAR (QSAR) studies was carried out by Hansch and Fujita, in which they found the lipophilicity of a molecule correlated strongly with biological activity \cite{Hansch1962}.
 Since then the QSAR field has advanced to include many more parameters and in now a key part in most empirical drug discovery efforts.
 
 % cheminformatics for drug library design
 % chemical space and all that
 Another use of cheminformatics in drug discovery is the analysis and design of compound screening libraries.
-% mention lipinski's RO5 as an established method to filer compound collections?
-In industrial high-throughput screening a full-deck compound library typically contains several million small molecules.
-Screening this entire library is a costly endevour, even for pharmaceutical companies, and therefore a lot of research has been carried out in how to maximise the value and information gained from screening these large compound collections.
+In industrial high-throughput screening a full-deck compound library typically contains several million small molecules, screening this entire library is a costly endevour, even for pharmaceutical companies, and therefore a lot of research has been carried out in how to maximise the value and information gained from screening large compound collections.
 One of the ways compound libraries can be optimised is by covering a large a range of chemical space as possible.
 A compound library that contains many extremely similar molecules may be useful in certain specific circumstances, but in most cases this is viewed as a redundancy and a library which covering the same chemical space with fewer compounds would reduce costs.
 Alternatively, a compound collection of equal size which contains more diverse chemistry may lead to a more varied selection of lead candidates. \cite{Clemons2011}
@@ -57,10 +55,10 @@ Relating changes to a compound's structure to biological activity is relatively 
 
 
 \subsection{Chemical similarity}
-Despite the premise of QSAR as ``\textsl{similar molecules} have similar biological effects'' there is the challenge of how to measure similarity between chemical structures.
+The premise of QSAR is ``\textsl{similar molecules} have similar biological effects'' presenting the challenge of how to measure similarity between chemical structures.
 Chemical structures can be represented in a number of different formats and we typically think of the skeletal 2D graphical representation (figure \ref{figure:mol_encodings} A) when considering complex organic molecules which have to be interpreted by chemists.
 Computers however require a different format to efficiently store and parse chemical structure data.
-SMILEs (simplified molecular input line entry system) and InChIs (international chemical identifier) are two formats which encode chemical structures as short character strings representing atoms as human readable characters (such as \texttt{CH} for carbon and hydrogen) with other symbols to represent branches and sterochemistry etc (figure \ref{figure:mol_encodings} B\&C).
+SMILEs (simplified molecular input line entry system) and InChIs (international chemical identifier) are two formats which encode chemical structures as short character strings representing atoms as human readable characters (such as \texttt{CH} for carbon and hydrogen) with other symbols to represent branches and sterochemistry (figure \ref{figure:mol_encodings} B\&C).
 These relatively simple formats sometimes suffer from ambiguity, in which a single encoding could represent several molecules, or a single molecule could be
 represented by multiple valid encodings.
 A less ambiguous but also less human-readable file format is SDF (structure data file) or Molfile, which encode chemical structures as a table of x, y, z co-ordinates and bonds for each atom (figure \ref{figure:mol_encodings} D).
@@ -85,13 +83,13 @@ Different methods to encode the chemical structure of a molecule (aspirin).
     % daylight fingerprints + tanimoto distances
     % ECPF? USRCAT
 Given these encodings of chemical structure and the task to calculate similarity (or distance) between molecules, the most direct and simple method is to calculate distance based on the string encodings (usually SMILE format), such as hamming distance or longest-common-substring divided by total length between two SMILE strings.\cite{Ozturk2016}
-However, these naive methods  suffer from a number of drawbacks, mainly stemming from the ambiquity and variability of SMILE encodings which limit their widespread use. \cite{citation_needed}
-A more nuanced approach to measuring chemical similarity is to first calculate  compound fingerprints such as daylight or extended connectivity fingerprints (ECFP) \cite{citation} which are abstract representations of molecules in the form of fixed-length binary arrays -- generated from local patterns in the molecule such as the identity of neighbouring atoms (where neighbouring is extended to several bonds away).
+However, these naive methods  suffer from a number of drawbacks, mainly stemming from the ambiquity and variability of SMILE encodings which limit their widespread use in chemical similarity calculations.
+A more nuanced approach to measuring chemical similarity is to first calculate  compound fingerprints such as daylight or extended connectivity fingerprints (ECFP) \cite{Rogers2010} which are abstract representations of molecules in the form of fixed-length binary arrays -- generated from local patterns in the molecule such as the identity of neighbouring atoms (where neighbouring is extended to several bonds away).
 The distance between compound fingerprints can then be found using one of a variety of distance metrics.
 To compare the binary compound fingerprints the most commonly used metric is Tanimoto similarity ($T_s$) and distance\footnote{Whilst not a distance in the  strict mathematical sense it is commonly referred to as a distance metric.} ($T_d$), where $T_s$ is defined as the ratio of common elements between two equal length fingerprints divided by the length of either fingerprint, and $T_d = -\log_2(T_s)$.
 Another approach to molecular fingerprinting is to summarise the 3D shape of a molecule.
 Ultrafast shape recognition (USR) was developed and used for \textit{in silico} drug screening to efficiently describe molecular shape in 12 measurements.
-USR however was optimised for computational efficiency at the expense of detailed information and is agnostic to the atom types contained in the molecule.
+USR however is optimised for computational efficiency at the expense of detailed information and is agnostic to the atom types contained in the molecule.
 This drawback led to an extension of USR (USRCAT - USR with CREDO atom types) which was later developed for users to search the protein data bank and describes a molecule's 3D shape and constituent atoms. \cite{Schreyer2012}
 Recently a number of studies have leveraged advances in the machine learning field to generate alternative chemical fingerprints using neural networks. \cite{Kearnes2016a,Feinberg2018,Ma2018,Liu2018}
 The idea behind these methods is that deep neural networks are able to learn appropriate representations of the input data in order to maximise performance in a certain task.
@@ -99,7 +97,7 @@ They typically represent chemical structures as un-directional graphs of atoms, 
 
 
 \subsection{Application of cheminformatics to high-content screening}
-Much of the work in cheminformatics is carried out in industrial rather than academic laboratories, coupled with the relatively immature field of high-content imaging means has resulted in a sparsity of published research in the application of cheminformatics to high-content imaging and screening.
+Much of the work in cheminformatics is carried out in industrial rather than academic laboratories, coupled with the relatively immature field of high-content imaging has resulted in a sparsity of published research in the application of cheminformatics to high-content imaging and screening.
 
 % Young et al paper summary
 One of the earliest papers which combined cheminformatics with image-based screening was by Young \textit{et al.}\cite{Young2008} who screened a library of 6,547 compounds in HeLa cells and extracted 30 morphological features regarding nuclei morphology.
@@ -112,8 +110,8 @@ Using a library of 31,000 compounds, they performed a image-based morphological 
 They then compared this subset to a second subset generated by maximising diversity of chemical space, and investigated the performance of each subset of compounds in a wide range of previously performed cell-based screens.
 They found that subsetting compounds based on morphological diversity resulted in an increased performance compared to compounds chosen on chemical diversity or compounds chosen at random.
 
-Another paper published by the same group\cite{Wawer2014c} developed a method for SAR with high-dimensional profiling data, assessing both high-content imaging and gene expression profiling datasets.
-They used pattern mining techniques originally developed in advertising and marketing to find frequently linked sub-structures with certain biological activities.
+Another study published by the same group developed a method for SAR with high-dimensional profiling data, assessing both high-content imaging and gene expression profiling datasets.
+They used pattern mining techniques originally developed in advertising and marketing to find frequently linked sub-structures with certain biological activities. \cite{Wawer2014c}
 
 % find which papers have been published and v. briefly summarise them
 % Young Bender, Clemons Wagner
@@ -121,6 +119,11 @@ They used pattern mining techniques originally developed in advertising and mark
     % representing a continuous landscape of chemical similarity and biological
         % activity
     % real biology or artefacts of molecular representation?
+
+\subsection{The BioAscent library}
+The BioAscent compound library consists of a 12,000 compound subset of a larger 125,000 chemical diversity library.
+The library was designed to include compounds with drug-like properties such as adherence to Lipinksi's rule of 5 and avoiding known pan-assay interference compounds (PAINS).
+The bioascent collection has been found to contain a considerable proportion of molecules which are likely to be kinase-interacting (27\%) and GPCR-interacting (20\%) according to computational models of chemical structure.
 
 
 \subsection{Aim of this chapter}
@@ -148,14 +151,14 @@ My aim was to incorporate this chemical information with existing public dataset
 
 \subsection{The BioAscent library contains clusters of phenotypically similar compounds}
 
-In order to compare the phenotypic profiles produced by compounds in the BioAscent library, active compounds were selected based on on the L$_1$ norm distance from the negative control centroid (figure (\ref{figure:compound_activity})).
-As many of the compounds were cytotoxic and produced images containing only a few dying cells which do not produce robust morphological measurements, an activity window was used to exclude cytoxic compounds.
+In order to compare the phenotypic profiles produced by compounds in the BioAscent library, active compounds were selected based on on the $l_1$ norm distance from the negative control centroid (figure \ref{figure:compound_activity}).
+As many of the compounds were cytotoxic and produced images containing only a few cells which do not produce robust morphological measurements, an activity window was used to exclude cytoxic compounds.
 
 
 \begin{figure}
     \captionsetup{width=0.8\textwidth}
     \caption[Selecting active compounds based on distance]{
-Selection of active BioAscent compounds based on the L$_1$ norm distance from the DMSO negative control centroid in PCA space.
+Selection of active BioAscent compounds based on the $l_1$ norm distance from the DMSO negative control centroid in PCA space.
 Lower and upper bounds of the selected compounds are indicated by dashed lines. In total 1244 compounds were selected.}
     \includegraphics[width=0.6\textwidth]{ch5compoundActivities}
     \label{figure:compound_activity}
@@ -163,7 +166,7 @@ Lower and upper bounds of the selected compounds are indicated by dashed lines. 
 
 Hierarchical clustering of morphological profiles produced by these phenotypically active compounds showed that despite the chemical diversity of the BioAscent library, the active compounds formed distinct clusters of compounds which produced similar cellular morphologies (figure \ref{figure:morph_cluster} A).
 To confirm the validity of the clustering, the hierarchical labels were compared with clusters found in an unsupervised algorithm.
-The morphological profiles were embedded into lower dimensional space using the t-SNE algorithm \cite{Maaten2008} which aims to preserve local structure within the data and reveals clusters of similar points in an unsupervised approach.
+The morphological profiles were embedded into 2-dimensional space using the t-SNE algorithm \cite{Maaten2008} which aims to preserve local structure within the data and reveals clusters of similar points in an unsupervised manner.
 When these points were coloured by the cluster labels idenfified by hierarchical clustering they appeared to match up with the tSNE embedding (figure \ref{figure:morph_cluster} B).
 
 \begin{figure}
@@ -183,13 +186,13 @@ Morphological clustering of active compounds within the BioAscent library.
 
 
 \subsection{The BioAscent library is chemically diverse}
-The BioAscent library is marketed as chemically diverse, yet I still wanted see to what degree this is true, and if there are clusters of chemically similar compounds such as those based around a common scaffold.
-All 13,000 BioAscent compounds were converted into molecular fingerprints to produce a distance matrix between all pairs of compound fingerprints, this was then clustered using agglomative hierarchical clustering.
-As could be predicted, the heatmaps and dendrograms did not reveal any large clusters of structurally similar compounds in the 13,000 compound library.
+The BioAscent library is marketed as chemically diverse, yet I still wanted see to what extent and if there are clusters of chemically similar compounds such as those based around a common scaffold.
+All 12,000 BioAscent compounds were converted into molecular fingerprints to produce a Tanimoto distance matrix between all pairs of compound fingerprints, this was then clustered using agglomative hierarchical clustering.
+As could be predicted, the heatmaps and dendrograms did not reveal any large clusters of structurally similar compounds in the 12,000 compound library.
 This chemical diversity continued when the compounds were filtered to only contain the phenotypically active molecules.
 The use of more novel compound fingerprinting techniques such as USRCAT \cite{Schreyer2012} and autoencoded features \cite{Gomez-Bombarelli2016} did not increase the degree of clustering.
 
-%TODO insert figure of (lack of) compound similarity clustering for both 13K and
+%TODO insert figure of (lack of) compound similarity clustering for both 12K and
 %active
 
 Rather than looking at large-scale clustering of many thousands of compounds with hierarchical clustering, I tried the Butina clustering method to identify small collections of structurally similar compounds.
@@ -210,10 +213,10 @@ After removing clusters which contained fewer than 3 compounds, this left 96 clu
 
 \subsection{There is little evidence that structurally similar molecules produce similar cellular morphologies}
 
-Following the premise of SAR, structurally similar molecules are likely to share the same protein binding site, therefore activiting the same or similar signalling pathways and producing similar cellular morphologies.
-I investigated to what extend structurally similar molecules in the BioAscent library produce similar cellular morphologies, and also how structurally similar are compounds which were shown to produce similar phenotypes.
-Using the phenotypic clusters as defined in fig.\ref{figure:morph_cluster}, I compared the structural similarity between compounds within these phenotypic clusters compared to a null distribution of compounds picked at random.
-I found that compounds within phenotypic clusters were very slightly more structurally similar than compounds picked at random (figure \ref{figure:compound_pheno_corr} A, $p=1.81\times10^{-15}$, $D=0.011$, 2-sample Kolmogorov-Smirnov test).
+Following the premise of SAR, structurally similar molecules are likely to share a common target, therefore activiting the same or similar signalling pathways and producing similar cellular morphologies.
+I investigated to what extent structurally similar molecules in the BioAscent library produce similar cellular morphologies, and also how structurally similar are compounds which were shown to produce similar phenotypes.
+Using the phenotypic clusters as defined in fig.\ref{figure:morph_cluster}, I compared the structural similarity between compounds within these phenotypic clusters compared to a null distribution of pairs of compounds picked at random.
+I found that compounds within phenotypic clusters were very slightly more structurally similar than compounds in the null distribution (figure \ref{figure:compound_pheno_corr} A, $p=1.81\times10^{-15}$, $D=0.011$, 2-sample Kolmogorov-Smirnov test).
 In addition, I approach the problem from the opposite direction and investigated the phenotypic similarity within clusters of structurally similar molecules as found with the Butina clustering algorithm, compared to the phenotypic similarity between compounds picked at random from the pooled compound list of those contained within Butina clusters.
 I again found that structurally similar molecules are more likely to produce similar cellular morphologies than compounds picked at random (figure \ref{figure:compound_pheno_corr} B, $p=0.037$, $D=0.018$, 2-sample Kolmogorov-Smirnov test).
 
@@ -240,20 +243,20 @@ Using Mantel's test of correlation between two distance matrices \cite{Mantel196
 \subsection{Identifying the putative MoA of phenotypic hits with ChEMBL structure queries}
 
 Another way to utilise the chemical structure data availble with the BioAscent library is through querying publically available databases such as ChEMBL for exact compounds matches or structurally similar compounds.
-This returns large amounts of data from a variety of assays in which the compound or a structural analogue was screened against such as targets, EC/IC$_{50}$ values, binding affinities etc.
-I set about to see if this historical data could be used to suggest putative MoAs of hits from target agnostic phenotypic screening assays.
+This returns large amounts of data from a variety of assays in which the compound or a structural analogue was screened against a number of targets with information relating to EC/IC$_{50}$ values, binding affinities etc.
+I investigated if this historical dataset could be used to suggest putative MoAs of hits from target agnostic phenotypic screening assays.
 
-For this I used the compounds within 10 phenotypic clusters (figure \ref{figure:morph_cluster}), and for each cluster queried ChEMBL based on a structure similarity search to identify records for either the query compound, or structural analogues.
+For this I used the compounds within the 10 phenotypic clusters (figure \ref{figure:morph_cluster}), and for each cluster queried ChEMBL based on a structure similarity search to identify records for either the query compound, or structural analogues.
 Then using these compounds identifying which human proteins they have been screened against, and filtering these protein based on EC/IC$_{50}$ values.
-This returns a list of Uniprot accession codes which were used with interpro \cite{Finn2017} to test for enrichment compared to a background for each cluster.
+This returns a list of Uniprot accession codes which were used with interpro \cite{Finn2017} to test for enrichment of protein regions compared to a background.
 
 Eight out of the ten phenotypic clusters returned at least one significantly enriched target with fold-enrichment ranging between 1.5 and 10.
-The most significantly enriched target in 6/8 of the clusters was related to protein kinases, whereas the remaining two were rhodopsin-like GPCRS and adrenergic receptors.
+The most significantly enriched target in 6/8 of the clusters was related to protein kinases, whereas the remaining two were rhodopsin-like GPCRs and adrenergic receptors.
 
 \begin{figure}
     \captionsetup{width=0.8\textwidth}
     \caption[Interpro target enrichment]{
-        Enriched interpro targets associated with compounds within one phenotypic cluster.
+        Enriched interpro targets found within a phenotypic cluster of the BioAscent library when compared to a background of all active BioAscent compounds.
 }
     \includegraphics[width=0.8\textwidth]{ch5interpro.png}
     \label{figure:interpro}
@@ -261,22 +264,21 @@ The most significantly enriched target in 6/8 of the clusters was related to pro
 
 
 
-\subsection{Finding phenotypic hits in ``dark chemical space''}
+\subsection{Using phenotypic screening to find ``dark chemical matter''}
 
 An area of interest in drug discovery is finding new pharmacologically active compounds which occupy new areas of chemical space. \cite{Wassermann2015}
 One way to incoporate the phenotypically active hits from the BioAscent library is to query historical screening databases by structural similarity.
 To do this I took the list of 1244 phenotypically active BioAscent compounds and performed a structural similarity search on the ChEMBL database to look for those BioAscent compounds which have a large Tanimoto distance from all compounds deposited in the database.
 
 From the 1244 active BioAscent compounds 59 (4.7\%) were found to have no structurally similar analogues in the ChEMBL database (figure \ref{figure:dark_mols}).
-To assess if these 59 compounds contained undersireable physiochemical properties which would limit their inclusion in screening libraries explain their absence from historic screening databases I used a quantitative estimate of drug-likeness (QED), \cite{Bickerton2012} to compare the 59 compounds from `dark chemical space' to the 1244 active BioAscent compounds.
-The QED metric did not reveal any significant differences in desirable physiochemical properties (QED$_{\text{dark compounds}} = 0.57$,  QED$_{\text{all active}} = 0.60$, 2 sample t-test $t=0.85$, $p=0.39$).
+To assess if these 59 compounds contained undersireable physiochemical properties which would limit their inclusion in screening libraries and explain their absence from historic screening databases I used a quantitative estimate of drug-likeness (QED), \cite{Bickerton2012} to compare the 59 compounds from `dark chemical space' to the 1244 active BioAscent compounds.
+The QED metric did not reveal any significant differences in desirable physiochemical properties between the two groups (QED$_{\text{dark compounds}} = 0.57$,  QED$_{\text{all active}} = 0.60$, 2 sample t-test $t=0.85$, $p=0.39$).
 
 
 \begin{figure}
     \captionsetup{width=1.0\textwidth}
     \caption[BioAscent hits from dark chemical space]{
-BioAscent hits from dark chemical space.
-59 phenotypically active BioAscent compounds which had no structurally similar compounds listed in the ChEMBL database as measured.
+59 phenotypically active BioAscent compounds with no close structural analogues in the ChEMBL database.
 }
     \includegraphics[width=1.0\textwidth]{ch5darkmols}
     \label{figure:dark_mols}
@@ -286,23 +288,8 @@ BioAscent hits from dark chemical space.
 %cluster somewhere or are mixed in with all the rest
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
-\section{Discussion and Conclusions}
-TODO
-% describe what I've achieved
-% what I failed to achieve ..?
-% chemical similarity is difficult
-% would have been a lot easier if I didn't use a chemical diversity library
-% rapidly evolving field
-% activity cliffs - binding properties change despite very similar structures
-% bind to different targets within the same pathway - similar phenotype but can
-% be very different structures
 
 
 
@@ -312,35 +299,114 @@ TODO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+\section{Discussion}
+
+Cheminformatics as a field is largely overshadowed by bioinformatics in terms of academic interests and publications (figure \ref{figure:informatics_ngram}), it has however arguably had a greater positive impact on the design and identification of new small molecule therapeutics.
+As high-content screening becomes more and more prevalent in drug discovery incorporation of the fields will become more increasingly likely.
+I therefore aimed to investigate methods in which cheminformatics analyses can aid high-content and phenotypic screening, and also the other way round: how high-content screening and morphological profiling can inform cheminformatics.
+
+
+\begin{figure}
+    \captionsetup{width=0.8\textwidth}
+    \caption[Popularity of terms `bioinformatics' and `cheminformatics' in the literature]{
+Popularity of the terms `bioinformatics' and `cheminformatics' in the published literature as found using Google's Ngram viewer between 1980 and 2010.
+y-axis represents the cumulative percentage of literature containing the term, x-axis represents the year.
+}
+    \includegraphics[scale=0.5]{ch5googleNgram}
+    \label{figure:informatics_ngram}
+\end{figure}
+
+From the global analysis of the BioAscent compound library I failed to find any evidence of clusters of structural similarity, which is not suprising when using a compound library specifically designed to maximise structural diversity.
+I did however find smaller regions of the BioAscent library consisting of a handful of structurally similar compounds using the Butina clustering algorithm.
+The choice of using the BioAscent compound library -- rather than one of many other alternatives -- was made by what was available to me at the time, as large compound collections are a precious resource in academia.
+In hindsight, a chemical diversity library may not have been the ideal compound collection to use for a study relying heavily chemical similarity measures, and a compound library which consists of clusters of structurally similar molecules may have resulted in different conclusions regarding chemical similarity and phenotypic similarity.
+
+My hypothesis that structually similar compounds should produce similar morphological changes, and therefore compounds that cause similar phenotypes should be structurally similar on average did not yield particularly striking results.
+While I found compounds within phenotypic clusters had lower Tanimoto distances than compounds paired at random, and the opposite: that compounds within structually similar clusters as found with the Butina algorithm were more phenotypically similar (figure \ref{figure:compound_pheno_corr}), despite statisical significance the effect size was small, in globally assessing correlation between the two distance matrices showed no significant correlation.
+This result is largely in agreement with that of Young \textit{et al.} who found a ``modest'' correlation of 0.0074 between between rank-ordered pairs of compounds for phenotypic similarity and structural similarity. \cite{Young2008}
+One possible explanation for these low effect sizes could be due to largely uncorrelated data with small regions of high correlation.
+I feel that a more fine-grained analysis with a carefully constructed compound collection would be better suited for this task, and could result in stronger evidence for the association between chemical structure and phenotype.
+Another consideration to explain the largely uncorrelated data are activity-cliffs -- where a small change to a molecule's structure can result in large differences in biological activity.
+There is no doubt that a small change to overall chemical structure can inhibit biding of a small molecule to a target receptor, althought this brings into question the usefulness of chemical similarity measures, and if many of these activity-cliffs are artefacts caused by poorly measured `similar' compounds, which we may see change as more nuanced chemical similarity measures are developed.
+
+
+% ChEMBL structure mining
+The availability of large public datasets which can be queried with chemical identifiers such as SMILE strings is a great resource with a number of potential applications.
+The ChEMBL database contains information for 2.2 million compounds, and the results from over a million assays and 12,000 targets.
+In my efforts to incorporate this rich dataset with the results of the high-content screen, I encountered issues associated with a dataset contructed from many hetergeneous sources, such as lack of information describing the assay, and no consistent system to label the type of assay to allow filtering of less relevant assay types.
+The idea was to find existing data from assays which used the 12,000 compound BioAscent library, however none of the data sources used the exact BioAscent compound library, but rather there were compounds within the BioAscent library that are shared in other compound collections, and so the data returned by exactly matching the BioAscent compounds was too sparse for further analysis.
+I therefore relaxed the searching criteria, and searched instead for compounds with a Tanimoto similarity greater than 0.9 which resulted in an adequate number of results but added an additional layer of assumptions.
+The enriched protein sequences found for the compounds (or similar compounds) in each phenotypic cluster consisted predominantly of protein kinase regions (see figure \ref{figure:interpro} for an example of one cluster).
+While this did serve as a nice sanity check, in that 20\% of the BioAscent compounds are predicted to be kinase-interacting, it was not particularly interesting for hypothesis generation.
+In addition I would warn against putting too much faith in the hypothesised protein targets: the protein targets were filtered using single concentration regardless of the assay type.
+It is easy to envisage that a concentration which is selective to a particular protein in a cell-based assay would not be stringent enough when used as a cutoff in an \textit{in vitro} protein binding assay.
+Another source of uncertainty is the use of tools such as DAVID and interpro to predict enriched protein regions, these rely on heuristics and combining another set of heterogenenous datasets which in turn have their own errors and biases.
+
+% dark chemical space
+The concept of dark chemical matter was introduced by Wasserman and colleagues from Novartis to describe compounds in their high-throughput screening library which have failed to show biological activity in any screening assay, yet through gene-expression studies demonstrated the potential for biological activity in future screens. \cite{Wassermann2015}
+These compounds offer interesting starting points for drug discovery as their lack of activity in historically target-driven screens may mean they have the potential to act through novel mechanisms of action.
+A target agnostic approach coupled with unbiased detection of subtle biological activity positions high-content imaging as a useful tool to identify dark chemical matter in compound collections.
+As I did not have access to historical records of the BioAscent's performance in a wide range of assays, I instead used the records in the ChEMBL database.
+From the 1244 active BioAscent compounds, 59 where structurally distinct from any listed in the ChEMBL records (figure \ref{figure:dark_mols}).
+There is also the possibiliy that there may be more dark chemical matter in the BioAscent library, as I did not investigate the bio-activity of the structurally similar records in the ChEMBL database, and that many of those which returned structural analogues may not have shown activity in previous assays.
+As the BioAscent library has been designed around drug-like molecules, and a measure of drug-likeness did not reveal any undesirable physiochemical properties of these dark chemical matter the reason behind their exlusion in previous screening assays remains unclear.
+
+
+Overall, incorporating cheminformatics and high-content screening presents an interesting opportunity for drug discovery by combining the well-defined and annotated cheminformatics field with the rich datasets high-content imaging can provide.
+In this chapter I have shown that high-content screening data can be combined with existing datasets to aid interpretation using chemical structure as a common linker to retrieve data for either the same compound or similar compounds, as well as demonstrating the use of high-content screens to identify interesting areas of chemical space for the development of novel therapeutics.
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 
 
 
 \section{Methods}
 
 \subsection{Chemical similarity}
-Compound structural information was in the form of .sdf files provided by BioAscent.
+Compound structural information was provided in the form of .sdf files by the supplier.
 To create daylight-like compound fingerprints the RDKit library was used to convert .sdf entries into an RDKit's implementation of the daylight fingerprint using the `rdkit.Chem.Fingerprints.FingerprintMols' function with default parameters.
 
-USRCAT features were generously calculated and supplied by Dr. Steven Shave (Edinburgh).
+USRCAT features of the BioAscent library were generously calculated and supplied by Dr. Steven Shave (Edinburgh).
 
 Latent representations of chemical structure features were calculated using a molecular autoencoder pre-trained on the ChEMBL22 dataset \footnote{www.github.com/cxhernandez/molencoder}, based on the work published by Gomez-Bombarelli \textit{et al.} \cite{Gomez-Bombarelli2016} using one-hot encoded SMILE strings of the molecules.
 
-To compute the distance between RDKit daylight fingerprints the Tanimoto/Jaccard distance was used, in the case of USRCAT and autoencoded features I used the Euclidean distance.
+To compute the distance between RDKit daylight fingerprints the Tanimoto distance was used, in the case of USRCAT and autoencoded features I used the Euclidean distance.
 Hierarchical clustering was performed on the distance matrix using the complete linkage method and euclidean distance.
-To define clusters from the calculated dendrogram, a threshold was defined as 70\% of the maximum linkage distance which produced 10 clusters.
+To define clusters from the calculated dendrogram, a threshold was defined as 70\% of the maximum linkage distance.
 Butina clustering was implemented using RDKit with Tanimoto distances calculated from daylight fingerprints, with a cutoff value of 0.2.
 
-Mantel's test for comparing two distance matrices was implemented with scikit-bio's implementation using Pearson's correlation coefficient and 999 permutations for testing significance.
+Mantel's test for comparing two distance matrices was implemented with scikit-bio's implementation using Pearson's correlation coefficient and 999 permutations for significance testing.
 The distance matrices used were standardised Euclidean distance for the morphological profiles and standardised Tanimoto distances of the daylight fingerprints for compound structure profiles.
 
 
 \subsection{BioAscent library screen}
 
+The morphological data used in this chapter is from the MCF7 cell-line stained using the cell-painting protocol, imaged with the ImageXpress and morphological features calculated using Cellprofiler.
+
 \subsubsection{Compound activity window}
 Data was normalised to plate-based controls and features standardised, then transformed with PCA to the minimum number of principal components which accounted for 80\% of the variance in the data.
-L$_1$ norm distances were calculated from the DMSO negative control centroid in PCA space.
-The lower bound of the activity window was defined visually using a plot of ranked L$_1$ distances.
-The upper bound was chosen based on images containing at least 10 cells and visual assessment of images produced by higher L$_1$ distances ensuring images did not consist entirely of dying cell (small, rounded and bright cytoplasmic staining).
+$l_1$ norm distances were calculated from the DMSO negative control centroid in PCA space.
+The lower bound of the activity window was defined visually using a plot of ranked $l_1$ distances.
+The upper bound was chosen based on images containing at least 10 cells and visual assessment of images produced by higher $l_1$ distances ensuring images did not consist entirely of dying cell (small, rounded and bright cytoplasmic staining).
 
 
 \subsection{Phenotypic similarity}
@@ -361,23 +427,24 @@ Dashed line indicates cutoff of 70\% of the maximum linkage distance, resulting 
 t-SNE clustering was performed using sklearn's `manifold.TSNE` implementation using the Barnes-Hut approximation with the default parameters.
 
 \subsection{ChEMBL structure searches}
-To query the ChEMBL database I used the ChEMBL webresource client \footnote{www.github.com/chembl/chembl\_webresource\_client}.
-In order to identify records for similar compounds I first queried structures based on SMILE strings of the BioAscent compounds with a filter to return only compounds with a Tanimoto distance less than 0.1, recording the similar compounds as ChEMBL identifiers.
+To programmatically query the ChEMBL database I used the python ChEMBL webresource client. \footnote{www.github.com/chembl/chembl\_webresource\_client}
+In order to identify records for similar compounds I first queried structures based on SMILE strings of the BioAscent compounds with a filter to return only compounds with a Tanimoto similarity of 0.9, recording the similar compounds as ChEMBL identifiers.
 Then in a second query using the ChEMBL identifiers, I searched for historical screening results against human protein targets and returned a list in the form of Uniprot accession codes.
 As this returned a list of all protein targets which had been screened against, I filtered this list to protein targets with an assay EC/IC$_{50}$ value less than 1 $\mu$M.
 This was repeated for each cluster of BioAscent compounds returning a list of Uniprot accession codes for each cluster.
 
 
 \subsection{Dark chemical matter}
-To search for active compounds in the BioAscent library which are structurally distinct from any compounds in the ChEMBL database I queried the ChEMBL webresource with the 1244 active BioAscent compounds, returning ChEMBL compounds wit a similarity of 70\% relating to a Tanimoto distance of the daylight fingerprints of within 0.3 (the minimum similarity value allowable with the ChEMBL API).
-Any BioAscent compound that failed to return any structurally similar ChEMBL record was listed as a `dark SMILE'
-\footnote{A thanks to Michał Nowotka from EMBL-EBI for making changes to the ChEMBL servers and API to allow for such time-intensive queries.}.
-QED values were computed using RdKIT's Chem.QED.qed function on molecules computed from the supplied .sdf file.
+To search for active compounds in the BioAscent library which are structurally distinct from any compounds in the ChEMBL database I queried the ChEMBL webresource with the 1244 active BioAscent compounds, returning compounds within 70\% similarity, which is equivalent of compounds within 0.3 Tanimoto distance (this is the minimum similarity value allowed when using ChEMBL's API).
+Any BioAscent compound that failed to return any structurally similar ChEMBL record was listed as a `dark SMILE'.
+\footnote{A thanks to Michał Nowotka from the EMBL-EBI for his help making changes to the ChEMBL servers and API to enable such time-intensive queries.}
+QED values of drug-likeness were computed using RdKIT's Chem.QED.qed function with default parameters on molecules computed from the supplied sdf file.
+
 
 \subsection{Interpro analysis}
 Interpro analysis was carried out using DAVID 6.8. \cite{Huang2009}
-DAVID was chosen despite more up-to-date alternatives, as DAVID allows uploading a custom background list.
-Therefore I created a background list of protein targets by repeating the Uniprot lookup as before but with a list of all 12,000 BioAscent compounds, which was used as a background for each cluster.
+DAVID was chosen despite more up-to-date alternatives, as DAVID allows uploading a custom background list of genes or proteins.
+Therefore I created a background list of protein targets by repeating the Uniprot lookup as before but with a list of all 12,000 BioAscent compounds, which was used as a background for each cluster analysis with DAVID.
 Significantly enriched interprot targets were selected based on a Benjamini-Hochberg corrected p-value with an $\alpha$ of 0.05.
 
 

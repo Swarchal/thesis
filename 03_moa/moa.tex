@@ -133,9 +133,16 @@ Two dimensional convolutions are used in ANNs by starting with many randomly ini
 Using a single convolutional layer highlights simple features in an image such as edges and speckles, by combining several convolutional layers more complex features are highlighted through combinations of these simple features.
 These convolved images are then flattened into a one-dimensional vector which is used as an input in a fully connected ANN such as that depicted in figure \ref{figure:nn_layers}.
 
-TODO: need some intro into the tasks, the mechanistic classes.
 
-TODO: aims of the chapter
+\subsection{Chapter aims}
+%TODO: aims of the chapter
+The aims of this chapter are to assess how well machine learning models to predict compound MoA transfer across morphologically distinct cell lines.
+This is of interest as the ability to predict the MoA of unannotated compounds on a new cell-line with a pre-trained model without the requirement of re-screening an annotated compound library would save time and money.
+
+%TODO: need some intro into the tasks, the mechanistic classes.
+The compound library used in this work consist of 24 annotated compounds with well defined MoAs.
+
+
 
 \section{Results}
 
@@ -186,7 +193,7 @@ Looking at confusion matrices calculated for both sub-image and whole images rev
     \includegraphics[width=0.8\textwidth]{ch2choppedWholeCM}
     \captionsetup{width=0.8\textwidth}
     \caption[Sub image and whole image confusion matrices]{
-Confusion matrices comparing sub-image and whole image classification accuracy on 8 mechanistic classes of compounds.
+Confusion matrices comparing sub-image and whole image classification accuracy on 8 mechanistic classes of compounds with the MDA-MB-231 cell-line.
 }
     \label{figure:nn_chopped_vs_whole_cm}
 \end{figure}
@@ -261,16 +268,46 @@ TODO, delete as appopriate when results come in.
 \subsection{Principal component analysis does (not) improve classification accuracy with decision trees.}
 TODO, delete as appopriate when results come in.
 
-\subsection{RF/CNN outperforms CNN/RF when using a single cell-line}
-TODO, delete as appopriate when results come in.
+\subsection{CNN and random forest show equivalent performance at predicting MoA on a single cell-line}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{ch2SingleCellLine}
+    \captionsetup{width=0.8\textwidth}
+    \caption[Classifying MoA on a single cell-line]{Comparison of ensemble based tree classifier and CNN at predicting compound MoA when trained on tested on an individual cell-line.
+    \textbf{(A)} Gradient Boosting tree classifier.
+    \textbf{(B)} ResNet18 CNN classifier.
+Accuracy measured as the Jaccard similarity score.
+    }
+    \label{figure:single_cell_line}
+\end{figure}
 
 
-\subsection{Data from additional cell lines does (not) improve model performance}
-TODO, delete as appopriate when results come in.
+\subsection{Additional data from more cell lines does necessarily improve model performance}
 
-\subsection{On the transferrability of models to new unseen cell lines}
-TODO
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{ch2CumulativeTraining}
+    \captionsetup{width=0.8\textwidth}
+    \caption[The effect of using additional cell-lines during model training]{
+        The effect of using additional cell-lines during model model training.
+        Models accuracy when tested on a with-held proportion of MDA-MB-231 data.
+        Boxplots show accuracy when tested on different combinations of additional cell-lines.
+    }
+    \label{figure:cumulative_training}
+\end{figure}
 
+
+
+\subsection{On the transferrability of classifiers applied to unseen cell lines}
+
+\begin{figure}
+    \includegraphics[width=1.1\textwidth]{ch2TransferLearning}
+    \captionsetup{width=0.8\textwidth}
+    \caption[Confusion matrices of classifiers when applied to unseen cell-lines]{
+    Confusion matrices of classifiers applied to unseen cell-lines.
+    Models were trained on 7 out of the eight cell-lines and tested on the with-held cell-line (named above confusion matrix).
+    }
+    \label{figure:transfer_learning}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -293,6 +330,10 @@ TODO.
 
 
 \section{Methods}
+
+\section{Dataset}
+The imaging dataset used in this work is the same as in chapter \ref{chapter:tccs}.
+For each compound data were used for three concentrations (0.1 $\mu$M, 0.3 $\mu$M, 1.0 $\mu$M).
 
 
 \subsection{Accuracy}
@@ -362,7 +403,7 @@ The optimiser used was ADAM \cite{Kingma2014} with the categorical cross entropy
     \caption[CNN learning rate and decay]{
 Learning rate and decay for training CNN models, initialised at $1e^{-3}$ and reduced 10-fold every 10 epochs.
 }
-    \includegraphics[width=0.7\textwidth]{ch2learningRate}
+    \includegraphics[width=0.5\textwidth]{ch2learningRate}
     \label{figure:learningRate}
 \end{figure}
 
