@@ -25,8 +25,8 @@
 Cellular morphology is influenced by multiple intrinsic and extrinsic factors acting on a cell, and striking changes in morphology are observed when cells are exposed to biologically active small molecules.
 This compound-induced alteration in morphology is a manifestation of various perturbed cellular processes, and we can hypothesise that compounds with similar MoA which act upon the same signalling pathways will produce comparable phenotypes, and that cell morphology can, in turn, be used to predict compound MoA.
 
-In 2010 Caie \textit{et al.} generated, as part of a larger study, an image dataset consisting of MCF7 breast cancer cells treated with 113 small molecules grouped into 12 mechanistic classes, these cells were then fixed, labelled and imaged in three fluorescent channels\cite{Caie2010}.
-This dataset (also known as BBBC021) has become widely used as a benchmark in the field for MoA classification tasks, with multiple publications using the images to compare machine learning and data pre-processing approaches. \cite{Ljosa2013a,Singh2014a,Pawlowski2016,Ando2017}
+In 2010 Caie \textit{et al.} generated, as part of a larger study, an image dataset which consisted of MCF7 breast cancer cells treated with 113 small molecules grouped into 12 mechanistic classes imaged in three fluorescent channels.\cite{Caie2010}
+This dataset has become widely used as a benchmark in the field for MoA classification tasks, with multiple publications using the images to compare machine learning and data pre-processing approaches. \cite{Ljosa2013a,Singh2014a,Pawlowski2016,Ando2017}
 Whilst this is important work, it has led to the situation whereby the vast majority of studies in this field have based their work on a single dataset generated with one cell-line.
 
 One of the issues associated with phenotypic screening when used in a drug discovery setting is target deconvolution.
@@ -72,10 +72,11 @@ As combining the output of several decision trees is useful only if there is a d
 % using extracted morphological features
 Decision tree methods work best with multivariate tabular data, with well defined features describing each observation, this is in contrast to image data which consists of 2D arrays of pixel intensities.
 Therefore, in order to train such a model, cellular morphology needs to be quantified by measuring cellular features.
-This is a common task with multiple software packages available, which follow two main steps: (1) Segment objects from the background. Objects may be sub-cellular structures or whole-cell masks (2) Measure various attributes from the object, this is typically based on size, shape and intensity.
-Cellprofiler \cite{Carpenter2006} was chosen primarily due to the high configurability and the permissive license enabling large-scale distributed processing on compute clusters in order to reduce the image analysis time.
-The images captured on the ImageXpress were analysed using Cellprofiler, quantifying approximately 400 morphological features.
-The datasets produced by the Cellprofiler analysis contained morphological measurements on an individual cell level, although this takes considerable memory requirements, and therefore I aggregated the single cell-level data per image into median profiles.
+This is a common task with multiple software packages available, which follow two main steps:
+\begin{enumerate}
+    \item Segment objects from the background. Objects may be sub-cellular structures or whole-cell masks.
+    \item Measure various attributes from the object, this is typically based on size, shape and intensity.
+\end{enumerate}
 
 %Although we can train a model on single cell data we are not interesting in classifying morphologies of single cells, but rather classifying an image or a collection of images that represent a compound treatment, this therefore allows several approaches to structuring the training data:
 %
@@ -113,7 +114,6 @@ A new ANN is initialised with random weights, to train a neural network these we
 
 
 
-
 \begin{figure}
 \fcapsideleft
 {
@@ -137,11 +137,9 @@ These convolved images are then flattened into a one-dimensional vector which is
 
 \subsection{Chapter aims}
 %TODO: aims of the chapter
-The aims of this chapter are to assess how well machine learning models to predict compound MoA transfer across morphologically distinct cell lines.
+The aims of this chapter are to assess how well machine learning models predict compound MoA transfer across morphologically distinct cell lines.
 This is of interest as the ability to predict the MoA of unannotated compounds on a new cell-line with a pre-trained model without the requirement of re-screening an annotated compound library would save time and money.
-
-%TODO: need some intro into the tasks, the mechanistic classes.
-The compound library used in this work consist of 24 annotated compounds with well defined MoAs.
+The compound library used in this work consists of 24 annotated compounds with well defined MoAs.
 
 
 
@@ -149,13 +147,13 @@ The compound library used in this work consist of 24 annotated compounds with we
 
 \subsection{CNN predictions are improved using sub-images}
 
-The images generated by the ImageXpress microscope with zero binning are 2160$\times$2160 pixel tiff files, with a bit-depth of 16, whilst these image properties are common in microscopy, they are extreme for current CNN implementations.
+The images generated by the ImageXpress microscope are 2160$\times$2160 pixel tiff files, with a bit-depth of 16, whilst these image properties are common in microscopy, they are extreme for current CNN implementations.
 Most image classification tasks involving CNN's use 8-bit images in the region of 300 by 300 pixels, relatively small images are used as the convolutional layers of deep CNN's generate many thousands of matrices, and using smaller input images drastically reduces the computing resources and time required to train such classifiers.
 
 This presents the issue of how to reduce the 2160$\times$2160 images into small images, one option is to downscale the entire image using bi-linear or bi-cubic interpolation, while a second option is to chop the original image up into smaller sub-images (figure \ref{figure:image_chopping}).
 Downsizing the original image by simple scaling has a few potential problems which make it unsuitable for this particular task:
     many of the finer-grained cell morphologies such as mitochondria and endoplasmic reticulum distribution will be lost due to the reduction in image resolution;
-    in addition, it was found that whole well images are susceptible to over-fitting as the classifier learned biologically irrelevant features such as the locations of cells within an image, which although should be random might have some spurious association with particular class labels.
+    in addition, it has been reported that whole well images are susceptible to over-fitting as the classifier learned biologically irrelevant features such as the locations of cells within an image, which although should be random might have some spurious association with particular class labels.
 When chopping images into sub-images the most simple and commonly used method is to chop each image into an evenly spaced grid, whilst this is unbiased and easy to implement, it has the downside of potentially returning many images that do not contain any cells.
 A more nuanced approach is to first detect the $x$,$y$ co-ordinates of each cell in the image, and creating a 300$\times$300 bounding-box around the centre of each cell.
 This method returns an image per cell, negating the issue of empty images; it does however require detecting cell locations and handling cells located next to the image border.
@@ -208,7 +206,7 @@ This value could be optimised by running several models with differently sized c
 
 
 \subsection{More complex CNN architectures outperform simpler AlexNet}
-As CNNs can be constructed with a wide variety of architectures, and the field is still rapidly developing, I remained close to well established architectures in the literature.
+As CNNs can be constructed with a wide variety of architectures, and the field is still rapidly developing, I remained close to well established CNN architectures that are widely used in the field rather than developing my own.
 However, as most images are digitally represented in three colour channels (red, green, blue (RGB)), the vast majority of CNN models are constructed in a way that input is restricted to three colour channels, therefore it is necessary to adapt these architectures to work with the differently shaped inputs and additional parameters generated by the 5 channel images generated with the ImageXpress.
 
 The two different CNN architectures were tested based on the hypothesis that a deeper, more complex architecture (ResNet18 \cite{He2015}) will be capable of learning more subtle features, although more complex models with greater numbers of internal parameters are more prone to overfitting when training data is limited.
@@ -224,7 +222,7 @@ Dropout is a form of regularisation and works by randomly ignoring a fixed propo
     \captionsetup{width=0.8\textwidth}
     \caption[Comparison of CNN architectures]{
 Comparison of CNN architectures.
-A comparison of AlexNet and ResNet18 architectures with and without dropout training and predicting on 5 channel 244$\times$244 pixel 5 channel images of all eight cell lines.
+A comparison of AlexNet and ResNet18 architectures with and without dropout training and predicting on 5 channel 300$\times$300 pixel 5 channel images of all eight cell lines.
 Loss was calculated using cross entropy on 8 mechanistic classes of compounds.}
     \label{figure:nn_arch}
 \end{figure}
@@ -267,8 +265,7 @@ However, as intensity standardisation did not improve model performance in this 
 
 %\subsection{Single cell/Image aggregates improve classification accuracies with decision trees.}
 %TODO, delete as appopriate when results come in.
-
-\subsection{Principal component analysis does not improve classification accuracy with decision trees.}
+\subsection{Decision trees did not benefit from feature transformation via principal component analysis.}
 Many machine learning methods benefit from feature selection or feature transformation.
 Here I tested if transforming the normalised cellprofiler features into principal components improved prediction accuracy with gradient boosting trees when training and testing on the MDA-MB-231 cell-line.
 I found that standardisation followed by principal component analysis and using all the principal components resulted in a descreased F$_1$ score of 0.80 compared to cellprofiler features which produced an F$_1$ score of 0.83.
@@ -305,8 +302,8 @@ With this in mind I investigated how training with additional data from morpholo
 I used 30\% of the MDA-MB-231 cell line as a test set, and trained multiple tree-based and CNN models with the rest of the MDA-MB-231 and various combinations of increasing numbers of the other cell-lines (figure \ref{figure:cumulative_training}).
 I found that training with the additional data from different cell-lines negatively impacted the performance of CNN models, although interestingly model performance did not further decrease when even more additional cell-lines were used, as one additional cell-line produces similar classification accuracy as with using all 7 cell-lines.
 The tree-based models generally benefitted from training with the additional data, although certain combinations of additional cell-lines did decrease prediction accuracy below that of just training and predicting on the MDA-MB-231 cell-lines.
-It was not clear which combinations of cell-lines caused this decrease in model performance, and no single cell-line was responsible for the regression.
-Owing to the considerable time taken to train the CNN models and the large number of various combinations of additional cell-lines that could be used, I limited the CNN training to 2,3 and 7 additional cell-lines, although
+It was not clear which combinations of cell-lines caused this decrease in model performance, and no single cell-line was responsible for the regression in model performance.
+Owing to the considerable time taken to train the CNN models and the large number of possible combinations of additional cell-lines that could be used, I limited the CNN training to 2,3 and 7 additional cell-lines.
 
 
 \begin{figure}
@@ -358,7 +355,7 @@ This generalisation would require the recognition of morphological features indu
 
 Initial benchmarking studies with the two chosen models (gradient boosting decision trees and CNN) demonstrated roughly equivalent predictive peformance when the models were trained with one cell-line and tasked to predict the MoA on the same cell-line.
 This is in contrast to recent publications which have highlighted the ability of CNN-based methods to outperform other more classical approaches. \cite{Ando2017, Pawlowski2016}
-A possible explanation for why this was not observed in the results presented here is that I used fairly standard CNN architectures and pre-processing techniques, as my main interest was not absolute predictive performance but rather generalisability.
+One explanation for why this was not observed here is that I used fairly standard CNN architectures and pre-processing techniques, as my main interest was not absolute predictive performance but rather generalisability.
 The results demonstrated by Ando \textit{et al.} used novel preprocessing techniques on a carefully curated dataset, and Pawlowski \textit{et al.} relied on fine-tuning CNN models which were pre-trained on the large ImageNet datasets -- this was considered as an option, although there is no clear method to use the pre-trained models on my dataset as their weights are specific to the 3 channel architecture.
 Another option to increase overall predictive performance of the CNN models would be to use a deeper network with more parameters, especially as I already observed that the relatively complex ResNet18 architecture outperformed AlexNet.
 I decided to limit the complexity of the CNN models at ResNet18, as training the more complex models take considerably more time and computing resources than I had available.
@@ -381,9 +378,9 @@ While this has shown promise in adapting existing neural networks to new dataset
 % final conclusions and wrap-up
 Overall I have found that current implementations of machine learning models used to classify compound MoA from high-content screening data do not generalise well to new cell-lines.
 I found that using extracted morphological features from software such as cellprofiler provides a flexible dataset which is easy to manipulate and preprocess when used as inpute for classification models.
-Using raw images on the other hand is not as familiar for most investigators, and CNN models are much more difficult to reason about and understand how modifications to the input data will affect model outcome.
+Using raw images on the other hand is not as familiar for most investigators, and CNN models are much more difficult to interpret and understand how modifications to the input data will affect model outcome.
 Much of the machine learning field is currently focussed CNNs and other neural network based methods, and they do offer some useful advantages in the high-content field such as not requiring segmentation or algorithms to measure hand-picked features.
-I think that further work investigating how to improve the generalisability of CNN-based classifiers is of great importance to many fields, and I predict that although it is currently a significant limitation, with the rapid development and commercial interests of this field it is likely many new methods will be developed which will aid MoA prediction.
+Further work investigating how to improve the generalisability of CNN-based classifiers is of great importance to many fields, and I predict that although it is currently a significant limitation, with the rapid development and commercial interests of this field it is likely many new methods will be developed which will aid MoA prediction.
 
 
 
@@ -395,9 +392,9 @@ I think that further work investigating how to improve the generalisability of C
 \section{Methods}
 
 \section{Dataset}
-The imaging dataset used in this work is the same as in chapter \ref{chapter:tccs}.
-For each compound data were used for three concentrations (0.1 $\mu$M, 0.3 $\mu$M, 1.0 $\mu$M).
-
+The imaging dataset used in this work is from the 24 compound validation set and is described in the general methods chapter (chapter \ref{chapter:generalMethods}).
+For each compound, data were used from the three highest concentrations (0.1 $\mu$M, 0.3 $\mu$M, 1.0 $\mu$M).
+This was chosen as at lower concentrations many compounds failed to produce morphological changes that were distinquishable from the DMSO negative control.
 
 \subsection{Accuracy}
 Validation accuracy during training was measured using the Jaccard similarity score of the $_i$th samples with true label set $y_i$ and predicted label set $\hat{y_i}$:
@@ -425,6 +422,7 @@ Models were created using scikit-learn (version 0.19) GradientBoostingClassifier
 
 All code related to neural networks was written in pytorch (version 0.3, python 3.5) and ANN models were trained on nvidia K80 GPUs.
 The popular ResNet18 architecture was adapted to work with 5 channel numpy arrays rather than RGB colour images.
+Images stored with 300 by 300 pixel dimensions were downsized to 244 by 244 pixels using scikit-images ``resize'' function to match the input size required by ResNet and AlexNet.
 This was carried out by altering the first convolutional layer to accept 5 channels, and in turn increase the size of the input for the first linear layer from 512 to 2048 to account for the increased vector size after flattening the output from the convolutional layers.
 AlexNet was adapted in a similar way by increasing the number of channels in the first convolutional layer and a corresponding increase in the first linear layer after flattening.
 When testing the effect of dropout on ResNet18 and AlexNet, dropout layers were added between each of the linear layers, the proportion of dropout was 0.2, apart from the penultimate layer which had a dropout proportion of 0.5.
