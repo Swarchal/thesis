@@ -12,58 +12,87 @@
 
 \begin{document}
 
+
 \chapter*{Declaration}
+
 \addcontentsline{toc}{chapter}{Declaration}
 \setlength{\epigraphrule}{0pt}
 \setlength{\epigraphwidth}{\textwidth}
 \epigraph{\normalsize
 This thesis presents my own work, and has not been submitted for any other degree or professional qualification.
 Wherever results were obtained in collaboration with others, I have clearly stated it in the text.
-Any information derived from the published work of others has been cited in the text, and a complete list of references can be found in the bibliography.
-Published papers arising from the work described in this thesis can be found in the appendices.}
+Any information derived from the published work of others has been cited in the text, and a complete list of references 
+can be found in the bibliography.
+Published papers arising from the work described in this thesis can be found in the appendix.}
 {\normalsize \vspace{0.8cm} -- Scott Warchal, 2018}
 
-% Dedication
-
-\chapter*{}
-\setlength{\epigraphwidth}{0.4\textwidth}
-\epigraph{\textit{epigraph here}}
 
 \chapter*{Acknowledgements}
+
 \addcontentsline{toc}{chapter}{Acknowledgements}
-Acknowledgements here.
+Firstly I would like to thank my supervisor, Prof. Neil Carragher, for allowing to be a part of his research group, as 
+well as all the advice and support over the years, opportunities to attend conferences and workshops around the world, 
+and freedom to pursue my own ideas.
+I would also like to thank everyone in the Carragher groups as well as various others I have shared offices with, it's 
+been a pleasure to work with you all -- there has always been good humour and plenty of cake.
+Special mention goes to Alison Munro, John Dawson and Ash Makda for their help in the lab and answering my many daft 
+questions with seemingly limitless patience.
+A thankyou to Cancer Research UK for funding this project.
+Finally I would like to thank my parents and my brother for their support and understanding over the years.
 
-% 1 page max
+
 \chapter*{Abstract}
+
 \addcontentsline{toc}{chapter}{Abstract}
-High content image-based screening assays utilise cell based models to extract and quantify morphological phenotypes induced by small molecules.
-The rich datasets produced can be used to identify lead compounds in drug discovery efforts, infer compound mechanism of action, or aid biological understanding with the use of tool compounds.
-Here I present my work developing and applying high-content image based screens of small molecules across a panel of eight genetically and morphologically distinct breast cancer cell lines.
+High content image-based screening assays utilise cell based models to extract and quantify morphological phenotypes 
+induced by small molecules.
+The rich datasets produced can be used to identify lead compounds in drug discovery efforts, infer compound mechanism 
+of action, or aid biological understanding with the use of tool compounds.
+Here I present my work developing and applying high-content image based screens of small molecules across a panel of 
+eight genetically and morphologically distinct breast cancer cell lines.
 
-I implemented machine learning models to predict compound mechanism of action from morphological data and assessed how well these models transfer to unseen cell lines, comparing the use of numeric morphological features extracted using computer vision techniques against more modern convolutional neural networks acting on raw image data.
+I implemented machine learning models to predict compound mechanism of action from morphological data and assessed how 
+well these models transfer to unseen cell lines, comparing the use of numeric morphological features extracted using 
+computer vision techniques against more modern convolutional neural networks acting on raw image data.
 
-The application of cell line panels have been widely used in pharmacogenomics in order to compare the sensitivity between genetically distinct cell lines to drug treatments and identify molecular biomarkers that predict response.
-I applied dimensional reduction techniques and distance metrics to develop a measure of differential morphological response between cell lines to small molecule treatment, which controls for the inherent morphological differences between untreated cell lines.
+The application of cell line panels have been widely used in pharmacogenomics in order to compare the sensitivity 
+between genetically distinct cell lines to drug treatments and identify molecular biomarkers that predict response.
+I applied dimensional reduction techniques and distance metrics to develop a measure of differential morphological 
+response between cell lines to small molecule treatment, which controls for the inherent morphological differences 
+between untreated cell lines.
 
-These methods were then applied to a screen of 13,000 lead-like small molecules across the eight cell lines to identify compounds which produced distinct phenotypic responses between cell lines.
-Putatative hits were then validated in a three-dimensional tumour spheroid assay to determine the functional effect of these compounds in more complex models, as well as proteomics to determine the responsible pathways.
+These methods were then applied to a screen of 13,000 lead-like small molecules across the eight cell lines to identify 
+compounds which produced distinct phenotypic responses between cell lines.
+Putative hits from a subset of approved compounds were then validated in a three-dimensional tumour spheroid assay to 
+determine the functional effect of these compounds in more complex models, as well as proteomics to determine the 
+responsible pathways.
 
-Using data generated from the compound screen, I carried out work towards integrating knowledge of chemical structures with morphological data to infer mechanistic information of the unannotated compounds, and assess structure activity relationships from cell-based imaging data.
+Using data generated from the compound screen, I carried out work towards integrating knowledge of chemical structures 
+with morphological data to infer mechanistic information of the unannotated compounds, and assess structure activity 
+relationships from cell-based imaging data.
 
 
 \chapter*{Lay Summary}
+
 \addcontentsline{toc}{chapter}{Lay summary}
-Drugs act by altering the behaviour of cells, usually by disrupting the internal cellular machinery necessary for normal function, or in the case of diseases, by trying to reverse disfunctional cellular processes responsible for disease initiation and progression back towards a normal state.
-Subtle changes in cellular functions can be detected visually through microscopy and fluorescent labels which bind to subcellular components such as DNA.
-Using automated image analysis methods it is possible to analyse these microscope images of cells and create a detailed description of each individual cell, represented as a series of measurements describing various attributes such as the cell's size, location and concentration of various biomolecules, this can be though of as the cell's ``fingerprint''.
-Using these cellular fingerprints it is possible to test drugs in an effort to find those that convert a disease-like fingerprint into a healthy looking one, or to compare the fingerprints produced by unknown drugs to ones produced by molecules whose function is already known.
+Drugs act by altering the behaviour of cells, usually by disrupting the internal cellular machinery necessary for 
+normal function, or in the case of diseases, by trying to reverse dysfunctional cellular processes responsible for 
+disease initiation and progression back towards a normal state.
+Subtle changes in cellular functions can be detected visually through microscopy and fluorescent labels which bind to 
+sub-cellular components such as DNA.
+Using automated image analysis methods it is possible to analyse these microscope images of cells and create a detailed 
+description of each individual cell, represented as a series of measurements describing various attributes such as the 
+cell's size, location and concentration of various biomolecules, this can be thought of as the cell's ``fingerprint''.
+Using these cellular fingerprints it is possible to test drugs in an effort to find those that convert a disease-like 
+fingerprint into a healthy looking one, or to compare the fingerprints produced by unknown drugs to ones produced by 
+molecules whose function is already known.
 
-My work focuses on how to generate and exploit compound fingerprints across a number of different cells which represent different types of breast cancer.
-A significant challenge in studying distinct cancer cell types is that each cell has its own unique fingerprint regardless of drug treatment, which makes comparisons between cells more difficult.
-In addition, I investigate how more advanced computational tools alongside this varied dataset can aid predicting how novel compounds work.
-
-
-
+My work focuses on how to generate and exploit compound fingerprints across a number of different cells which represent 
+different types of breast cancer.
+A significant challenge in studying distinct cancer cell types is that each cell has its own unique fingerprint 
+regardless of drug treatment, which makes comparisons between cells more difficult.
+In addition, I investigate how more advanced computational tools alongside this varied dataset can aid predicting how 
+novel compounds work.
 
 
 \clearpage
@@ -80,11 +109,13 @@ In addition, I investigate how more advanced computational tools alongside this 
 \clearpage
 
 \chapter*{List of Acronyms}
+
 \addcontentsline{toc}{chapter}{List of Acronyms}
 
 \begin{acronym}
     \acro{2D}{Two-Dimensional}
     \acro{3D}{Three-Dimensional}
+    \acro{5-HT}{5-hydroxtryptamine}
     \acro{ABL}{Abelson murine leukemia viral oncogene homologue}
     \acro{ANN}{Artificial Neural Network}
     \acro{BCR}{Breakpoint Cluster Region}
@@ -114,12 +145,16 @@ In addition, I investigate how more advanced computational tools alongside this 
     \acro{QED}{Quantitative Estimate of Drug-likeness}
     \acro{RGB}{Red Green Blue}
     \acro{RIPA}{RadioImmunoPrecipitation Assay}
+    \acro{RPPA}{Rerverse Phase Protein microArray}
     \acro{SAR}{Structure Activity Relationship}
+    \acro{SERT}{Serotonin Reuptake Transporter}
     \acro{SMILE}{Simplified Molecular Input Line Entry System}
+    \acro{SSRI}{Selective Serotonin Reuptake Inhibitor}
     \acro{STS}{Staurosporine}
     \acro{TCCS}{Theta Comparative Cell Scoring}
     \acro{USR}{Ultrafast Shape Recognition}
     \acro{USRCAT}{Ultrafast Shape Recognition with CREDO Atom Types}
 \end{acronym}
+
 
 \end{document}
